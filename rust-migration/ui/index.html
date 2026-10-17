@@ -3880,7 +3880,7 @@
           // so na tela de login, pra nao rodar a toa dentro do jogo
           if ((wv.getURL() || '').startsWith(LOGIN_URL)) wv.executeJavaScript(scrollLoginScript).catch(() => { });
           wv.executeJavaScript(`localStorage.setItem('poke_lang', ${JSON.stringify(lang)})`).catch(() => { }); // mantem o jogo no idioma escolhido (o jogo tem en, pt e es, os mesmos do app)
-          injectScripts(wv); // userscripts habilitados (IV calc e os do usuário)
+          if (window.__TAURI__) { wv.__pgSemScripts = true; } else { injectScripts(wv); } // no PIW nativo aguarda a conta ficar online, nao injeta no CAPTCHA
         } catch { }
       });
       wv.addEventListener('did-fail-load', (e) => {
@@ -12004,8 +12004,15 @@ return {portal:isPort,live,sk:!!(P.sock&&P.sock.readyState===1),hasBalls,hasInv,
         let shim = ''; // API GM_* pedida pelo @grant; vazio = injecao crua, como antes
         try { shim = gmShim(s, code); } catch { shim = ''; }
         wv.executeJavaScript('(()=>{const m=window.__pgUS=window.__pgUS||{},k=' + JSON.stringify(String(s.id)) + ';if(m[k])return 1;m[k]=1;return 0})()')
-          .then(ja => { if (!ja) wv.executeJavaScript('(async function(){' + shim + '\n' + code + '\n})().then(function(){})').catch(e => { try { window.pokeAPI.logError('userscript', String(s.name || s.id).slice(0, 60) + ': ' + String((e && e.message) || e).slice(0, 200)); } catch { } }); })
-          .catch(() => { });
+          .then(ja => {
+            if (ja) return;
+            wv.executeJavaScript('(async function(){' + shim + '\n' + code + '\n})()')
+              .catch(e => {
+                wv.executeJavaScript('(()=>{if(window.__pgUS)delete window.__pgUS[' + JSON.stringify(String(s.id)) + ']})()').catch(() => {});
+                try { window.pokeAPI.logError('userscript', String(s.name || s.id).slice(0, 60) + ': ' + String((e && e.message) || e).slice(0, 500)); } catch {}
+              });
+          })
+          .catch(e => { try { window.pokeAPI.logError('userscript', 'Falha ao preparar ' + String(s.name || s.id) + ': ' + String(e)); } catch {} });
       } catch { }
     };
     async function injectScripts(wv) {
