@@ -11845,7 +11845,17 @@ return {portal:isPort,live,sk:!!(P.sock&&P.sock.readyState===1),hasBalls,hasInv,
     statsEl.querySelector('.st-reset').onclick = resetSessao;
 
     // ===== Gerenciador de scripts / extras (userscripts injetados nos painéis) =====
-    const PRESETS = [{ id: 'justpokedex', name: 'JustPokédex: Calculadora de IV', file: 'justpokedex.js', author: 'guilherme-se' }];
+    const PRESETS = [
+      { id: 'justpokedex', name: 'JustPokédex: Calculadora de IV', file: 'justpokedex.js', author: 'guilherme-se' },
+      { id: 'piw-auto-boss', name: 'PIW Auto Boss', file: 'auto-boss.user.js', author: 'luishferreira' },
+      { id: 'piw-auto-catch', name: 'PIW Auto Catch', file: 'auto-catch.user.js', author: 'luishferreira' },
+      { id: 'piw-auto-pokedex', name: 'PIW Auto Pokédex', file: 'auto-pokedex.user.js', author: 'luishferreira' },
+      { id: 'piw-auto-reconnect', name: 'PIW Auto Reconnect', file: 'auto-reconnect.user.js', author: 'luishferreira' },
+      { id: 'piw-auto-refill', name: 'PIW Auto Refill', file: 'auto-refill.user.js', author: 'luishferreira' },
+      { id: 'piw-hunt-recommender', name: 'PIW Hunt Recommender', file: 'hunt-recommender.user.js', author: 'luishferreira' },
+      { id: 'piw-iv-calculator', name: 'PIW IV Calculator', file: 'iv-calculator.user.js', author: 'luishferreira' },
+      { id: 'piw-qol', name: 'PIW Quality of Life', file: 'piw-qol.js', author: 'luishferreira' }
+    ];
     let scriptsOn = {}; try { scriptsOn = lsObj('scriptsOn'); } catch { }
     let userScripts = []; try { userScripts = lsArr('userScripts'); } catch { }
     // teto total de 4 MB ANTES do lsSet: estourar a cota fazia o lsSet podar o HISTORICO do usuario (hunts,
