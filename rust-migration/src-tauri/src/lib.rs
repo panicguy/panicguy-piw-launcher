@@ -134,7 +134,7 @@ fn preset_read(name: String) -> Option<String> {
 
 fn get_app_data_dir() -> PathBuf {
     if let Some(roaming) = std::env::var_os("APPDATA") {
-        PathBuf::from(roaming).join("pionailo")
+        PathBuf::from(roaming).join("piw-nailo")
     } else {
         PathBuf::from(".").join("data")
     }
