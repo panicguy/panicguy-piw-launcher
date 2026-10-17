@@ -12,7 +12,7 @@ pub struct DesktopSettings {
     window_transition: Mutex<()>,
 }
 fn data_dir() -> PathBuf {
-    PathBuf::from(std::env::var_os("APPDATA").unwrap_or_else(|| ".".into())).join("pionailo")
+    PathBuf::from(std::env::var_os("APPDATA").unwrap_or_else(|| ".".into())).join("piw-nailo")
 }
 impl DesktopSettings {
     pub fn new() -> Self {
@@ -46,7 +46,7 @@ impl DesktopSettings {
 }
 fn startup_path() -> PathBuf {
     PathBuf::from(std::env::var_os("APPDATA").unwrap_or_else(|| ".".into()))
-        .join("Microsoft/Windows/Start Menu/Programs/Startup/PIO Nailo Rust.lnk")
+        .join("Microsoft/Windows/Start Menu/Programs/Startup/PIW Nailo Rust.lnk")
 }
 pub fn autostart_enabled() -> bool {
     cfg!(windows) && startup_path().is_file()
