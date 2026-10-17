@@ -13,7 +13,7 @@ pub const LOGIN_URL: &str = "https://kick.com/settings/profile";
 
 pub fn profile(index: usize) -> PathBuf {
     PathBuf::from(std::env::var_os("APPDATA").unwrap_or_else(|| ".".into()))
-        .join("pionailo")
+        .join("piw-nailo")
         .join("kick-profiles")
         .join(format!("conta_{}", index + 1))
 }
