@@ -2672,10 +2672,8 @@
         <button id="dittoBtn" title="Onde caçar com o Ditto (comum ou shiny) e em que pokémon virar, no seu nível">✨
           Ditto</button>
         <button id="scriptsBtn" title="Rode userscripts (IV calc e os seus) nos painéis">🧩 Scripts</button>
-        <button id="autoSellBtn" title="Ativa a venda automática de loot no servidor para todas as contas">💰 Venda
-          Automática</button>
-        <button id="autoSupplyBtn" title="Reabastecimento automático de Pokébolas e Poções com verificação de saldo">📦
-          Auto Supply</button>
+        <!-- Venda Automática legada desativada: usar scripts PIW em Presets -->
+        <!-- Auto Supply legado desativado: usar Auto Refill nos Presets -->
         <button id="dispatchHuntBtn" title="Despacha contas selecionadas direto para a Hunt (sem sair do Modo Eco)">🎯
           Despachar Contas</button>
         <button id="twitchBonusBtn"
@@ -5625,7 +5623,7 @@
     };
 
     // ----- Venda Automática do Inventário (Loot) -----
-    let autoSellLootOn = lsGet('autoSellLoot') === '1';
+    let autoSellLootOn = false; // opção legada desativada no PIW
     const autoSellBtn = document.getElementById('autoSellBtn');
     const autoSellScript = (on) => `(() => {
     try {
@@ -6558,7 +6556,8 @@
     }
 
     let autoSupplyCfg = loadAutoSupplyCfg();
-    let autoSupplyOn = Boolean(autoSupplyCfg.enabled);
+    autoSupplyCfg.enabled = false;
+    let autoSupplyOn = false; // opção legada desativada no PIW
 
     function saveAutoSupplyCfg(cfg) {
       if (!lsSet('autoSupplyCfg', JSON.stringify(cfg))) return false;
@@ -7320,7 +7319,7 @@
 
     // Loop periódico de verificação do Auto Supply
     setInterval(() => {
-      if (autoSupplyOn) executeAutoSupply(false);
+      if (false && autoSupplyOn) executeAutoSupply(false); // monitor legado desativado no PIW
     }, 20000);
 
     // ===== Sistema de Bônus Twitch (Presença Headless em Chats Oficiais) =====
