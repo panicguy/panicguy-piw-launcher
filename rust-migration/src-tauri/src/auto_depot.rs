@@ -15,7 +15,7 @@ impl Default for Preferences {
 }
 fn path() -> PathBuf {
     PathBuf::from(std::env::var_os("APPDATA").unwrap_or_else(|| ".".into()))
-        .join("pionailo").join("auto-depot.json")
+        .join("piw-nailo").join("auto-depot.json")
 }
 pub fn now_ms() -> i64 {
     std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH)
