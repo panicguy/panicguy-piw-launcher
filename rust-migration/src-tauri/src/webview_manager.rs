@@ -9,7 +9,7 @@ use tokio::sync::{RwLock, oneshot};
 fn get_account_profile_dir(index: usize) -> PathBuf {
     if let Some(roaming) = std::env::var_os("APPDATA") {
         PathBuf::from(roaming)
-            .join("pionailo")
+            .join("piw-nailo")
             .join("profiles")
             .join(format!("conta_{}", index + 1))
     } else {
