@@ -18,7 +18,7 @@ const skipArg = args.find((a) => a.startsWith('--skip='));
 const skipS = skipArg ? Number(skipArg.slice(7)) || 0 : 60;
 let files = args.filter((a) => !a.startsWith('--'));
 if (!files.length) {
-  const dir = path.join(process.env.APPDATA || path.join(os.homedir(), '.config'), 'pionailo', 'mem');
+  const dir = path.join(process.env.APPDATA || path.join(os.homedir(), '.config'), 'piw-nailo', 'mem');
   try { files = fs.readdirSync(dir).filter((f) => f.endsWith('.jsonl')).sort().map((f) => path.join(dir, f)); }
   catch { console.error('Nenhum arquivo em ' + dir + '. Rode o app com --mem-probe.'); process.exit(1); }
 }
