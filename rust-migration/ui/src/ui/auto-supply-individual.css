@@ -1,0 +1,30 @@
+/* Per-account editing extends the existing supply layout. */
+#autoSupplyModal .supply-scope-toolbar { display:flex; align-items:center; flex-wrap:wrap; gap:10px; padding:10px 12px; background:var(--color-bg-elevated); border:1px solid var(--border-subtle); border-radius:10px; }
+#autoSupplyModal .supply-scope-toolbar > label { color:var(--color-text-secondary); font-size:12px; }
+#autoSupplyModal #supplyScopeSelect { flex:1; min-width:130px; padding:7px 10px; background:var(--color-surface-1)!important; color:var(--color-text-primary)!important; border:1px solid var(--border-subtle)!important; border-radius:7px; font-size:12px; }
+#autoSupplyModal .supply-custom-toggle { display:flex; align-items:center; gap:6px; cursor:pointer; }
+#autoSupplyModal .supply-custom-toggle[hidden] { display:none!important; }
+#autoSupplyModal .supply-custom-toggle input { accent-color:var(--color-accent); }
+#autoSupplyModal .supply-scope-note { margin:7px 0 12px; color:var(--color-text-secondary); font-size:11px; line-height:1.5; }
+#autoSupplyModal .supply-individual-footer { display:flex; justify-content:space-between; align-items:center; gap:8px; padding-top:8px; margin-top:7px; border-top:1px solid var(--border-subtle); color:var(--color-text-secondary); font-size:10px; }
+#autoSupplyModal .supply-edit-account { background:transparent!important; color:var(--color-accent)!important; border:0!important; box-shadow:none!important; padding:4px 0!important; font-size:11px!important; cursor:pointer; }
+#autoSupplyModal .supply-edit-account:hover { text-decoration:underline; text-underline-offset:3px; }
+#autoSupplyModal :is(.supply-edit-account,#supplyScopeSelect,.supply-custom-toggle input):focus-visible { outline:2px solid var(--color-accent); outline-offset:3px; }
+#autoSupplyModal #autoSupplyFieldsWrap :is(input,select):disabled { opacity:.65; cursor:default; }
+#autoSupplyModal .supply-individual-footer { margin-top:0; padding-top:4px; }
+#autoSupplyModal .supply-edit-account { padding:2px 0!important; }
+#autoSupplyModal .supply-selection-help { color:var(--color-text-secondary); font-size:11px; line-height:1.5; margin:4px 0 10px; }
+#autoSupplyModal .supply-recipient { display:flex; align-items:center; gap:6px; cursor:pointer; min-width:0; }
+#autoSupplyModal .supply-recipient input { width:13px; height:13px; margin:0; accent-color:var(--color-accent); flex-shrink:0; }
+#autoSupplyModal .supply-acc-card { cursor:default; }
+#autoSupplyModal .supply-acc-card.is-editing { outline:1px solid var(--color-accent); outline-offset:-1px; }
+#autoSupplyModal .supply-edit-account[aria-pressed=true] { font-weight:700; }
+#autoSupplyModal .supply-rules-head { flex-wrap:wrap; gap:5px; }
+#autoSupplyModal #supplyEditingTitle { color:var(--color-text-primary); font-size:14px; }
+#autoSupplyModal #supplyEditingNames { color:var(--color-text-secondary); font-size:11px; line-height:1.5; }
+#autoSupplyModal .supply-scope-toolbar { align-items:flex-start; flex-direction:column; gap:5px; }
+#autoSupplyModal .supply-mixed-value { border-color:var(--color-accent)!important; }
+#autoSupplyModal input.supply-mixed-value::placeholder { color:var(--color-text-secondary); opacity:1; }
+#autoSupplyModal .supply-edit-account { display:inline-flex; align-items:center; justify-content:center; gap:5px; background:none!important; border:0!important; border-radius:5px!important; box-shadow:none!important; padding:3px 6px!important; min-height:24px; line-height:1.2!important; font-size:11px!important; font-weight:500; color:var(--color-text-secondary)!important; }
+#autoSupplyModal .supply-edit-account svg { width:13px; height:13px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+#autoSupplyModal .supply-edit-account:hover { background:var(--color-accent-soft)!important; color:var(--color-text-primary)!important; text-decoration:none; }

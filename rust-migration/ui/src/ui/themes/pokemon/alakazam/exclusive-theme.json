@@ -1,0 +1,63 @@
+{
+  "id": "pkmn-alakazam",
+  "dex": 65,
+  "name": "Alakazam",
+  "pokemon": "Alakazam — PSYCHIC",
+  "t1": "PSYCHIC",
+  "t2": "",
+  "isMega": false,
+  "tone": "dark",
+  "toneLabel": "Escuro",
+  "category": "pokemon",
+  "glyph": "◇",
+  "brandTitle": "ALAKAZAM <span>LAUNCHER</span>",
+  "brandSub": "O HORIZONTE DA MENTE",
+  "quote": "Antes do movimento,<br>existe a intenção.",
+  "swatches": [
+    "#222c36",
+    "#8c6c3d",
+    "#61d7e5"
+  ],
+  "colors": {
+    "tone": "dark",
+    "bgBase": "#18252f",
+    "bgElevated": "#25323d",
+    "surface1": "#303c46",
+    "surface2": "#3c4a55",
+    "surfaceHover": "#485968",
+    "surfaceSelected": "#665c42",
+    "textPrimary": "#fff7df",
+    "textSecondary": "#dfd4b6",
+    "textMuted": "#b5af9e",
+    "accent": "#63d4e3",
+    "accentSoft": "rgba(99,212,227,.15)",
+    "actionPrimary": "#95713b",
+    "actionPrimaryHover": "#ad894e",
+    "borderSubtle": "#5b5c51",
+    "borderStrong": "#b7a37a"
+  },
+  "assets": {
+    "cutout": "src/ui/themes/pokemon/alakazam/cutout-manual-v1.png",
+    "panorama": "src/ui/themes/pokemon/alakazam/panorama-exclusive.png"
+  },
+  "schemaVersion": 1,
+  "exclusive": true,
+  "family": [
+    "abra",
+    "kadabra",
+    "alakazam"
+  ],
+  "artworkProvenance": {
+    "cutout": "User-supplied artwork; manual background extraction authorized in chat",
+    "panorama": "Built-in image generation; mountain observatory at dusk"
+  },
+  "companionSpecies": [
+    "abra",
+    "kadabra"
+  ],
+  "sideQuote": "A mente antecipa.\nA jornada avança.",
+  "footerQuote": "CLAREZA PARA ESCOLHER O CAMINHO.",
+  "productionStatus": "integrated-local-review",
+  "missingAssets": [],
+  "sideKicker": "ALÉM DO PRÓXIMO PASSO"
+}

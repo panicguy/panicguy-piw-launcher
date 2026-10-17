@@ -1,0 +1,58 @@
+{
+  "id": "pkmn-arcanine",
+  "dex": 59,
+  "name": "Arcanine",
+  "pokemon": "Arcanine — FIRE",
+  "t1": "FIRE",
+  "t2": "",
+  "isMega": false,
+  "tone": "dark",
+  "toneLabel": "Escuro",
+  "category": "pokemon",
+  "glyph": "☀",
+  "brandTitle": "ARCANINE <span>LAUNCHER</span>",
+  "brandSub": "ONDE A CHAMA ENCONTRA O HORIZONTE",
+  "quote": "Há coragem em cada novo horizonte.",
+  "swatches": [
+    "#19120e",
+    "#38261b",
+    "#efaa61"
+  ],
+  "colors": {
+    "tone": "dark",
+    "bgBase": "#19120e",
+    "bgElevated": "#231a15",
+    "surface1": "#30231c",
+    "surface2": "#3e2c21",
+    "surfaceHover": "#513827",
+    "surfaceSelected": "#543824",
+    "textPrimary": "#fff3e2",
+    "textSecondary": "#ddc4a8",
+    "textMuted": "#bc9771",
+    "accent": "#efaa61",
+    "accentSoft": "rgba(239,170,97,.16)",
+    "actionPrimary": "#b85c2d",
+    "actionPrimaryHover": "#d5733d",
+    "borderSubtle": "#58402d",
+    "borderStrong": "#95613c"
+  },
+  "assets": {
+    "panorama": "src/ui/themes/pokemon/arcanine/panorama-exclusive.png",
+    "cutout": "src/ui/themes/pokemon/arcanine/cutout-exclusive.png"
+  },
+  "exclusive": true,
+  "schemaVersion": 1,
+  "sideQuote": "A chama segue. A jornada também.",
+  "sideKicker": "O GUARDIÃO DAS CHAMAS",
+  "footerQuote": "NENHUMA NOITE APAGA A CORAGEM.",
+  "family": [
+    "growlithe",
+    "arcanine"
+  ],
+  "artworkProvenance": {
+    "cutout": "User-supplied artwork; built-in background extraction",
+    "panorama": "Built-in image generation"
+  },
+  "productionStatus": "integrated-local-review",
+  "missingAssets": []
+}

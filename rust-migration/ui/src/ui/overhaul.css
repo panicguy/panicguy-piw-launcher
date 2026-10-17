@@ -1,0 +1,397 @@
+/* PIW Nailo · Night watch. Visual composition only: sessions and webviews stay in index.html. */
+:root {
+  --leaf-rail:155px; --leaf-sidebar:318px; --leaf-top:76px; --leaf-bottom:100px;
+  --watch-ink:#07152a; --watch-plate:#10243e; --watch-plate-hi:#1b3454;
+  --watch-edge:#6480a4; --watch-hair:#708cad55; --watch-silver:#eaf2ff;
+  --watch-dim:#a9bed8; --watch-green:#8ee6a3;
+}
+html {color-scheme:dark}
+button {touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+#leafSettingsDrawer,#leafToolsMenu {overscroll-behavior:contain}
+.leaf-sr-only {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.leaf-skip {position:fixed;z-index:2000;top:8px;left:12px;padding:8px 12px;background:#eaf2ff;color:#0b1e36;border-radius:6px;transform:translateY(-160%)}
+.leaf-skip:focus-visible {transform:translateY(0)}
+#leafShell {
+  isolation:isolate;
+  background-color:#071329;
+  background-size:cover;
+  background-position:center center;
+}
+#leafShell:before {
+  display:block; opacity:1; z-index:0;
+  background:
+    linear-gradient(180deg,#06102449 0%,transparent 17%,transparent 81%,#030b1933 100%),
+    radial-gradient(ellipse at 45% 58%,transparent 42%,#05102544 100%);
+}
+#leafShell:after {width:310px;height:460px;left:-15px;bottom:-11px;z-index:1;background-position:left bottom;background-size:contain;filter:drop-shadow(3px 0 12px #8cbaff65)}
+
+/* The upper band is a piece of the night scene, with a precise control baseline. */
+.leaf-topbar {
+  position:relative; z-index:6;
+  grid-template-columns:calc(var(--leaf-rail) + var(--leaf-sidebar)) minmax(0,1fr) auto;
+  background:linear-gradient(90deg,#071328e6 0%,#09162bef 25%,#0b1930f2 70%,#071328ef);
+  border-bottom:1px solid #7e9cc04d;
+  box-shadow:inset 0 -1px #030916aa,0 7px 24px #0006;
+}
+.leaf-topbar:after {content:"";position:absolute;bottom:-2px;left:var(--leaf-rail);right:18px;height:1px;background:linear-gradient(90deg,#b5d4fa99,#5477a944 62%,transparent);pointer-events:none}
+.leaf-brand {min-width:0;padding-left:max(16px,calc(var(--leaf-rail) - 93px));gap:11px}
+.leaf-logo-mark {width:40px;height:45px;font-size:54px;line-height:39px;color:#eef6ff;text-shadow:0 0 5px #d9ecff,0 0 22px #8caee1}
+.leaf-brand-title {font-size:21px;line-height:1;letter-spacing:2.8px;text-shadow:0 1px 5px #0008}
+.leaf-brand-title span {font-weight:normal}
+.leaf-brand-sub {display:flex;align-items:center;gap:9px;margin-top:8px;font-size:7px;letter-spacing:1.5px;color:#a9bfdc}
+.leaf-brand-sub i {display:inline-block;width:16px;height:1px;background:#7796bd}
+.leaf-top-center {gap:9px;align-self:stretch;padding:0 13px 0 8px}
+.leaf-top-center:before {content:"";align-self:center;height:28px;border-left:1px solid #7894b45e;margin-right:3px}
+.leaf-segment {height:39px;flex:none;align-self:center;padding:3px;background:#071327d9;border-color:#7194c1a6;box-shadow:inset 0 1px #ffffff27,0 2px 7px #0008}
+.leaf-segment button {height:31px;min-width:78px;justify-content:center;font-size:11px;color:#d7e5f7}
+.leaf-segment button.is-active {background:linear-gradient(#314e78,#1a3357);box-shadow:inset 0 1px #edf6ff80,0 0 13px #7daceb73;border-color:#9cc4f8}
+.leaf-chip {height:34px;flex:none;padding:0 10px!important;border:1px solid #607da488;background:#0e1d34a9;border-radius:18px;color:#d9e5f8;font-size:10.5px;box-shadow:inset 0 1px #ffffff12}
+.leaf-chip:hover {border-color:#a3c4e9;background:#254263}
+.leaf-chip.is-active {background:#203e60;border-color:#92b8e5;box-shadow:inset 0 1px #f5faff44}
+.leaf-chip .switch {margin-left:3px}
+.leaf-top-right {padding-right:15px;gap:8px}
+.leaf-top-note {display:block;margin-right:8px;color:#bdcce1;font:italic 12px/1.22 Georgia,serif;text-align:right;white-space:nowrap;opacity:.84}
+.leaf-header-moon {display:block;margin-right:12px;font:37px/1 Georgia,serif;color:#d6e7ff;text-shadow:0 0 12px #92bcf2}
+.leaf-tools-btn,.leaf-icon-btn {width:36px;height:36px;border-radius:50%;border-color:#6984aa;background:#0d1b32d9;box-shadow:inset 0 1px #ffffff2b,0 2px 5px #0006}
+.leaf-tools-btn:hover,.leaf-icon-btn:hover {border-color:#bcdbff;background:#244061}
+.leaf-icon-btn:active,.leaf-tools-btn:active,.leaf-chip:active,.leaf-segment button:active {transform:translateY(1px);box-shadow:inset 0 2px 5px #0007}
+
+/* The account ledger cuts into the illustration; a separate rail carries Absol. */
+.leaf-body {margin-left:var(--leaf-rail);z-index:2;grid-template-columns:var(--leaf-sidebar) minmax(0,1fr)}
+.leaf-sidebar {
+  padding:12px 11px 8px 12px;
+  background:linear-gradient(180deg,#0a1830f4,#0b1b34e8 52%,#091830c6);
+  border-left:1px solid #7d9bc246;border-right:1px solid #9bb9d061;
+  border-radius:0 0 15px 0;
+  box-shadow:inset 1px 0 #e4f4ff13,inset -1px 0 #e4f4ff11,8px 10px 26px #0006;
+}
+.leaf-sidebar:after {content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(180deg,#c8e2ff91,transparent 65%);pointer-events:none}
+.leaf-sidebar:before {content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 3% 92%,#9cc0fa14,transparent 40%);z-index:0}
+.leaf-sidebar>* {position:relative;z-index:1}
+.leaf-summary {min-height:57px;margin-bottom:10px;background:#0c1b32bc;border:1px solid #6684a53f;border-radius:9px;box-shadow:inset 0 1px #ffffff1b}
+.leaf-summary-item {padding:8px 10px 6px}
+.leaf-summary-item+.leaf-summary-item {border-color:#8da7c437}
+.leaf-summary-item .k {font-size:9px;text-transform:uppercase;letter-spacing:.75px;color:#afc2de}
+.leaf-summary-item .v {margin-top:5px;font-size:16px;font-weight:750;line-height:1;color:#f5f9ff}
+.leaf-summary-item .v.good {color:#a9ebbd}
+.leaf-sidebar-title {height:27px;gap:7px;padding:0 2px 4px;color:#c6d6e9;font:600 10px/1.2 'Segoe UI',sans-serif;letter-spacing:1.1px;text-transform:uppercase}
+.leaf-sidebar-rule {height:1px;flex:1;background:linear-gradient(90deg,#8ea9c669,transparent)}
+.leaf-add-account {flex:none;color:#c8dcf4}
+.leaf-add-account:hover {background:#263f60}
+#leafAccountList {gap:8px;padding:0 2px 3px 0;scrollbar-gutter:stable}
+#leafAccountList::-webkit-scrollbar-thumb {background:#748fb49e}
+.leaf-account {
+  position:relative;min-height:151px;padding:9px 10px 7px;overflow:hidden;
+  background:linear-gradient(145deg,#1b304eeb,#10243df7 68%,#0d2039f7);
+  border:1px solid #5c789d;border-radius:11px;
+  box-shadow:inset 0 1px #d1e7ff27,inset 0 -1px #050d1c,0 4px 12px #0008;
+  transition:border-color 140ms ease-out,background-color 140ms ease-out,transform 140ms ease-out;
+}
+.leaf-account:before {content:"";position:absolute;inset:0 0 auto;height:22px;background:linear-gradient(90deg,#aacfff16,transparent 75%);pointer-events:none}
+.leaf-account:after {content:"";position:absolute;right:0;top:0;width:18px;height:18px;border-top:1px solid #a9c6e66b;border-right:1px solid #a9c6e66b;border-radius:0 10px 0 0;pointer-events:none}
+.leaf-account:hover {border-color:#a5c5ea;background:#203758;transform:translateY(-1px)}
+.leaf-account.is-selected {border-color:#c5dfff;background:#213e62;box-shadow:inset 0 0 0 1px #badbff7a,0 0 0 1px #5085c59a,0 5px 16px #000a}
+.leaf-account.is-attention {border-color:#cfaa6b}
+.leaf-account.is-attention .leaf-hunt-glyph,.leaf-account.is-attention .leaf-account-state {color:#e4c487}
+.leaf-account.state-off {filter:saturate(.6);border-color:#62718b}
+.leaf-account.state-wait {border-color:#777c9a}
+.leaf-account.state-err {border-color:#c47d89}
+.leaf-account-top {position:relative;display:grid;grid-template-columns:15px 40px minmax(0,1fr) auto;grid-template-rows:21px 19px;gap:0 6px;align-items:center;min-height:41px}
+.leaf-account-number {grid-column:1;grid-row:1/3;align-self:start;margin-top:3px;color:#9db6d3;font:700 8px/1 'Segoe UI',sans-serif;font-variant-numeric:tabular-nums}
+.leaf-poke-avatar {grid-column:2;grid-row:1/3;width:39px;height:39px;border-radius:8px;background:radial-gradient(circle at 45% 30%,#466280,#1d3454 72%);border:1px solid #819ebd;box-shadow:inset 0 1px #ffffff44,0 2px 6px #0007;overflow:visible}
+.leaf-poke-avatar img {width:44px;height:44px;filter:drop-shadow(0 2px 2px #0009)}
+.leaf-account-identity {grid-column:3;grid-row:1/3;min-width:0;align-self:center}
+.leaf-account-name {font-size:13px;line-height:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#f6faff;font-weight:750}
+.leaf-pokemon-line {margin-top:1px;font-size:10px;line-height:12px;color:#afc0d6}
+.leaf-pokemon-line span {color:#7890af;margin:0 2px}.leaf-pokemon-line b {color:#d9e6f5}
+.leaf-lv {grid-column:4;grid-row:1;align-self:start;margin:1px 0 0;padding:2px 4px;background:#233d5f;border:1px solid #617fa5;border-radius:3px;color:#d5e4f7;font-size:8px;white-space:nowrap}
+.leaf-account-state {grid-column:4;grid-row:2;justify-self:end;font-size:10px;white-space:nowrap}
+.leaf-account-state:before {width:6px;height:6px;box-shadow:0 0 7px currentColor}
+.leaf-account-state.wait {color:#d9bc7c}.leaf-account-state.off {color:#a9b3c7}.leaf-account-state.err {color:#f099a2}
+.leaf-hunt-row {height:22px;min-height:22px;margin-top:6px;padding:0;border:0;border-bottom:1px solid #6f8dae51;border-radius:0;background:transparent;color:#b9cbe0;font-size:10px}
+.leaf-hunt-glyph {width:12px;height:12px;color:#9bc6fa;flex:none}
+.leaf-hunt-glyph svg {width:12px;height:12px}
+.leaf-hunt-name b {color:#f1f6ff;font-weight:650}
+.leaf-hunt-time {color:#bdcde0;font-variant-numeric:tabular-nums}
+.leaf-account-metrics {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:6px}
+.leaf-metric {padding-left:7px;border-left:1px solid #728cab40}
+.leaf-metric:first-child {padding-left:1px;border-left:0}
+.leaf-metric .mk {font-size:9px;line-height:10px;letter-spacing:.3px;text-transform:uppercase;color:#9cb3cf}
+.leaf-metric .mv {margin-top:2px;font-size:12px;line-height:13px;font-weight:750;color:#f3f7fe}
+.leaf-account-actions {grid-template-columns:minmax(0,1fr) 27px;gap:6px;margin-top:6px;padding:0}
+.leaf-open-account {height:24px;display:flex;align-items:center;justify-content:center;gap:6px;background:linear-gradient(#4c9d69,#367e55);border:1px solid #81d59c;border-radius:13px;color:white;font-size:10px;box-shadow:inset 0 1px #e6ffea4e,0 2px 5px #0008}
+.leaf-open-account span {font-size:9px}.leaf-open-account:hover {background:linear-gradient(#63b57e,#449569);border-color:#c1f3cb}
+.leaf-open-account:active {transform:translateY(1px);box-shadow:inset 0 2px 4px #183d2e}
+.leaf-reload-account {height:24px;width:27px;border-radius:12px;background:#233a59;border-color:#6d8caf}
+.leaf-reload-account:hover {background:#355477}
+.leaf-account-footnote {display:flex;justify-content:space-between;gap:6px;margin-top:5px;color:#9fb7d1;font-size:8px;line-height:9px;font-variant-numeric:tabular-nums}
+.leaf-side-footer {flex:none;margin:0 0 7px;padding:0 2px 8px;border-bottom-color:#6989ab70}
+.leaf-login-all {height:32px;background:linear-gradient(#438e61,#2d704b);border:1px solid #83c89a;border-radius:7px;box-shadow:inset 0 1px #f1fff144;font-size:10px}
+.leaf-side-round {height:32px;border-radius:7px;background:#1b3454;border-color:#6b88ab}
+.leaf-side-motto {position:absolute;right:17px;bottom:18px;font:8px/1.5 Georgia,serif;letter-spacing:2px;color:#bbd1ed;opacity:.72}
+.leaf-side-motto span {font-size:17px}.leaf-side-motto em {font-size:10px}
+.leaf-version {color:#a1b7d1;font-size:8px}
+
+/* Each game has its own instrument frame around the untouched webview. */
+.leaf-main {padding:11px 14px 6px 12px}
+#grid {gap:13px!important}
+.panel {
+  grid-template-rows:39px minmax(0,1fr) 38px!important;
+  border:1px solid #708fb6!important;border-radius:12px!important;
+  box-shadow:inset 0 0 0 1px #d4e7ff1f,0 8px 22px #000a!important;
+  transition:border-color 160ms ease-out,box-shadow 160ms ease-out!important;
+}
+.panel:before {content:"";position:absolute;z-index:2;left:0;top:39px;width:2px;height:calc(100% - 77px);background:linear-gradient(180deg,#b5d5f080,transparent 23%,transparent 77%,#b5d5f060);pointer-events:none}
+.panel:hover {border-color:#b1d2f5!important;box-shadow:inset 0 0 0 1px #e9f5ff25,0 9px 22px #000b!important}
+.panel.expanded {border-color:#c3e1ff!important;box-shadow:0 0 0 1px #a4cbef91,0 15px 35px #000c!important}
+.panel:has(.dot.err) {border-color:#b77480!important}.panel:has(.dot.off) {border-color:#63748d!important}
+.panel-header {height:39px!important;padding:0 11px!important;gap:8px!important;background:linear-gradient(180deg,#132844,#0b1c35)!important;border-bottom:1px solid #6e8db26b!important;box-shadow:inset 0 1px #daeaff18;color:#edf5ff!important}
+.panel-header:before {content:attr(data-index) !important;width:21px;height:21px;border-radius:5px;background:#243f62;color:#dcecff;font-size:9px;border:1px solid #6483a8;box-shadow:inset 0 1px #ffffff32}
+.panel-header .dot {width:7px!important;height:7px!important}
+.panel-header .name {font-size:11px!important;letter-spacing:.1px;font-weight:750!important;max-width:44%}
+.panel-header .status {font-size:9px!important;letter-spacing:.25px;color:#b9cbe0!important}
+.panel-header .dot.ok ~ .status {color:#9fe7b1!important}
+.panel-header .dot.err ~ .status {color:#f0a2aa!important}
+.panel-header button {min-width:24px!important;height:24px!important;border:1px solid transparent!important;border-radius:5px!important;color:#b9cce3!important;font-size:15px!important}
+.panel-header button:hover {border-color:#748fb2!important;background:#284564!important;color:#fff!important}
+.panel-header button:active {transform:translateY(1px);background:#17304f!important}
+.panel>webview {background:#070f1d!important}
+.leaf-panel-footer {height:38px;padding:0 11px;background:linear-gradient(180deg,#10243e,#0b1a31);border-top:1px solid #6e8db26b;color:#aec4df;box-shadow:inset 0 1px #e1efff14}
+.leaf-panel-footer .pf-orbit {display:grid;place-items:center;width:24px;height:24px;margin-right:3px;border:1px solid #597ba3;border-radius:50%;color:#9ec5f4;font-size:15px}
+.leaf-panel-footer .pf-sprite {margin-top:-7px}
+.leaf-panel-footer .pf-hunt,.leaf-panel-footer .pf-balls {display:flex;align-items:baseline;gap:7px;font-size:10px}
+.leaf-panel-footer small {font-size:8px;font-weight:650;letter-spacing:.8px;color:#89a5c4}
+.leaf-panel-footer .pf-hunt b,.leaf-panel-footer .pf-balls b {font-size:10px;font-weight:700;color:#f0f6ff}
+.leaf-panel-footer .pf-balls {padding-left:10px;border-left:1px solid #7895b259}
+.leaf-landscape-footer span {right:8%;bottom:21px;font-size:10px;color:#d7e5fb;text-shadow:0 2px 8px #000}
+
+/* Secondary surfaces retain the same chrome and a visible source for motion. */
+#leafListView {background:linear-gradient(150deg,#122845f2,#0a1930f2);border-color:#7898bd;box-shadow:inset 0 1px #e4f1ff26,0 10px 24px #0007}
+.leaf-page-head h1 {font-size:28px;letter-spacing:.2px}
+#leafListRows {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.leaf-list-card {display:flex;flex-direction:column;align-items:stretch;gap:0;min-height:174px;margin:0;padding:12px 14px 10px;background:linear-gradient(145deg,#1b3150,#11253e);border-color:#6280a4;box-shadow:inset 0 1px #ffffff20,0 4px 12px #0005}
+.leaf-list-card:hover {background:#234064}
+.leaf-list-identity {display:flex;align-items:center;gap:9px;min-width:0}
+.leaf-list-index {align-self:flex-start;margin-top:4px;font-size:9px;color:#9fb9d8;font-weight:700}
+.leaf-list-card .avatar {width:42px;height:42px;flex:none;border-radius:8px}
+.leaf-list-card .avatar img {width:46px;height:46px}
+.leaf-list-person {min-width:0;flex:1}
+.leaf-list-card .name {font-size:13px}
+.leaf-list-card .sub {font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.leaf-list-state {display:flex;align-items:center;gap:5px;font-size:10px;color:#a4e4b4;white-space:nowrap}
+.leaf-list-state:before {content:"";width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 6px currentColor}
+.leaf-list-state.wait {color:#e0c58d}.leaf-list-state.off {color:#aab5c7}.leaf-list-state.err {color:#f0a2aa}
+.leaf-list-hunt {display:flex;gap:9px;align-items:center;min-width:0;margin:9px 0 7px;padding:0 0 7px;border-bottom:1px solid #7793b35b;color:#9eb6d2;font-size:10px}
+.leaf-list-hunt b {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#edf5ff;font-weight:650}
+.leaf-list-stats {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+.leaf-list-stats .leaf-list-cell {padding:0 9px;border-left:1px solid #7793b35b}
+.leaf-list-stats .leaf-list-cell:first-child {padding-left:0;border:0}
+.leaf-list-cell .label {font-size:9px;letter-spacing:.4px;text-transform:uppercase}
+.leaf-list-cell .value {font-size:12px}
+.leaf-list-actions {display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:8px;color:#9eb6d2;font-size:9px}
+.leaf-list-open {height:27px;min-width:130px;background:linear-gradient(#3e8c60,#2c704d);border-color:#86c99d;border-radius:15px;font-size:10px;box-shadow:inset 0 1px #eaffec55}
+.leaf-list-open:hover {background:#4a9c6b}.leaf-list-open:active {transform:translateY(1px)}
+#leafToolsMenu {right:55px;top:66px;border-color:#7796ba;background:linear-gradient(#1b3353,#0d2039);box-shadow:inset 0 1px #f0f7ff33,0 18px 40px #000b}
+#leafSettingsDrawer {border-left-color:#83a3c8;background:linear-gradient(145deg,#203c60,#0b1b32 74%)}
+.leaf-setting-btn {box-shadow:inset 0 1px #ffffff1c}
+.leaf-setting-btn:active,.leaf-tool-item:active {transform:translateY(1px)}
+
+@media(max-width:1650px) {
+  :root {--leaf-rail:108px;--leaf-sidebar:295px;--leaf-top:69px;--leaf-bottom:85px}
+  #leafShell:after {width:275px;height:410px;left:-28px}
+  .leaf-brand {padding-left:16px}
+  .leaf-brand-title {font-size:18px;letter-spacing:2px}
+  .leaf-top-note,.leaf-header-moon {display:none}
+  .leaf-chip {padding:0 8px!important}
+}
+@media(max-width:1250px) {
+  :root {--leaf-rail:66px;--leaf-sidebar:270px;--leaf-top:62px;--leaf-bottom:58px}
+  .leaf-brand {padding-left:16px}.leaf-logo-mark {font-size:43px;width:32px}
+  .leaf-brand-title {font-size:16px}.leaf-brand-sub {font-size:6px;letter-spacing:.7px}
+  .leaf-top-center {gap:5px}.leaf-chip {padding:0 7px!important}.leaf-chip .txt-hide-sm,.leaf-segment .txt-hide-sm {display:none}
+  .leaf-account {min-height:148px;padding:7px}.leaf-account-top {grid-template-columns:12px 34px minmax(0,1fr) auto;gap:0 4px}
+  .leaf-poke-avatar {width:33px;height:34px}.leaf-poke-avatar img {width:39px;height:39px}
+  .leaf-account-name {font-size:11px}.leaf-metric .mk {font-size:7px}.leaf-metric .mv {font-size:10px}
+  #leafShell:after {width:225px;height:355px;left:-50px;bottom:-6px}
+  #leafListRows {grid-template-columns:1fr}
+}
+@media(max-width:850px) {
+  :root {--leaf-rail:0px;--leaf-sidebar:205px;--leaf-bottom:0px;--leaf-top:58px}
+  .leaf-topbar {grid-template-columns:var(--leaf-sidebar) minmax(0,1fr) auto}
+  .leaf-brand {padding-left:8px}.leaf-brand-sub {display:none}.leaf-brand-title {font-size:13px}
+  .leaf-body {margin-left:0}.leaf-sidebar {padding:7px}.leaf-top-center:before {display:none}
+  .leaf-summary-item {padding:6px 4px}.leaf-summary-item .k {font-size:7px}.leaf-summary-item .v {font-size:12px}
+  .leaf-account-number,.leaf-lv {display:none}.leaf-account-top {grid-template-columns:31px minmax(0,1fr) auto}
+  .leaf-poke-avatar {grid-column:1}.leaf-account-identity {grid-column:2}.leaf-account-state {grid-column:3;grid-row:1/3}
+  .leaf-account-state {font-size:0}.leaf-account-state:before {width:7px;height:7px}
+  .leaf-metric {padding-left:4px}.leaf-metric .mk {font-size:6px}.leaf-metric .mv {font-size:9px}
+  .leaf-side-motto,#leafShell:after {display:none}.leaf-main {padding:6px}
+}
+@media(max-height:760px) {.leaf-side-motto {display:none}:root {--leaf-bottom:48px}}
+@media(max-height:590px) {:root {--leaf-bottom:0px}.leaf-account {min-height:144px}}
+@media(prefers-reduced-motion:reduce) {.leaf-account,.panel,.leaf-chip,.leaf-icon-btn,.leaf-tools-btn {transition:none!important}}
+
+/* Game-first composition: the four views occupy the canvas, as in the supplied layout reference. */
+:root {--leaf-rail:0px;--leaf-sidebar:260px;--leaf-top:56px;--leaf-bottom:0px}
+#leafShell {grid-template-rows:var(--leaf-top) minmax(0,1fr)}
+#leafShell:after {display:none}
+.leaf-landscape-footer {display:none}
+.leaf-topbar {grid-template-columns:var(--leaf-sidebar) minmax(0,1fr) auto}
+.leaf-topbar:after {left:9px;right:9px}
+.leaf-brand {padding-left:11px;gap:8px}
+.leaf-logo-mark {width:31px;height:33px;font-size:40px;line-height:30px}
+.leaf-brand-title {font-size:16px;letter-spacing:1.9px}
+.leaf-brand-sub {margin-top:4px;font-size:5.8px;letter-spacing:.8px;gap:5px}
+.leaf-brand-sub i {width:10px}
+.leaf-top-center {gap:5px;padding:0 8px}
+.leaf-top-center:before {height:23px;margin-right:1px}
+.leaf-segment {height:33px}
+.leaf-segment button {height:25px;min-width:62px;padding:0 7px;font-size:10px}
+.leaf-chip {height:29px;padding:0 8px!important;font-size:9.5px}
+.leaf-top-right {gap:5px;padding-right:8px}
+.leaf-top-note {font-size:10px;margin-right:3px}
+.leaf-header-moon {font-size:28px;margin-right:4px}
+.leaf-tools-btn,.leaf-icon-btn {width:30px;height:30px}
+.leaf-body {grid-row:2;margin-left:0;grid-template-columns:var(--leaf-sidebar) minmax(0,1fr)}
+.leaf-sidebar {
+  padding:7px 7px 6px;
+  border-left:0;border-top:0;border-bottom:0;border-radius:0;
+  background:linear-gradient(180deg,#0a1830fa,#0b1c35ef 42%,#0a1930d4 72%,#0a1930b8);
+  box-shadow:inset -1px 0 #d8ebff23,5px 0 14px #0007;
+}
+.leaf-sidebar:before {inset:auto 0 0;top:39%;background:url('assets/absol-cutout.png') -24px bottom/275px auto no-repeat;opacity:.85;mask-image:linear-gradient(180deg,transparent 0%,#000 28%);z-index:0}
+.leaf-sidebar:after {left:auto;right:0;background:linear-gradient(180deg,#d5e9ff88,transparent 72%)}
+.leaf-summary {min-height:49px;margin-bottom:5px;border-radius:7px}
+.leaf-summary-item {padding:6px 7px 4px}
+.leaf-summary-item .k {font-size:8px}
+.leaf-summary-item .v {font-size:14px;margin-top:3px}
+.leaf-sidebar-title {height:24px;font-size:9px;letter-spacing:.8px}
+#leafAccountList {gap:6px;padding:0 2px 4px 0}
+.leaf-account {min-height:141px;padding:7px 7px 5px;border-radius:9px}
+.leaf-account-top {grid-template-columns:12px 34px minmax(0,1fr) auto;grid-template-rows:19px 17px;gap:0 4px;min-height:36px}
+.leaf-account-number {font-size:7px}
+.leaf-poke-avatar {width:33px;height:34px;border-radius:7px}
+.leaf-poke-avatar img {width:39px;height:39px}
+.leaf-account-name {font-size:11.5px;line-height:14px}
+.leaf-pokemon-line {font-size:8.5px;line-height:11px}
+.leaf-lv {font-size:7px}
+.leaf-account-state {font-size:8.5px}
+.leaf-hunt-row {height:20px;min-height:20px;margin-top:5px;font-size:9px}
+.leaf-account-metrics {margin-top:5px}
+.leaf-metric .mk {font-size:7.5px;line-height:9px}
+.leaf-metric .mv {font-size:10.5px;line-height:12px}
+.leaf-account-actions {margin-top:5px}
+.leaf-open-account,.leaf-reload-account {height:23px}
+.leaf-account-footnote {margin-top:3px;font-size:7px}
+.leaf-side-footer {order:3;margin:5px 1px 0;padding:6px 0 0;border-top:1px solid #7c98bb80;border-bottom:0;background:linear-gradient(180deg,#0b1a30bb,#0a192fe8)}
+.leaf-login-all,.leaf-side-round {height:30px}
+.leaf-side-motto {display:none}
+.leaf-version {display:none}
+.leaf-main {padding:7px;background:transparent}
+#grid {gap:8px!important}
+.panel {grid-template-rows:30px minmax(0,1fr) 29px!important;border-radius:9px!important;box-shadow:inset 0 0 0 1px #d4e7ff1b,0 5px 13px #0008!important}
+.panel:before {top:30px;height:calc(100% - 59px)}
+.panel-header {height:30px!important;padding:0 8px!important;gap:6px!important}
+.panel-header:before {width:17px;height:17px;font-size:8px}
+.panel-header .name {font-size:10px!important}
+.panel-header .status {font-size:8px!important}
+.panel-header button {min-width:20px!important;height:20px!important;font-size:12px!important}
+.leaf-panel-footer {height:29px;padding:0 8px;font-size:9px}
+.leaf-panel-footer .pf-orbit {width:19px;height:19px;font-size:12px}
+.leaf-panel-footer .pf-sprite {width:22px;height:22px}
+.leaf-panel-footer .pf-hunt,.leaf-panel-footer .pf-balls {font-size:9px}
+.leaf-panel-footer small {font-size:7px}
+.leaf-panel-footer .pf-hunt b,.leaf-panel-footer .pf-balls b {font-size:9px}
+#leafListView {border-radius:9px}
+#leafToolsMenu {top:49px;right:40px}
+#leafSettingsDrawer {top:var(--leaf-top)}
+
+@media(max-width:1650px) {
+  :root {--leaf-sidebar:230px;--leaf-top:52px;--leaf-bottom:0px}
+  .leaf-brand-title {font-size:14px;letter-spacing:1px}
+  .leaf-brand-sub {font-size:5.4px}
+  .leaf-top-note,.leaf-header-moon {display:none}
+  .leaf-sidebar:before {background-size:242px auto}
+}
+@media(max-width:1250px) {
+  :root {--leaf-sidebar:220px;--leaf-top:52px;--leaf-bottom:0px}
+  .leaf-top-center {gap:4px;padding:0 5px}
+  .leaf-chip {padding:0 6px!important}
+  .leaf-account {min-height:136px}
+  .leaf-account-state {font-size:0}
+  .leaf-account-state:before {width:7px;height:7px}
+}
+@media(max-width:850px) {
+  :root {--leaf-sidebar:190px;--leaf-top:50px;--leaf-bottom:0px}
+  .leaf-brand {padding-left:6px}
+  .leaf-brand-title {font-size:11px}
+  .leaf-logo-mark {width:24px;font-size:33px}
+  .leaf-sidebar {padding:5px}
+  .leaf-summary-item .k {font-size:6px}
+  .leaf-metric .mk {font-size:6px}
+  .leaf-metric .mv {font-size:9px}
+  .leaf-main {padding:5px}
+  #grid {gap:5px!important}
+}
+@media(max-height:760px) {
+  :root {--leaf-bottom:0px}
+  .leaf-sidebar {padding-top:4px;padding-bottom:4px}
+  .leaf-summary {min-height:43px;margin-bottom:3px}
+  .leaf-summary-item {padding:4px 5px 2px}
+  .leaf-sidebar-title {height:19px;padding-bottom:2px}
+  #leafAccountList {gap:4px}
+  .leaf-account {min-height:116px;padding:5px 6px 4px}
+  .leaf-account-top {grid-template-rows:16px 14px;min-height:30px}
+  .leaf-poke-avatar {width:29px;height:29px}
+  .leaf-poke-avatar img {width:34px;height:34px}
+  .leaf-account-name {font-size:10px;line-height:12px}
+  .leaf-pokemon-line {font-size:7.5px;line-height:9px}
+  .leaf-hunt-row {height:17px;min-height:17px;margin-top:3px;font-size:8px}
+  .leaf-account-metrics {margin-top:3px}
+  .leaf-metric .mk {font-size:6.5px;line-height:8px}
+  .leaf-metric .mv {font-size:9px;line-height:10px}
+  .leaf-account-actions {margin-top:3px}
+  .leaf-open-account,.leaf-reload-account {height:20px;font-size:8px}
+  .leaf-account-footnote {display:none}
+  .leaf-side-footer {margin-top:3px;padding-top:4px}
+  .leaf-login-all,.leaf-side-round {height:25px}
+  .leaf-main {padding:5px}
+  #grid {gap:6px!important}
+}
+
+/* Final art pass: moonlit chrome, readable secondary actions, restrained highlights. */
+.leaf-topbar {
+  background:
+    linear-gradient(90deg,#061328f2 0%,#08172be8 47%,#091a32da 72%,#071328eb 100%),
+    url('assets/absol-panorama.png') center 8%/cover no-repeat;
+}
+.leaf-account-actions {grid-template-columns:minmax(0,1fr) 69px}
+.leaf-reload-account {width:auto;display:flex;align-items:center;justify-content:center;gap:3px;border-radius:12px;font-size:8px;color:#c7d9ed}
+.leaf-reload-account svg {width:10px;height:10px;flex:none}
+.leaf-reload-label {display:inline;white-space:nowrap}
+.panel-header {position:relative}
+.panel-header:after {content:"";position:absolute;left:29px;top:0;width:128px;height:1px;background:linear-gradient(90deg,#d5eaff80,transparent);pointer-events:none}
+.panel.expanded .panel-header:after {background:linear-gradient(90deg,#e5f4ff,transparent)}
+.leaf-panel-footer {position:relative}
+.leaf-panel-footer:after {content:"";position:absolute;inset:auto 11px 0;height:1px;background:linear-gradient(90deg,transparent,#8db4df55 50%,transparent);pointer-events:none}
+.leaf-account:nth-child(1),.panel:nth-child(1) {--slot-accent:#c4a2eb}
+.leaf-account:nth-child(2),.panel:nth-child(2) {--slot-accent:#88c6ed}
+.leaf-account:nth-child(3),.panel:nth-child(3) {--slot-accent:#8de3ad}
+.leaf-account:nth-child(4),.panel:nth-child(4) {--slot-accent:#efc781}
+.leaf-account:before {background:linear-gradient(90deg,color-mix(in srgb,var(--slot-accent) 16%,transparent),transparent 72%)}
+.leaf-account-number {color:var(--slot-accent)}
+.panel-header:after {background:linear-gradient(90deg,var(--slot-accent),transparent)}
+.panel-header:before {border-color:color-mix(in srgb,var(--slot-accent) 65%,#405a76)}
+.panel:before {background:linear-gradient(180deg,var(--slot-accent),transparent 25%,transparent 75%,var(--slot-accent))}
+@media(max-width:850px) {
+  .leaf-account-actions {grid-template-columns:minmax(0,1fr) 25px}
+  .leaf-reload-label {display:none}
+}
+
+/* More breathing room than the layout reference; the moonlit frame stays ours. */
+:root {--leaf-top:60px}
+.leaf-main {padding:9px 10px 10px}
+#grid {gap:11px!important}
+.panel {border-radius:11px!important}
+@media(max-width:1650px) {:root {--leaf-top:56px}.leaf-main {padding:7px 8px 8px}#grid {gap:9px!important}}
+@media(max-width:850px) {:root {--leaf-top:52px}.leaf-main {padding:5px}#grid {gap:5px!important}}

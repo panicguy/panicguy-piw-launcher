@@ -1,0 +1,1875 @@
+/* ==========================================================================
+   PIW Nailo — 12 Temas Temáticos (Claro, Intermediário e Escuro)
+   Compatível com Absol Launcher, PokeLeaf Shell e Webviews
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. DEFINIÇÃO DAS 12 PALETAS (CSS CUSTOM PROPERTIES)
+   -------------------------------------------------------------------------- */
+
+/* 1.1 Absol Midnight (Original / Deep Dark) */
+body[data-theme="absol-night"], :root {
+  --color-bg-base: #081224;
+  --color-bg-elevated: #0b1930;
+  --color-surface-1: #13253d;
+  --color-surface-2: #1c3150;
+  --color-surface-hover: #294565;
+  --color-surface-selected: #213d62;
+  --color-text-primary: #f3f6fc;
+  --color-text-secondary: #c5d5ea;
+  --color-text-muted: #8da4c4;
+  --color-accent: #9fc3ef;
+  --color-accent-soft: rgba(159, 195, 239, 0.16);
+  --color-action-primary: #3b8659;
+  --color-action-primary-hover: #4b9968;
+  --border-subtle: #3b5478;
+  --border-strong: #688dbb;
+  --theme-color-scheme: dark;
+  --theme-shell-overlay: transparent;
+  --theme-cutout-opacity: 1;
+  --theme-preview-bg: #081224;
+  --theme-preview-surface: #13253d;
+  --theme-preview-accent: #9fc3ef;
+}
+
+/* 1.2 Creme Baunilha (Light / Pergaminho Vintage) — Eevee, Togepi, Snorlax */
+body[data-theme="creme-vanilla"] {
+  --color-bg-base: #f5eedf;
+  --color-bg-elevated: #ece2ce;
+  --color-surface-1: #e2d5bd;
+  --color-surface-2: #d6c6aa;
+  --color-surface-hover: #cbba9d;
+  --color-surface-selected: #edd8bc;
+  --color-text-primary: #2d2116;
+  --color-text-secondary: #5a4534;
+  --color-text-muted: #856e5a;
+  --color-accent: #b46927;
+  --color-accent-soft: rgba(180, 105, 39, 0.14);
+  --color-action-primary: #4e7845;
+  --color-action-primary-hover: #3d6035;
+  --border-subtle: #cbb9a3;
+  --border-strong: #a48f76;
+  --theme-color-scheme: light;
+  --theme-shell-overlay: linear-gradient(180deg, rgba(245, 238, 223, 0.89), rgba(245, 238, 223, 0.95));
+  --theme-cutout-opacity: 0.72;
+  --theme-preview-bg: #f5eedf;
+  --theme-preview-surface: #e2d5bd;
+  --theme-preview-accent: #b46927;
+}
+
+/* 1.3 Branco Puro (Light / Studio Clean) — Arceus, Reshiram, Togekiss */
+body[data-theme="pure-white"] {
+  --color-bg-base: #f6f8fb;
+  --color-bg-elevated: #ffffff;
+  --color-surface-1: #edf2f7;
+  --color-surface-2: #e2e8f0;
+  --color-surface-hover: #cbd5e1;
+  --color-surface-selected: #dbeafe;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-accent: #2563eb;
+  --color-accent-soft: rgba(37, 99, 235, 0.12);
+  --color-action-primary: #16a34a;
+  --color-action-primary-hover: #15803d;
+  --border-subtle: #cbd5e1;
+  --border-strong: #94a3b8;
+  --theme-color-scheme: light;
+  --theme-shell-overlay: linear-gradient(180deg, rgba(246, 248, 251, 0.91), rgba(246, 248, 251, 0.96));
+  --theme-cutout-opacity: 0.68;
+  --theme-preview-bg: #f6f8fb;
+  --theme-preview-surface: #edf2f7;
+  --theme-preview-accent: #2563eb;
+}
+
+/* 1.4 Branco Gelo (Light / Glacial Frost) — Articuno, Glaceon, Alolan Vulpix */
+body[data-theme="frost-ice"] {
+  --color-bg-base: #e6f1f8;
+  --color-bg-elevated: #f1f7fc;
+  --color-surface-1: #d8eaf5;
+  --color-surface-2: #c7dfeee6;
+  --color-surface-hover: #b4d2e5;
+  --color-surface-selected: #c3e2f9;
+  --color-text-primary: #0d283c;
+  --color-text-secondary: #2f5470;
+  --color-text-muted: #587e9b;
+  --color-accent: #0284c7;
+  --color-accent-soft: rgba(2, 132, 199, 0.14);
+  --color-action-primary: #0891b2;
+  --color-action-primary-hover: #0e7490;
+  --border-subtle: #b6d5e8;
+  --border-strong: #7baac7;
+  --theme-color-scheme: light;
+  --theme-shell-overlay: linear-gradient(180deg, rgba(230, 241, 248, 0.88), rgba(230, 241, 248, 0.94));
+  --theme-cutout-opacity: 0.76;
+  --theme-preview-bg: #e6f1f8;
+  --theme-preview-surface: #d8eaf5;
+  --theme-preview-accent: #0284c7;
+}
+
+/* 1.5 Chá Verde (Mid / Matcha Garden) — Celebi, Shaymin, Bulbasaur, Leafeon */
+body[data-theme="matcha-garden"] {
+  --color-bg-base: #17261d;
+  --color-bg-elevated: #1f3327;
+  --color-surface-1: #284233;
+  --color-surface-2: #325240;
+  --color-surface-hover: #406952;
+  --color-surface-selected: #38614a;
+  --color-text-primary: #f0f7f2;
+  --color-text-secondary: #b5d6be;
+  --color-text-muted: #82a88d;
+  --color-accent: #6ee7b7;
+  --color-accent-soft: rgba(110, 231, 183, 0.16);
+  --color-action-primary: #22c55e;
+  --color-action-primary-hover: #16a34a;
+  --border-subtle: #3b614b;
+  --border-strong: #5f9474;
+  --theme-color-scheme: dark;
+  --theme-shell-overlay: linear-gradient(180deg, rgba(23, 38, 29, 0.65), rgba(23, 38, 29, 0.86));
+  --theme-cutout-opacity: 0.88;
+  --theme-preview-bg: #17261d;
+  --theme-preview-surface: #284233;
+  --theme-preview-accent: #6ee7b7;
+}
+
+/* 1.6 Cinza Ardósia (Mid / Steel Armor) — Lucario, Scizor, Metagross, Aggron */
+body[data-theme="slate-steel"] {
+  --color-bg-base: #1a2027;
+  --color-bg-elevated: #232a34;
+  --color-surface-1: #2c3542;
+  --color-surface-2: #374251;
+  --color-surface-hover: #49576a;
+  --color-surface-selected: #3e4e63;
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #94a3b8;
+  --color-accent: #60a5fa;
+  --color-accent-soft: rgba(96, 165, 250, 0.16);
+  --color-action-primary: #3b82f6;
+  --color-action-primary-hover: #2563eb;
+  --border-subtle: #435265;
+  --border-strong: #687e9b;
+  --theme-color-scheme: dark;
+  --theme-shell-overlay: linear-gradient(180deg, rgba(26, 32, 39, 0.65), rgba(26, 32, 39, 0.86));
+  --theme-cutout-opacity: 0.9;
+  --theme-preview-bg: #1a2027;
+  --theme-preview-surface: #2c3542;
+  --theme-preview-accent: #60a5fa;
+}
+
+/* 1.7 Âmbar Crepúsculo (Mid / Desert Sun) — Dragonite, Arcanine, Flygon */
+body[data-theme="desert-amber"] {
+  --color-bg-base: #221914;
+  --color-bg-elevated: #2d211a;
+  --color-surface-1: #3b2c23;
+  --color-surface-2: #4a382c;
+  --color-surface-hover: #5e4738;
+  --color-surface-selected: #553d2d;
+  --color-text-primary: #fef3c7;
+  --color-text-secondary: #fed7aa;
+  --color-text-muted: #d4a373;
+  --color-accent: #f59e0b;
+  --color-accent-soft: rgba(245, 158, 11, 0.16);
+  --color-action-primary: #ea580c;
+  --color-action-primary-hover: #c2410c;
+  --border-subtle: #543f32;
+  --border-strong: #8a664e;
+  --theme-color-scheme: dark;
+  --theme-shell-overlay: linear-gradient(180deg, rgba(34, 25, 20, 0.65), rgba(34, 25, 20, 0.86));
+  --theme-cutout-opacity: 0.9;
+  --theme-preview-bg: #221914;
+  --theme-preview-surface: #3b2c23;
+  --theme-preview-accent: #f59e0b;
+}
+
+/* 1.8 Oceano Profundo (Mid / Abyssal Sea) — Kyogre, Blastoise, Vaporeon */
+body[data-theme="deep-marine"] {
+  --color-bg-base: #0a1c2e;
+  --color-bg-elevated: #0f263e;
+  --color-surface-1: #163352;
+  --color-surface-2: #1d4269;
+  --color-surface-hover: #265586;
+  --color-surface-selected: #214c77;
+  --color-text-primary: #e0f2fe;
+  --color-text-secondary: #bae6fd;
+  --color-text-muted: #7dd3fc;
+  --color-accent: #38bdf8;
+  --color-accent-soft: rgba(56, 189, 248, 0.16);
+  --color-action-primary: #0284c7;
+  --color-action-primary-hover: #0369a1;
+  --border-subtle: #26496d;
+  --border-strong: #4178ae;
+  --theme-color-scheme: dark;
+  --theme-shell-overlay: linear-gradient(180deg, rgba(10, 28, 46, 0.6), rgba(10, 28, 46, 0.84));
+  --theme-cutout-opacity: 0.94;
+  --theme-preview-bg: #0a1c2e;
+  --theme-preview-surface: #163352;
+  --theme-preview-accent: #38bdf8;
+}
+
+/* 1.9 Névoa Lavanda (Mid / Spectral Mist) — Mewtwo, Espeon, Chandelure, Gengar */
+body[data-theme="lavender-ghost"] {
+  --color-bg-base: #1a1325;
+  --color-bg-elevated: #241a33;
+  --color-surface-1: #302344;
+  --color-surface-2: #3e2e56;
+  --color-surface-hover: #523d71;
+  --color-surface-selected: #483464;
+  --color-text-primary: #faf5ff;
+  --color-text-secondary: #e9d5ff;
+  --color-text-muted: #c084fc;
+  --color-accent: #c084fc;
+  --color-accent-soft: rgba(192, 132, 252, 0.18);
+  --color-action-primary: #9333ea;
+  --color-action-primary-hover: #7e22ce;
+  --border-subtle: #493564;
+  --border-strong: #7957a4;
+  --theme-color-scheme: dark;
+  --theme-shell-overlay: linear-gradient(180deg, rgba(26, 19, 37, 0.65), rgba(26, 19, 37, 0.86));
+  --theme-cutout-opacity: 0.92;
+  --theme-preview-bg: #1a1325;
+  --theme-preview-surface: #302344;
+  --theme-preview-accent: #c084fc;
+}
+
+/* 1.10 Bruma Carmim (Dark / Fire Ember) — Charizard, Groudon, Yveltal */
+body[data-theme="crimson-ember"] {
+  --color-bg-base: #1a0c10;
+  --color-bg-elevated: #251217;
+  --color-surface-1: #32181f;
+  --color-surface-2: #421f29;
+  --color-surface-hover: #572936;
+  --color-surface-selected: #4f2330;
+  --color-text-primary: #fff1f2;
+  --color-text-secondary: #fecdd3;
+  --color-text-muted: #fda4af;
+  --color-accent: #fb7185;
+  --color-accent-soft: rgba(251, 113, 133, 0.16);
+  --color-action-primary: #e11d48;
+  --color-action-primary-hover: #be123c;
+  --border-subtle: #4d222e;
+  --border-strong: #82384c;
+  --theme-color-scheme: dark;
+  --theme-shell-overlay: linear-gradient(180deg, rgba(26, 12, 16, 0.65), rgba(26, 12, 16, 0.86));
+  --theme-cutout-opacity: 0.92;
+  --theme-preview-bg: #1a0c10;
+  --theme-preview-surface: #32181f;
+  --theme-preview-accent: #fb7185;
+}
+
+/* 1.11 Floresta Esmeralda (Dark / Dragon Jade) — Rayquaza, Tyranitar, Sceptile */
+body[data-theme="emerald-dragon"] {
+  --color-bg-base: #0b1a13;
+  --color-bg-elevated: #10241b;
+  --color-surface-1: #163225;
+  --color-surface-2: #1e4231;
+  --color-surface-hover: #2a5943;
+  --color-surface-selected: #244e3a;
+  --color-text-primary: #ecfdf5;
+  --color-text-secondary: #a7f3d0;
+  --color-text-muted: #6ee7b7;
+  --color-accent: #34d399;
+  --color-accent-soft: rgba(52, 211, 153, 0.16);
+  --color-action-primary: #059669;
+  --color-action-primary-hover: #047857;
+  --border-subtle: #26523d;
+  --border-strong: #3f7c5e;
+  --theme-color-scheme: dark;
+  --theme-shell-overlay: linear-gradient(180deg, rgba(11, 26, 19, 0.65), rgba(11, 26, 19, 0.86));
+  --theme-cutout-opacity: 0.94;
+  --theme-preview-bg: #0b1a13;
+  --theme-preview-surface: #163225;
+  --theme-preview-accent: #34d399;
+}
+
+/* 1.12 Eclipse Ônix (Deep Dark / Void Black) — Umbreon, Darkrai, Giratina */
+body[data-theme="onyx-eclipse"] {
+  --color-bg-base: #09090c;
+  --color-bg-elevated: #121217;
+  --color-surface-1: #1a1a21;
+  --color-surface-2: #24242e;
+  --color-surface-hover: #333340;
+  --color-surface-selected: #2d2d3a;
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #94a3b8;
+  --color-accent: #fbbf24;
+  --color-accent-soft: rgba(251, 191, 36, 0.16);
+  --color-action-primary: #d97706;
+  --color-action-primary-hover: #b45309;
+  --border-subtle: #2b2b38;
+  --border-strong: #4d4d61;
+  --theme-color-scheme: dark;
+  --theme-shell-overlay: linear-gradient(180deg, rgba(9, 9, 12, 0.72), rgba(9, 9, 12, 0.88));
+  --theme-cutout-opacity: 1;
+  --theme-preview-bg: #09090c;
+  --theme-preview-surface: #1a1a21;
+  --theme-preview-accent: #fbbf24;
+}
+
+/* --------------------------------------------------------------------------
+   2. REGRAS GLOBAIS DE CASCA (OVERRIDE ELEGANTE SOBRE MOON-GARDEN / ABSOL)
+   -------------------------------------------------------------------------- */
+
+html, body[data-theme] {
+  background: var(--color-bg-base) !important;
+  color: var(--color-text-primary) !important;
+  color-scheme: var(--theme-color-scheme, dark);
+  transition: background-color 0.22s ease, color 0.22s ease;
+}
+
+/* Camada base do Shell e background overlay */
+body[data-theme] #leafShell {
+  background-color: var(--color-bg-base) !important;
+  background-image: var(--theme-panorama-url, url('assets/absol-panorama.png')) !important;
+  background-size: cover !important;
+  background-position: var(--theme-panorama-position, center center) !important;
+  background-repeat: no-repeat !important;
+}
+
+body[data-theme] #leafShell:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--theme-shell-overlay, transparent) !important;
+  transition: background 0.25s ease;
+}
+
+body[data-theme] #leafShell:after {
+  background-image: var(--theme-cutout-url, url('assets/absol-cutout.png')) !important;
+  opacity: var(--theme-cutout-opacity, 1) !important;
+  transition: opacity 0.25s ease;
+}
+
+/* Simple mode shares the active palette; Kuromi keeps its dedicated XP skin. */
+body[data-theme] #cards {
+  --cd-text: var(--color-text-primary);
+  --cd-secondary: var(--color-text-secondary);
+  --cd-muted: var(--color-text-muted);
+  --cd-positive: #3fb950;
+  --cd-warning: #f0883e;
+  --cd-danger: #f85149;
+  --cd-xp: #79c0ff;
+  --cd-shiny: #f778ba;
+  --cd-gold: #f2c665;
+  --cd-iv: #55e6d3;
+}
+body[data-theme-tone="light"] #cards {
+  --cd-positive: #18733a;
+  --cd-warning: #984600;
+  --cd-danger: #ba2535;
+  --cd-xp: #245caa;
+  --cd-shiny: #a82572;
+  --cd-gold: #815800;
+  --cd-iv: #08736b;
+}
+body[data-theme^="kuromi-xp"] #cards {
+  --cd-text: var(--kx-text);
+  --cd-secondary: var(--kx-text);
+  --cd-muted: var(--kx-text-dim);
+}
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards {
+  background: var(--color-bg-base) !important;
+  color: var(--color-text-primary) !important;
+  color-scheme: var(--theme-color-scheme);
+  scrollbar-color: var(--border-strong) var(--color-bg-base);
+}
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards :is(.cd-kpi, .cd-sec, .cd-panel, .cd-cfg, .cd-sh) {
+  background: var(--color-surface-1) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--color-text-primary);
+}
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards .cd-row {
+  background: transparent !important;
+  border-color: var(--border-subtle) !important;
+}
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards :is(.cd-kpi .v, .cd-cfg-row) { color: var(--color-text-primary); }
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards :is(.cd-h, .cd-tt, .cd-cfg-h, .cd-kpi .l, .cd-table th, .cd-empty, .cd-row .rt, .cd-sh-acc, .cd-mv, .cd-grip) { color: var(--color-text-muted); }
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards .cd-sh-n { color: var(--color-text-secondary); }
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards :is(.cd-table th, .cd-table td) { border-color: var(--border-subtle); }
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards :is(.cd-table tbody tr:hover, .cd-cfg-row:hover) { background: var(--color-surface-hover); }
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards :is(button, select, .cd-inp) {
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--border-subtle) !important;
+  accent-color: var(--color-accent);
+}
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards :is(button:hover, button.on) {
+  background: var(--color-surface-selected) !important;
+  border-color: var(--color-accent) !important;
+}
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards :is(button, select, input):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards input::placeholder { color: var(--color-text-muted); }
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards .cd-goal { background: var(--color-surface-2); }
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards .cd-goal > i { background: var(--cd-positive); }
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards :is(.cd-sec, .cd-kpis)::-webkit-scrollbar-thumb { background: var(--border-strong); }
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards .cd-it.cd-over { outline-color: var(--color-accent); }
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards :is(.cd-mv:hover, .cd-table th:hover) { color: var(--color-accent); }
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards :is(.cd-it:hover .cd-rz::before, .cd-it:hover .cd-rz2::before) { background: var(--border-strong); }
+body[data-theme]:not([data-theme^="kuromi-xp"]) #cards :is(.cd-rz:hover::before, .cd-rz2:hover::before, .cd-it.rz-on .cd-rz::before, .cd-it.rz-on .cd-rz2::before) { background: var(--color-accent); }
+
+/* Exclusive artwork follows the existing sidebar composition. */
+body.theme-exclusive .leaf-sidebar:before {
+  background-image: var(--theme-cutout-url);
+  background-position: center bottom;
+  background-size: contain;
+  width: 100%;
+  left: 0;
+  height: min(62vh, 540px);
+  opacity: .92;
+}
+body.theme-exclusive .leaf-topbar:before { display: none; }
+body.theme-exclusive .leaf-brand-title { font-size: clamp(10px, .75vw, 12px); letter-spacing: .35px; }
+body.theme-exclusive .leaf-top-note { display: none; }
+body.theme-exclusive .leaf-topbar {
+  background-image: none !important;
+  backdrop-filter: none;
+}
+body.theme-exclusive .leaf-sidebar {
+  background: color-mix(in srgb, var(--color-bg-base) 80%, transparent);
+}
+body.theme-exclusive .leaf-logo-mark {
+  background-image: none;
+  color: var(--color-accent);
+  font-size: 27px;
+  text-shadow: none;
+  background-size: 25px 25px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.theme-header-ornament { display: none; pointer-events: none; }
+body.theme-exclusive .leaf-topbar .theme-header-ornament {
+  display: flex;
+  position: absolute;
+  right: 440px;
+  top: 2px;
+  height: 52px;
+  gap: 8px;
+  align-items: center;
+  opacity: .22;
+  z-index: 0;
+}
+.theme-header-ornament span { font: 32px Georgia, serif; color: var(--color-accent); }
+.theme-header-ornament img { height: 52px; width: 110px; object-fit: contain; }
+.theme-header-ornament img.theme-header-emblem { width: 32px; height: 32px; }
+body.theme-exclusive .leaf-companions img {
+  position: static;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: .9;
+}
+.theme-solitary-emblem {
+  display: grid;
+  height: 100%;
+  place-items: center;
+  color: var(--color-accent);
+  font: 54px Georgia, serif;
+  background: radial-gradient(ellipse, var(--color-accent-soft), transparent 65%);
+}
+@media (max-width: 1400px) {
+  body.theme-exclusive .leaf-topbar .theme-header-ornament { display: none; }
+}
+@media (min-width: 1900px) {
+  body.theme-exclusive .leaf-top-note { display: block; max-width: 165px; }
+}
+
+/* Topbar */
+body[data-theme] .leaf-topbar {
+  background: var(--color-bg-elevated) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.16) !important;
+}
+
+body[data-theme] .leaf-brand-title {
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .leaf-brand-sub {
+  color: var(--color-text-muted) !important;
+}
+
+body[data-theme] .leaf-logo-mark {
+  background-color: var(--color-surface-1) !important;
+  color: var(--color-accent) !important;
+  box-shadow: 0 0 0 1px var(--border-subtle) !important;
+}
+
+/* Segmentos e Chips da Topbar */
+body[data-theme] .leaf-segment {
+  background: var(--color-surface-1) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+body[data-theme] .leaf-segment button {
+  color: var(--color-text-secondary) !important;
+}
+
+body[data-theme] .leaf-segment button.is-active {
+  background: var(--color-surface-selected) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 10px var(--color-accent-soft) !important;
+}
+
+body[data-theme] .leaf-chip,
+body[data-theme] .leaf-icon-btn,
+body[data-theme] .leaf-tools-btn {
+  background: var(--color-surface-1) !important;
+  color: var(--color-text-secondary) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+body[data-theme] .leaf-chip:hover,
+body[data-theme] .leaf-icon-btn:hover,
+body[data-theme] .leaf-tools-btn:hover {
+  background: var(--color-surface-hover) !important;
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .leaf-chip.is-active {
+  background: var(--color-surface-selected) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-accent) !important;
+}
+
+body[data-theme] .leaf-chip-login-all,
+body[data-theme] .leaf-login-all,
+body[data-theme] .leaf-login-all-top {
+  background: var(--color-action-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--color-action-primary-hover) !important;
+}
+
+body[data-theme] .leaf-chip-login-all:hover,
+body[data-theme] .leaf-login-all:hover,
+body[data-theme] .leaf-login-all-top:hover {
+  background: var(--color-action-primary-hover) !important;
+}
+
+body[data-theme] .leaf-connected {
+  background: var(--color-surface-1) !important;
+  color: var(--color-text-secondary) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+body[data-theme] .leaf-top-note {
+  color: var(--color-text-muted) !important;
+}
+
+/* Sidebar */
+body[data-theme] .leaf-sidebar {
+  background: linear-gradient(180deg, rgba(13,30,41,.86), rgba(11,29,39,.81) 64%, rgba(10,30,42,.7)) !important;
+  border-color: var(--border-subtle) !important;
+  box-shadow: none !important;
+}
+
+body[data-theme] .leaf-summary {
+  background: var(--color-surface-1) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+body[data-theme] .leaf-summary-item .k {
+  color: var(--color-text-muted) !important;
+}
+
+body[data-theme] .leaf-summary-item .v {
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .leaf-manage-accounts-btn {
+  background: var(--color-surface-1) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+body[data-theme] .leaf-fam-pill {
+  background: var(--color-surface-1) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--color-text-muted) !important;
+}
+
+body[data-theme] .leaf-fam-pill.is-on {
+  background: var(--color-surface-selected) !important;
+  border-color: var(--color-accent) !important;
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .leaf-account {
+  background: var(--color-surface-1) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .leaf-account:hover {
+  background: var(--color-surface-hover) !important;
+  border-color: var(--border-strong) !important;
+}
+
+body[data-theme] .leaf-account.is-selected {
+  background: var(--color-surface-selected) !important;
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 0 1px var(--color-accent), 0 5px 16px rgba(0, 0, 0, 0.15) !important;
+}
+
+body[data-theme] .leaf-account-name {
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .leaf-pokemon-line {
+  color: var(--color-text-secondary) !important;
+}
+
+body[data-theme] .leaf-poke-avatar {
+  background: var(--color-surface-2) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+body[data-theme] .leaf-hunt-row {
+  background: var(--color-surface-2) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+body[data-theme] .leaf-hunt-name b {
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .leaf-metric {
+  background: var(--color-surface-2) !important;
+}
+
+body[data-theme] .leaf-metric .mk {
+  color: var(--color-text-muted) !important;
+}
+
+body[data-theme] .leaf-metric .mv {
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .leaf-open-account {
+  background: var(--color-surface-selected) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--border-strong) !important;
+}
+
+body[data-theme] .leaf-open-account:hover {
+  background: var(--color-surface-hover) !important;
+}
+
+body[data-theme] .leaf-side-round,
+body[data-theme] .leaf-reload-account {
+  background: var(--color-surface-1) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+body[data-theme] .leaf-side-round:hover,
+body[data-theme] .leaf-reload-account:hover {
+  background: var(--color-surface-hover) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Painéis de Jogos / Webviews */
+body[data-theme] .panel {
+  background: var(--color-surface-1) !important;
+  border-color: var(--border-subtle) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22) !important;
+}
+
+body[data-theme] .panel-header {
+  background: var(--color-bg-elevated) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .panel-header .name {
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .panel-header .status {
+  color: var(--color-text-secondary) !important;
+}
+
+body[data-theme] .panel-header button {
+  color: var(--color-text-secondary) !important;
+}
+
+body[data-theme] .panel-header button:hover {
+  background: var(--color-surface-hover) !important;
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .panel-header .idx {
+  background: var(--color-surface-2) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+body[data-theme] .leaf-panel-footer {
+  background: var(--color-bg-elevated) !important;
+  border-top: 1px solid var(--border-subtle) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+body[data-theme] .leaf-panel-footer .pf-hunt b,
+body[data-theme] .leaf-panel-footer .pf-balls b {
+  color: var(--color-text-primary) !important;
+}
+
+/* Modo Lista */
+body[data-theme] #leafListView {
+  background: var(--color-bg-elevated) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .leaf-page-head h1 {
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .leaf-page-head p {
+  color: var(--color-text-muted) !important;
+}
+
+body[data-theme] .leaf-list-card {
+  background: var(--color-surface-1) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .leaf-list-card:hover {
+  background: var(--color-surface-hover) !important;
+}
+
+body[data-theme] .leaf-list-card .name,
+body[data-theme] .leaf-list-hunt b,
+body[data-theme] .leaf-list-cell .value {
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .leaf-list-card .sub,
+body[data-theme] .leaf-list-hunt,
+body[data-theme] .leaf-list-actions {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Menus & Gaveta de Configurações */
+body[data-theme] #leafToolsMenu,
+body[data-theme] #leafSettingsDrawer {
+  background: var(--color-bg-elevated) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--color-text-primary) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+body[data-theme] .leaf-drawer-head h2 {
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .leaf-drawer-subtitle,
+body[data-theme] .leaf-setting-title {
+  color: var(--color-text-muted) !important;
+}
+
+body[data-theme] .leaf-setting-btn,
+body[data-theme] .leaf-tool-item {
+  background: var(--color-surface-1) !important;
+  color: var(--color-text-secondary) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+body[data-theme] .leaf-setting-btn:hover,
+body[data-theme] .leaf-tool-item:hover {
+  background: var(--color-surface-hover) !important;
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .leaf-setting-btn.is-on {
+  background: var(--color-surface-selected) !important;
+  border-color: var(--color-accent) !important;
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .leaf-window-count-options button,
+body[data-theme] .leaf-layout-options button {
+  background: var(--color-surface-1) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+body[data-theme] .leaf-window-count-options button.is-on,
+body[data-theme] .leaf-layout-options button.is-on {
+  background: var(--color-surface-selected) !important;
+  border-color: var(--color-accent) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Modais & Inputs (Compatibilidade Universal com Todos os 12 Temas e 800+ Pokémon) */
+body[data-theme] :is(#overlay, #scOverlay, #tlOverlay, #dtOverlay, #atOverlay, #dispatchOverlay) {
+  background: rgba(0, 0, 0, 0.72) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+body[data-theme] :is(#autoSupplyOverlay, #twitchBonusOverlay, #kickBonusOverlay) {
+  background: rgba(4, 11, 20, 0.88) !important;
+  backdrop-filter: none !important;
+}
+
+body[data-theme] :is(#modal, #scModal, #tlModal, #dtModal, #atModal, #dispatchModal, #autoSupplyModal, #twitchBonusModal, #kickBonusModal) {
+  background: var(--color-bg-elevated) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--color-text-primary) !important;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--border-subtle) inset !important;
+}
+
+body[data-theme] :is(#modal, #scModal, #tlModal, #dtModal, #atModal, #dispatchModal, #autoSupplyModal) h2 {
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] :is(#modal, #scModal, #tlModal, #dtModal, #atModal, #dispatchModal, #autoSupplyModal) .hint {
+  color: var(--color-text-muted) !important;
+}
+
+body[data-theme] :is(#modal, #autoSupplyModal) :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+  background: var(--color-surface-1) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+body[data-theme] #autoSupplyModal .supply-num-input-wrap input {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+body[data-theme] :is(#modal, #autoSupplyModal) :is(input:not([type="checkbox"]):not([type="radio"]):focus, select:focus, textarea:focus) {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 0 2px var(--color-accent-soft) !important;
+}
+
+body[data-theme] #autoSupplyModal .supply-num-input-wrap input:focus {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+body[data-theme] :is(#modal, #scModal, #tlModal, #dtModal, #atModal, #autoSupplyModal) button {
+  background: var(--color-surface-1) !important;
+  color: var(--color-text-secondary) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+body[data-theme] :is(#modal, #scModal, #tlModal, #dtModal, #atModal, #autoSupplyModal) button:hover {
+  background: var(--color-surface-hover) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-accent) !important;
+}
+
+body[data-theme] :is(#modal, #scModal, #tlModal, #dtModal, #atModal, #autoSupplyModal) button.primary {
+  background: var(--color-action-primary) !important;
+  border-color: var(--color-action-primary) !important;
+  color: #ffffff !important;
+}
+
+body[data-theme] :is(#modal, #scModal, #tlModal, #dtModal, #atModal, #autoSupplyModal) button.primary:hover:not(:disabled) {
+  background: var(--color-action-primary-hover) !important;
+  border-color: var(--color-action-primary-hover) !important;
+}
+
+body[data-theme] #modal .acc-row input,
+body[data-theme] #modal .acc-proxy-fields input,
+body[data-theme] #modal .acc-proxy-fields select {
+  background: var(--color-surface-1) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+body[data-theme] .acc-family {
+  background: var(--color-surface-1) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+/* Suprimentos Individual e Auto Supply nos 12 Temas e 800+ Pokémon */
+body[data-theme] .supply-head-icon {
+  background: var(--color-accent-soft) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--color-accent) !important;
+}
+
+body[data-theme] .supply-close {
+  color: var(--color-text-muted) !important;
+}
+
+body[data-theme] .supply-close:hover {
+  color: var(--color-text-primary) !important;
+  background: var(--color-surface-hover) !important;
+}
+
+body[data-theme] :is(.supply-col-accounts, .supply-col-rules, .supply-rule-row) {
+  background: var(--color-surface-1) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .supply-acc-count-badge {
+  background: var(--color-accent-soft) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--color-accent) !important;
+}
+
+body[data-theme] .supply-mini-btn,
+body[data-theme] .supply-btn-subtle {
+  background: var(--color-surface-2) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+body[data-theme] .supply-mini-btn:hover,
+body[data-theme] .supply-btn-subtle:hover {
+  background: var(--color-surface-hover) !important;
+  border-color: var(--color-accent) !important;
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .supply-acc-card {
+  background: var(--color-surface-1) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--color-text-primary) !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  opacity: 0.65;
+  transition: opacity 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+body[data-theme] .supply-acc-card:hover {
+  background: var(--color-surface-hover) !important;
+  border-color: var(--color-accent) !important;
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+body[data-theme] .supply-acc-card.is-selected {
+  opacity: 1 !important;
+  border-color: var(--color-accent) !important;
+  border-left: 3.5px solid var(--color-accent) !important;
+  background: var(--color-surface-2) !important;
+}
+
+body[data-theme] .supply-acc-card.is-selected:hover {
+  opacity: 1 !important;
+  background: var(--color-surface-hover) !important;
+}
+
+body[data-theme] .supply-acc-name {
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .supply-acc-gold {
+  color: var(--color-accent) !important;
+}
+
+body[data-theme] .supply-item-chip {
+  background: var(--color-surface-2) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .supply-item-chip.is-low {
+  background: rgba(239, 68, 68, 0.16) !important;
+  border-color: rgba(239, 68, 68, 0.45) !important;
+  color: #ef4444 !important;
+}
+
+body[data-theme] :is(.supply-item-select, .supply-num-input-wrap) {
+  background: var(--color-surface-2) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--color-text-primary) !important;
+}
+
+body[data-theme] .supply-status-bar {
+  background: var(--color-surface-1) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. POLISH ESPECÍFICO PARA TEMAS CLAROS (LIGHT TONES)
+   -------------------------------------------------------------------------- */
+
+body[data-theme-tone="light"] {
+  text-shadow: none !important;
+}
+
+body[data-theme-tone="light"] .leaf-topbar {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+}
+
+body[data-theme-tone="light"] .leaf-window-controls button {
+  color: #334155 !important;
+}
+
+body[data-theme-tone="light"] .leaf-window-controls button:hover {
+  background: rgba(0, 0, 0, 0.08) !important;
+  color: #0f172a !important;
+}
+
+body[data-theme-tone="light"] .leaf-window-controls button[data-window-action="close"]:hover {
+  background: #ef4444 !important;
+  color: #ffffff !important;
+}
+
+body[data-theme-tone="light"] .leaf-brand-sub,
+body[data-theme-tone="light"] .leaf-top-note,
+body[data-theme-tone="light"] .leaf-aside-epilogue {
+  text-shadow: none !important;
+}
+
+body[data-theme-tone="light"] .leaf-poke-avatar img {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.18)) !important;
+}
+
+body[data-theme-tone="light"] .leaf-account-actions button {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+body[data-theme-tone="light"] #leafAccountList::-webkit-scrollbar-thumb {
+  background: var(--border-strong) !important;
+}
+
+body[data-theme-tone="light"] :is(#overlay, #scOverlay, #tlOverlay, #dtOverlay, #atOverlay, #dispatchOverlay, #autoSupplyOverlay, #twitchBonusOverlay, #kickBonusOverlay) {
+  background: rgba(15, 23, 42, 0.45) !important;
+}
+
+body[data-theme-tone="light"] :is(#modal, #scModal, #tlModal, #dtModal, #atModal, #dispatchModal, #autoSupplyModal, #twitchBonusModal, #kickBonusModal) {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.16), 0 0 0 1px var(--border-subtle) !important;
+}
+
+body[data-theme-tone="light"] .indiv-calc-warn {
+  background: rgba(239, 68, 68, 0.12) !important;
+  border-color: rgba(239, 68, 68, 0.35) !important;
+  color: #b91c1c !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. COMPONENTE: SELETOR DE TEMAS NO SETTINGS DRAWER
+   -------------------------------------------------------------------------- */
+
+.leaf-theme-section {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px 0 12px;
+}
+
+.leaf-theme-filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.leaf-theme-filter-btn {
+  padding: 3px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+  background: var(--color-surface-1);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.leaf-theme-filter-btn.is-active,
+.leaf-theme-filter-btn:hover {
+  background: var(--color-surface-selected);
+  color: var(--color-text-primary);
+  border-color: var(--color-accent);
+}
+
+.leaf-theme-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 7px;
+  max-height: 290px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.leaf-theme-grid::-webkit-scrollbar {
+  width: 4px;
+}
+
+.leaf-theme-grid::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 999px;
+}
+
+.leaf-theme-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px 9px;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: var(--color-surface-1);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  transition: transform 0.12s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.leaf-theme-card:hover {
+  background: var(--color-surface-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+.leaf-theme-card.is-active {
+  border-color: var(--color-accent);
+  background: var(--color-surface-selected);
+  box-shadow: 0 0 0 1px var(--color-accent), 0 3px 10px rgba(0, 0, 0, 0.18);
+}
+
+.leaf-theme-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.leaf-theme-swatches {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 4px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.leaf-theme-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.leaf-theme-badge {
+  font-size: 8.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-muted);
+}
+
+.leaf-theme-card.is-active .leaf-theme-badge {
+  background: var(--color-accent);
+  color: #0f172a;
+}
+
+.leaf-theme-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.leaf-theme-desc {
+  font-size: 9.5px;
+  color: var(--color-text-muted);
+  line-height: 1.25;
+}
+
+/* Busca e Filtros de Pokémon */
+.leaf-theme-search-wrap {
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.leaf-theme-search {
+  width: 100%;
+  height: 32px;
+  padding: 0 10px 0 28px;
+  background: var(--color-surface-1) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 6px;
+  font-size: 11px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.leaf-theme-search:focus {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 0 1px var(--color-accent);
+}
+
+.leaf-theme-search-icon {
+  position: absolute;
+  left: 9px;
+  top: 8px;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.leaf-theme-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 24px 10px;
+  color: var(--color-text-muted);
+  font-size: 11px;
+}
+
+/* Marca compartilhada: a identidade do Pokémon fica nos detalhes do tema. */
+body[data-pokemon="pkmn-arcanine"] #leafAccountList { flex: 0 1 auto; max-height: calc(100vh - 400px); }
+body[data-pokemon="pkmn-arcanine"] .leaf-side-footer { margin-top: auto; }
+body[data-theme="pkmn-arcanine"] .leaf-sidebar {
+  background: linear-gradient(180deg,rgba(27,20,15,.88),rgba(29,19,13,.8) 64%,rgba(24,15,10,.65)) !important;
+}
+body[data-pokemon="pkmn-arcanine"] .leaf-sidebar:before {
+  top: auto; right: auto; left: -38px; bottom: -12px;
+  width: 310px; height: 340px; background-size: contain;
+  background-position: center bottom; mask-image: none; opacity: 1; z-index: 2;
+}
+body[data-pokemon="pkmn-arcanine"] .leaf-aside-epilogue {
+  position: absolute; left: auto; right: 10px; bottom: 215px;
+  padding: 0; max-width: 90px; align-items: flex-end; text-align: right; z-index: 3;
+}
+body[data-pokemon="pkmn-arcanine"] .leaf-aside-epilogue strong { color: #ffdeb2; }
+body[data-pokemon="pkmn-arcanine"] .leaf-epilogue-kicker { color: #efaa61; font-size: 6px; letter-spacing: 1px; }
+body[data-pokemon="pkmn-arcanine"] .leaf-epilogue-line { background: linear-gradient(90deg,transparent,#df9350); width: 64px; }
+@media (max-width:850px) {
+  body[data-pokemon="pkmn-arcanine"] .leaf-account-top { grid-template-columns:26px minmax(0,1fr); }
+  body[data-pokemon="pkmn-arcanine"] .leaf-account-top > * { min-width:0; }
+}
+@media (max-height:760px) {
+  body[data-pokemon="pkmn-arcanine"] .leaf-sidebar:before { height:230px; width:240px; left:-25px; }
+  body[data-pokemon="pkmn-arcanine"] .leaf-aside-epilogue { display:none; }
+}
+body[data-pokemon="pkmn-mewtwo"] #leafAccountList { flex: 0 1 auto; max-height: calc(100vh - 400px); }
+body[data-pokemon="pkmn-mewtwo"] .leaf-side-footer { margin-top: auto; }
+body[data-pokemon="pkmn-mewtwo"] .leaf-sidebar:before {
+  top: auto; right: auto; left: -20px; bottom: 0;
+  width: 270px; height: 370px; background-size: contain;
+  background-position: center bottom; mask-image: none; opacity: 1; z-index: 2;
+}
+body[data-pokemon="pkmn-mewtwo"] .leaf-aside-epilogue {
+  position: absolute; left: 10px; right: auto; bottom: 200px;
+  padding: 0; max-width: 95px; align-items: flex-start; text-align: left; z-index: 3;
+}
+@media (max-height: 760px) {
+  body[data-pokemon="pkmn-mewtwo"] .leaf-sidebar:before { height: 230px; }
+  body[data-pokemon="pkmn-mewtwo"] .leaf-aside-epilogue { display: none; }
+}
+body .leaf-account-bar-top,
+body .leaf-family-toolbar,
+body .leaf-fam-nav,
+body .leaf-window-count-setting,
+body .leaf-fam-group-divider { display: none !important; }
+body[data-pokemon="pkmn-meganium"] #leafAccountList {
+  flex: 0 1 auto;
+  max-height: calc(100vh - 400px);
+}
+body[data-pokemon="pkmn-meganium"] .leaf-sidebar:before {
+  top: auto;
+  right: auto;
+  left: -60px;
+  bottom: 0;
+  width: 300px;
+  height: 310px;
+  background-position: center bottom;
+  background-size: contain;
+  mask-image: none;
+  opacity: 1;
+  z-index: 2;
+}
+body[data-pokemon="pkmn-meganium"] .leaf-aside-epilogue {
+  position: absolute;
+  right: auto;
+  left: 10px;
+  bottom: 200px;
+  padding: 0;
+  max-width: 85px;
+  z-index: 3;
+}
+@media (max-width: 850px) {
+  body[data-pokemon="pkmn-meganium"] .leaf-account-top { grid-template-columns: 26px minmax(0,1fr); }
+  body[data-pokemon="pkmn-meganium"] .leaf-account-top > * { min-width: 0; }
+}
+body[data-pokemon="pkmn-meganium"] .leaf-side-footer { margin-top: auto; }
+body[data-pokemon="pkmn-meganium"] .leaf-epilogue-kicker { font-size: 6px; letter-spacing: 1px; }
+@media (max-height: 760px) {
+  body[data-pokemon="pkmn-meganium"] .leaf-sidebar:before { width: 220px; height: 225px; left: -40px; }
+  body[data-pokemon="pkmn-meganium"] .leaf-aside-epilogue { display: none; }
+}
+/* Informação e ações sempre ficam acima da arte decorativa. */
+.leaf-sidebar #leafAccountList,
+.leaf-sidebar .leaf-summary,
+.leaf-sidebar .leaf-sidebar-title,
+.leaf-sidebar .leaf-side-footer { position: relative; z-index: 4; }
+.leaf-topbar { grid-template-columns: max-content minmax(0, 1fr) auto; }
+.absol-win .leaf-topbar { grid-template-columns: max-content minmax(0, 1fr) auto 138px; }
+.leaf-brand { padding: 0 6px 0 8px; }
+.leaf-brand-title.leaf-brand-logos {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 33px 16px;
+  align-items: center;
+  gap: 0 5px;
+  width: 114px;
+  height: 49px;
+  letter-spacing: 0;
+}
+.leaf-brand-logos img { display: block; object-fit: contain; flex: none; }
+.leaf-brand-logos .leaf-pokeidle-logo { grid-column: 1 / -1; width: 114px; height: 33px; }
+.leaf-brand-logos .leaf-rebosteio-logo,
+.leaf-brand-logos .leaf-nailo-logo { grid-column: 2; width: 78px; height: 16px; }
+.leaf-brand-logos .leaf-brand-by { grid-column: 1; justify-self: end; font: italic 12px/1 Georgia, serif; color: var(--color-text-secondary); }
+body[data-theme-tone="light"] .leaf-brand-logos .leaf-rebosteio-logo {
+  filter: brightness(0.2);
+}
+@media (max-width: 850px) {
+  .leaf-topbar { grid-template-columns: max-content minmax(0, 1fr) auto; }
+  .leaf-brand-title.leaf-brand-logos { width: 114px; }
+  .leaf-brand-logos .leaf-pokeidle-logo { width: 114px; }
+  .leaf-brand-logos .leaf-rebosteio-logo,
+  .leaf-brand-logos .leaf-nailo-logo { width: 78px; }
+}
+
+body[data-pokemon="pkmn-banette"] #leafAccountList {
+  flex: 0 1 auto;
+  max-height: calc(100vh - 400px);
+}
+body[data-pokemon="pkmn-banette"] .leaf-sidebar:before {
+  top: auto;
+  right: auto;
+  left: -50px;
+  bottom: 0;
+  width: 300px;
+  height: 310px;
+  background-position: center bottom;
+  background-size: contain;
+  mask-image: none;
+  opacity: 1;
+  z-index: 2;
+}
+body[data-pokemon="pkmn-banette"] .leaf-aside-epilogue {
+  position: absolute; left: 12px; right: auto; bottom: 260px;
+  padding: 0; max-width: 185px; align-items: flex-start; text-align: left; z-index: 3;
+}
+body[data-pokemon="pkmn-banette"] .leaf-aside-epilogue strong { max-width: 170px; }
+body[data-pokemon="pkmn-banette"] .leaf-epilogue-line { align-self: flex-start; width: 70px; }
+body[data-pokemon="pkmn-meganium"] .leaf-aside-epilogue {
+  align-items: flex-start; text-align: left; max-width: 95px;
+}
+body[data-pokemon="pkmn-meganium"] .leaf-epilogue-line { width: 32px; align-self: flex-start; }
+body[data-pokemon="pkmn-gengar"] .leaf-aside-epilogue {
+  position: absolute; left: auto; right: 10px; bottom: 235px;
+  padding: 0; max-width: 130px; align-items: flex-end; text-align: right; z-index: 3;
+}
+body[data-pokemon="pkmn-gengar"] .leaf-epilogue-line { width: 45px; }
+body[data-pokemon="pkmn-gengar"] .leaf-side-footer { margin-top: auto; }
+body[data-pokemon="pkmn-gengar"] #leafAccountList { flex: 0 1 auto; max-height: calc(100vh - 400px); }
+body[data-pokemon="pkmn-gengar"] .leaf-sidebar:before {
+  top: auto; right: auto; left: -30px; bottom: 0;
+  width: 280px; height: 285px; background-size: contain;
+  background-position: center bottom; mask-image: none; opacity: 1; z-index: 2;
+}
+@media (max-height: 760px) {
+  body[data-pokemon="pkmn-gengar"] .leaf-sidebar:before { width: 220px; height: 210px; left: -20px; }
+  body[data-pokemon="pkmn-gengar"] .leaf-aside-epilogue { display: none; }
+}
+@media (max-width: 850px) {
+  body[data-pokemon="pkmn-banette"] .leaf-account-top { grid-template-columns: 26px minmax(0,1fr); }
+  body[data-pokemon="pkmn-banette"] .leaf-account-top > * { min-width: 0; }
+}
+body[data-pokemon="pkmn-banette"] .leaf-side-footer { margin-top: auto; }
+body[data-pokemon="pkmn-banette"] .leaf-epilogue-kicker { font-size: 6px; letter-spacing: 1px; }
+@media (max-height: 760px) {
+  body[data-pokemon="pkmn-banette"] .leaf-sidebar:before { width: 220px; height: 225px; left: -40px; }
+  body[data-pokemon="pkmn-banette"] .leaf-aside-epilogue { display: none; }
+}
+
+/* Umbreon: floresta lunar, anéis dourados e silhueta em movimento. */
+body[data-pokemon="pkmn-umbreon"] #leafAccountList { flex:0 1 auto; max-height:calc(100vh - 400px); }
+body[data-pokemon="pkmn-umbreon"] .leaf-side-footer { margin-top:auto; }
+body[data-pokemon="pkmn-umbreon"] .leaf-sidebar:before {
+  top:auto; right:auto; left:-45px; bottom:0; width:300px; height:290px;
+  background-size:contain; background-position:center bottom; mask-image:none; opacity:1; z-index:2;
+}
+body[data-pokemon="pkmn-umbreon"] .leaf-aside-epilogue {
+  position:absolute; left:12px; right:auto; bottom:285px; padding:0;
+  max-width:155px; align-items:flex-start; text-align:left; z-index:3;
+}
+body[data-pokemon="pkmn-umbreon"] .leaf-aside-epilogue strong { color:#f5e5ab; }
+body[data-pokemon="pkmn-umbreon"] .leaf-epilogue-kicker { color:#eed06b; font-size:6px; letter-spacing:1px; }
+body[data-pokemon="pkmn-umbreon"] .leaf-epilogue-line { width:55px; align-self:flex-start; }
+@media (max-width:850px) {
+ body[data-pokemon="pkmn-umbreon"] .leaf-account-top { grid-template-columns:26px minmax(0,1fr); }
+ body[data-pokemon="pkmn-umbreon"] .leaf-account-top > * { min-width:0; }
+}
+@media (max-height:760px) {
+ body[data-pokemon="pkmn-umbreon"] .leaf-sidebar:before { width:240px; height:225px; left:-30px; }
+ body[data-pokemon="pkmn-umbreon"] .leaf-aside-epilogue { display:none; }
+}
+body[data-pokemon="pkmn-umbreon"] .leaf-sidebar:before { left:-12px; width:280px; height:280px; }
+body[data-pokemon="pkmn-umbreon"] .leaf-aside-epilogue { bottom:270px; }
+@media (max-height:760px) {
+ body[data-pokemon="pkmn-umbreon"] .leaf-sidebar:before { width:220px; height:215px; left:-12px; }
+}
+/* Ajuste solicitado: espelho, escala -10% e passagem sobre a divisão. */
+body[data-theme="pkmn-umbreon"] .leaf-sidebar { overflow:visible; z-index:2; }
+body[data-pokemon="pkmn-umbreon"] .leaf-sidebar:before {
+  left:22px; width:252px; height:252px; transform:scaleX(-1);
+}
+@media (max-height:760px) {
+ body[data-pokemon="pkmn-umbreon"] .leaf-sidebar:before { left:12px; width:198px; height:193.5px; }
+}
+/* Espelhar apenas o panorama, sem transformar a interface. */
+body[data-theme="pkmn-umbreon"] #leafShell { background-image:none !important; }
+body[data-theme="pkmn-umbreon"] #leafShell:before {
+  background:var(--theme-shell-overlay,linear-gradient(transparent,transparent)), var(--theme-panorama-url) center center / cover no-repeat !important;
+  transform:scaleX(-1); opacity:1;
+}
+body[data-theme="pkmn-umbreon"] #leafShell:before {
+  background:var(--theme-panorama-url) center center / cover no-repeat !important;
+}
+/* Frase do Umbreon alinhada à borda direita da sidebar. */
+body[data-pokemon="pkmn-umbreon"] .leaf-aside-epilogue {
+  left:auto; right:12px; align-items:flex-end; text-align:right;
+}
+body[data-pokemon="pkmn-umbreon"] .leaf-epilogue-line { align-self:flex-end; }
+body[data-pokemon="pkmn-umbreon"] .leaf-aside-epilogue { bottom:255px; }
+/* Header exclusivo: anel dourado do Umbreon e frase em duas linhas. */
+body[data-theme="pkmn-umbreon"] .leaf-top-note {
+  white-space:normal; width:174px; max-width:174px; flex:0 0 174px;
+  text-align:right; margin-right:8px; color:#e5d39b; line-height:1.3;
+}
+body[data-pokemon="pkmn-umbreon"] .leaf-header-moon {
+  font-size:0; width:18px; height:26px; flex:0 0 18px;
+  border:3px solid #eed06b; border-radius:50%; box-sizing:border-box;
+  margin:0 10px 0 0; transform:rotate(-18deg); text-shadow:none;
+  box-shadow:0 0 8px rgba(238,208,107,.22);
+}
+@media (max-width:1650px) {
+ body[data-theme="pkmn-umbreon"] .leaf-top-note { display:none; }
+}
+@media (max-width:1250px) {
+ body[data-pokemon="pkmn-umbreon"] .leaf-header-moon { display:none; }
+}
+/* Revisão em viewport real 1920x1080: frases sem colisão no header. */
+body.theme-exclusive .leaf-top-note {
+  white-space:normal; width:174px; max-width:174px; flex:0 0 174px;
+  text-align:right; margin-right:8px; line-height:1.3;
+}
+body.theme-exclusive .leaf-header-moon { flex-shrink:0; margin-right:10px; }
+@media (min-height:1000px) {
+body[data-pokemon="pkmn-gengar"] .leaf-aside-epilogue { bottom:290px; }
+body[data-pokemon="pkmn-banette"] .leaf-aside-epilogue { bottom:310px; }
+body[data-pokemon="pkmn-mewtwo"] .leaf-aside-epilogue { bottom:375px; max-width:165px; }
+}
+@media (max-width:1650px) { body.theme-exclusive .leaf-top-note { display:none; } }
+
+/* Composição mais preenchida em Full HD, preservando a área operacional. */
+@media (min-height:1000px) {
+ body[data-pokemon="pkmn-gengar"] .leaf-sidebar:before { width:330px; height:335px; left:-48px; }
+ body[data-pokemon="pkmn-gengar"] .leaf-aside-epilogue { bottom:340px; }
+ body[data-pokemon="pkmn-banette"] .leaf-sidebar:before { width:350px; height:375px; left:-65px; }
+ body[data-pokemon="pkmn-banette"] .leaf-aside-epilogue { bottom:370px; }
+ body[data-pokemon="pkmn-meganium"] .leaf-sidebar:before { width:345px; height:365px; left:-78px; }
+ body[data-pokemon="pkmn-meganium"] .leaf-aside-epilogue { bottom:245px; }
+ body[data-pokemon="pkmn-mewtwo"] .leaf-sidebar:before { width:300px; height:425px; left:-35px; }
+ body[data-pokemon="pkmn-mewtwo"] .leaf-aside-epilogue { bottom:390px; max-width:185px; }
+ body[data-pokemon="pkmn-arcanine"] .leaf-sidebar:before { width:350px; height:395px; left:-58px; }
+ body[data-pokemon="pkmn-arcanine"] .leaf-aside-epilogue { bottom:270px; }
+}
+.leaf-pokemon-lock { display:flex; align-items:center; gap:8px; margin:0 0 12px; font-size:12px; color:var(--color-text-primary); cursor:pointer; }
+.leaf-pokemon-lock input { accent-color:var(--color-accent); }
+@media (min-height:1000px) {
+ body[data-pokemon="pkmn-mewtwo"] .leaf-sidebar:before { width:360px; height:440px; left:-40px; }
+ body[data-pokemon="pkmn-mewtwo"] .leaf-aside-epilogue { bottom:385px; }
+ body[data-pokemon="pkmn-meganium"] .leaf-sidebar:before { width:390px; height:425px; left:-95px; }
+ body[data-pokemon="pkmn-meganium"] .leaf-aside-epilogue { bottom:290px; }
+ body[data-pokemon="pkmn-banette"] .leaf-aside-epilogue { max-width:230px; bottom:375px; }
+ body[data-pokemon="pkmn-banette"] .leaf-aside-epilogue strong { max-width:none; white-space:nowrap; font-size:14px; }
+ body[data-pokemon="pkmn-arcanine"] .leaf-sidebar:before { width:395px; height:450px; left:-78px; }
+ body[data-pokemon="pkmn-arcanine"] .leaf-aside-epilogue { bottom:320px; }
+}
+/* Expansão horizontal solicitada, sem mudar a altura da arte. */
+body[data-pokemon="pkmn-mewtwo"] .leaf-sidebar:before {
+  transform:scaleX(1.4); transform-origin:center bottom;
+}
+/* Espeon: silhueta vertical, joia rubra e vale florido. */
+body[data-pokemon="pkmn-espeon"] #leafAccountList { flex:0 1 auto; max-height:calc(100vh - 400px); }
+body[data-pokemon="pkmn-espeon"] .leaf-side-footer { margin-top:auto; }
+body[data-pokemon="pkmn-espeon"] .leaf-sidebar:before {
+ top:auto; right:auto; left:-12px; bottom:-25px; width:280px; height:330px;
+ background-size:contain; background-position:center bottom; mask-image:none; opacity:1; z-index:2;
+}
+body[data-pokemon="pkmn-espeon"] .leaf-aside-epilogue {
+ position:absolute; left:10px; right:auto; bottom:165px; padding:0;
+ max-width:85px; align-items:flex-start; text-align:left; z-index:3;
+}
+body[data-pokemon="pkmn-espeon"] .leaf-epilogue-kicker { font-size:6px; letter-spacing:1px; }
+body[data-pokemon="pkmn-espeon"] .leaf-epilogue-line { width:40px; align-self:flex-start; }
+body[data-pokemon="pkmn-espeon"] .leaf-header-moon { color:#e984ac; text-shadow:0 0 8px #e984ac55; }
+@media (min-height:1000px) {
+ body[data-pokemon="pkmn-espeon"] .leaf-sidebar:before { width:305px; height:425px; left:-26px; }
+ body[data-pokemon="pkmn-espeon"] .leaf-aside-epilogue { bottom:240px; }
+}
+@media (max-width:850px) {
+ body[data-pokemon="pkmn-espeon"] .leaf-account-top { grid-template-columns:26px minmax(0,1fr); }
+ body[data-pokemon="pkmn-espeon"] .leaf-account-top > * { min-width:0; }
+}
+@media (max-height:760px) {
+ body[data-pokemon="pkmn-espeon"] .leaf-sidebar:before { width:210px; height:230px; left:-10px; }
+ body[data-pokemon="pkmn-espeon"] .leaf-aside-epilogue { display:none; }
+}
+/* Espeon apoiado na base: cauda abaixo da ação e silhueta mais alta. */
+@media (min-height:761px) {
+ body[data-pokemon="pkmn-espeon"] .leaf-sidebar:before {
+  width:310px; height:430px; left:-47px; bottom:-82px;
+ }
+ body[data-pokemon="pkmn-espeon"] .leaf-aside-epilogue {
+  left:12px; bottom:225px; max-width:120px;
+ }
+ body[data-pokemon="pkmn-espeon"] .leaf-aside-epilogue strong {
+  white-space:pre-line; font-size:17px; line-height:1.18; max-width:120px;
+ }
+ body[data-pokemon="pkmn-espeon"] .leaf-epilogue-kicker { max-width:115px; line-height:1.5; }
+ body[data-pokemon="pkmn-espeon"] .leaf-epilogue-line { width:75px; }
+}
+@media (min-height:1000px) {
+ body[data-pokemon="pkmn-espeon"] .leaf-sidebar:before {
+  width:350px; height:550px; left:-55px; bottom:-108px;
+ }
+ body[data-pokemon="pkmn-espeon"] .leaf-aside-epilogue { bottom:285px; }
+ body[data-pokemon="pkmn-espeon"] .leaf-aside-epilogue strong { font-size:18px; }
+}
+@media (min-height:761px) {
+ body[data-pokemon="pkmn-espeon"] .leaf-aside-epilogue { bottom:130px; max-width:95px; }
+ body[data-pokemon="pkmn-espeon"] .leaf-aside-epilogue strong { max-width:95px; font-size:16px; }
+ body[data-pokemon="pkmn-espeon"] .leaf-epilogue-kicker { max-width:90px; }
+}
+@media (min-height:1000px) {
+ body[data-pokemon="pkmn-espeon"] .leaf-aside-epilogue { bottom:180px; }
+}
+/* Silhuetas exclusivas atravessam a divisão; lista e ações mantêm recorte próprio. */
+body[data-pokemon="pkmn-espeon"] .leaf-sidebar,
+body[data-pokemon="pkmn-umbreon"] .leaf-sidebar,
+body[data-pokemon="pkmn-gengar"] .leaf-sidebar,
+body[data-pokemon="pkmn-banette"] .leaf-sidebar,
+body[data-pokemon="pkmn-meganium"] .leaf-sidebar,
+body[data-pokemon="pkmn-mewtwo"] .leaf-sidebar,
+body[data-pokemon="pkmn-arcanine"] .leaf-sidebar { overflow:visible; z-index:2; }
+@media (min-height:761px) {
+ body[data-pokemon="pkmn-espeon"] .leaf-sidebar:before { left:-20px; }
+}
+@media (min-height:1000px) {
+ body[data-pokemon="pkmn-espeon"] .leaf-sidebar:before { left:-25px; }
+}
+/* Ícones temáticos desenhados, independentes dos glifos do catálogo. */
+body[data-theme] .leaf-header-moon.leaf-pokemon-header-icon {
+ width:28px; height:30px; flex:0 0 28px; font-size:0;
+ border:0; border-radius:0; transform:none; box-shadow:none;
+ color:var(--color-accent); text-shadow:none;
+}
+.leaf-pokemon-header-icon svg { display:block; width:100%; height:100%; }
+/* Miniaturas derivadas das artes aprovadas de cada Pokémon. */
+body[data-theme] .leaf-header-moon.leaf-pokemon-header-icon { width:38px; height:38px; flex-basis:38px; overflow:hidden; }
+.leaf-pokemon-header-icon img { display:block; width:100%; height:100%; object-fit:cover; object-position:center top; }
+body[data-pokemon="pkmn-espeon"] .leaf-pokemon-header-icon img { object-position:70% top; }
+/* Arcanine: pedra abaixo da borda inferior e frase livre do quarto cartão. */
+body[data-pokemon="pkmn-arcanine"] .leaf-sidebar:before { bottom:-40px; }
+body[data-pokemon="pkmn-arcanine"] .leaf-aside-epilogue { bottom:190px; }
+@media (min-height:1000px) {
+ body[data-pokemon="pkmn-arcanine"] .leaf-sidebar:before { bottom:-48px; }
+ body[data-pokemon="pkmn-arcanine"] .leaf-aside-epilogue { bottom:260px; }
+}
+@media (max-height:760px) {
+ body[data-pokemon="pkmn-arcanine"] .leaf-sidebar:before { bottom:-28px; }
+}
+body[data-pokemon="pkmn-corsola"] .leaf-sidebar { overflow:visible; z-index:2; }
+body[data-pokemon="pkmn-corsola"] #leafAccountList { flex:0 1 auto; max-height:calc(100vh - 400px); }
+body[data-pokemon="pkmn-corsola"] .leaf-side-footer { margin-top:auto; }
+body[data-pokemon="pkmn-corsola"] .leaf-sidebar:before {
+ top:auto; right:auto; left:-35px; bottom:0; width:310px; height:310px;
+ background-size:contain; background-position:center bottom; mask-image:none; opacity:1; z-index:2;
+}
+body[data-pokemon="pkmn-corsola"] .leaf-aside-epilogue {
+ position:absolute; left:12px; right:auto; bottom:250px; max-width:185px;
+ padding:0; align-items:flex-start; text-align:left; z-index:3;
+}
+body[data-pokemon="pkmn-corsola"] .leaf-aside-epilogue strong { white-space:pre-line; font-size:16px; }
+body[data-pokemon="pkmn-corsola"] .leaf-epilogue-kicker { font-size:6px; letter-spacing:1px; }
+body[data-pokemon="pkmn-corsola"] .leaf-epilogue-line { width:85px; align-self:flex-start; }
+@media(min-height:1000px) {
+ body[data-pokemon="pkmn-corsola"] .leaf-sidebar:before { width:365px; height:375px; left:-55px; }
+ body[data-pokemon="pkmn-corsola"] .leaf-aside-epilogue { bottom:365px; }
+}
+@media(max-height:760px) {
+ body[data-pokemon="pkmn-corsola"] .leaf-sidebar:before { width:240px; height:235px; left:-30px; }
+ body[data-pokemon="pkmn-corsola"] .leaf-aside-epilogue { display:none; }
+}
+@media(max-width:850px) {
+ body[data-pokemon="pkmn-corsola"] .leaf-account-top { grid-template-columns:26px minmax(0,1fr); }
+ body[data-pokemon="pkmn-corsola"] .leaf-account-top > * { min-width:0; }
+}
+@media(min-height:1000px) {
+ body[data-pokemon="pkmn-corsola"] .leaf-aside-epilogue { bottom:295px; }
+}
+/* Corsola espelhado: frase ao lado do coral alto, sem coluna vazia acima da arte. */
+body[data-pokemon="pkmn-corsola"] .leaf-sidebar:before { bottom:25px; transform:translateX(35px) rotate(30deg) scaleX(-1); transform-origin:center center; }
+body[data-pokemon="pkmn-corsola"] .leaf-aside-epilogue { left:auto; right:12px; bottom:240px; max-width:160px; align-items:flex-end; text-align:right; }
+body[data-pokemon="pkmn-corsola"] .leaf-epilogue-line { align-self:flex-end; }
+@media(min-height:1000px) {
+ body[data-pokemon="pkmn-corsola"] .leaf-aside-epilogue { bottom:320px; }
+ body[data-pokemon="pkmn-corsola"] .leaf-aside-epilogue strong { font-size:18px; }
+}
+/* Nova pose do Mewtwo: proporção natural, cauda na lateral e pés na base. */
+body[data-pokemon="pkmn-mewtwo"] .leaf-sidebar:before { transform:none; width:310px; height:350px; left:-65px; bottom:16px; background-size:contain; }
+@media(min-height:1000px) {
+ body[data-pokemon="pkmn-mewtwo"] .leaf-sidebar:before { width:350px; height:395px; left:-75px; }
+ body[data-pokemon="pkmn-mewtwo"] .leaf-aside-epilogue { bottom:395px; }
+}
+@media(max-height:760px) {
+ body[data-pokemon="pkmn-mewtwo"] .leaf-sidebar:before { width:240px; height:240px; left:-50px; }
+}
+@media(min-height:761px) and (max-height:999px) {
+ body[data-pokemon="pkmn-mewtwo"] .leaf-sidebar:before { height:285px; bottom:0; left:-40px; }
+ body[data-pokemon="pkmn-mewtwo"] .leaf-aside-epilogue { bottom:220px; max-width:95px; }
+}
+/* Alakazam: duas colheres e bigodes atravessam a divisão; frase curta ao lado da mão. */
+body[data-pokemon="pkmn-alakazam"] .leaf-sidebar { overflow:visible; z-index:2; }
+body[data-pokemon="pkmn-alakazam"] #leafAccountList { flex:0 1 auto; max-height:calc(100vh - 400px); }
+body[data-pokemon="pkmn-alakazam"] .leaf-side-footer { margin-top:auto; }
+body[data-pokemon="pkmn-alakazam"] .leaf-sidebar:before { top:auto; right:auto; left:-45px; bottom:-15px; width:330px; height:310px; background-size:contain; background-position:center bottom; mask-image:none; opacity:1; z-index:2; }
+body[data-pokemon="pkmn-alakazam"] .leaf-aside-epilogue { position:absolute; left:12px; right:auto; bottom:265px; max-width:145px; padding:0; align-items:flex-start; text-align:left; z-index:3; }
+body[data-pokemon="pkmn-alakazam"] .leaf-aside-epilogue strong { white-space:pre-line; font-size:16px; }
+body[data-pokemon="pkmn-alakazam"] .leaf-epilogue-line { width:70px; align-self:flex-start; }
+@media(min-height:1000px) {
+ body[data-pokemon="pkmn-alakazam"] .leaf-sidebar:before { width:400px; height:425px; left:-65px; bottom:-20px; }
+ body[data-pokemon="pkmn-alakazam"] .leaf-aside-epilogue { bottom:345px; max-width:115px; }
+}
+@media(max-height:760px) {
+ body[data-pokemon="pkmn-alakazam"] .leaf-sidebar:before { width:260px; height:230px; left:-40px; }
+ body[data-pokemon="pkmn-alakazam"] .leaf-aside-epilogue { display:none; }
+}
+body[data-pokemon="pkmn-alakazam"] .leaf-aside-epilogue { max-width:220px; bottom:270px; }
+body[data-pokemon="pkmn-alakazam"] .leaf-sidebar:before { height:280px; }
+@media(min-height:1000px) {
+ body[data-pokemon="pkmn-alakazam"] .leaf-aside-epilogue { max-width:230px; bottom:400px; }
+ body[data-pokemon="pkmn-alakazam"] .leaf-sidebar:before { height:425px; }
+}
+@media(max-height:760px) {
+ body[data-pokemon="pkmn-alakazam"] .leaf-sidebar:before { height:230px; }
+}
+@media(max-width:850px) {
+ body[data-pokemon="pkmn-alakazam"] .leaf-account-top { grid-template-columns:26px minmax(0,1fr); }
+ body[data-pokemon="pkmn-alakazam"] .leaf-account-top > * { min-width:0; }
+}
+@media(min-height:761px) and (max-height:999px) {
+ body[data-pokemon="pkmn-alakazam"] .leaf-sidebar:before { left:-20px; }
+}
+/* Respiro entre o quarto cartão, a frase e a orelha do Alakazam. */
+body[data-pokemon="pkmn-alakazam"] .leaf-aside-epilogue { bottom:255px; }
+body[data-pokemon="pkmn-alakazam"] .leaf-sidebar:before { bottom:-45px; }
+@media(min-height:1000px) {
+ body[data-pokemon="pkmn-alakazam"] .leaf-aside-epilogue { bottom:385px; }
+ body[data-pokemon="pkmn-alakazam"] .leaf-sidebar:before { bottom:-55px; }
+}
+@media(max-height:760px) {
+ body[data-pokemon="pkmn-alakazam"] .leaf-sidebar:before { bottom:-15px; }
+}
+
+/* Psyduck: lago ao entardecer com Psyduck flutuando na boia. */
+body[data-theme="pkmn-psyduck"] {
+  --theme-shell-overlay: linear-gradient(180deg,rgba(16,31,42,.12),rgba(16,31,42,.3));
+  --theme-cutout-opacity: 1;
+}
+body[data-theme="pkmn-psyduck"] .leaf-sidebar {
+  background: linear-gradient(180deg,rgba(16,31,42,.86),rgba(16,31,42,.81) 64%,rgba(16,31,42,.70)) !important;
+}
+body[data-pokemon="pkmn-psyduck"] .leaf-sidebar {
+  overflow: visible; z-index: 2;
+}
+body[data-pokemon="pkmn-psyduck"] #leafAccountList {
+  flex: 0 1 auto;
+  max-height: calc(100vh - 390px);
+}
+body[data-pokemon="pkmn-psyduck"] .leaf-side-footer { margin-top: auto; }
+body[data-pokemon="pkmn-psyduck"] .leaf-sidebar:before {
+  top: auto; right: auto; left: 0px; bottom: 56px;
+  width: 235px; height: 230px;
+  background-size: contain; background-position: center bottom;
+  mask-image: none; opacity: 1; z-index: 2; pointer-events: none;
+}
+body[data-pokemon="pkmn-psyduck"] .leaf-aside-epilogue {
+  position: absolute; left: auto; right: 12px; bottom: 285px;
+  padding: 0; max-width: 120px; align-items: flex-end; text-align: right;
+  z-index: 3; pointer-events: none;
+}
+body[data-pokemon="pkmn-psyduck"] .leaf-aside-epilogue strong {
+  white-space: pre-line; color: #f3d797; font-size: 17px; line-height: 1.3;
+}
+body[data-pokemon="pkmn-psyduck"] .leaf-epilogue-kicker { font-size: 6px; letter-spacing: 1px; }
+body[data-pokemon="pkmn-psyduck"] .leaf-epilogue-line { width: 60px; align-self: flex-end; }
+@media (min-height: 1000px) {
+  body[data-pokemon="pkmn-psyduck"] .leaf-sidebar:before { width: 265px; height: 260px; left: -4px; bottom: 58px; }
+  body[data-pokemon="pkmn-psyduck"] .leaf-aside-epilogue { bottom: 330px; }
+}
+@media (max-height: 760px) {
+  body[data-pokemon="pkmn-psyduck"] #leafAccountList { flex: 1 1 auto; max-height: none; }
+  body[data-pokemon="pkmn-psyduck"] .leaf-sidebar:before { width: 140px; height: 140px; left: -4px; bottom: 10px; }
+  body[data-pokemon="pkmn-psyduck"] .leaf-aside-epilogue { display: none; }
+}
+@media (max-width: 850px) {
+  body[data-pokemon="pkmn-psyduck"] .leaf-account-top { grid-template-columns: 26px minmax(0,1fr); }
+  body[data-pokemon="pkmn-psyduck"] .leaf-account-top > * { min-width: 0; }
+}
+
+/* Magnezone: aço azulado, observatório e silhueta do disco flutuante. */
+body[data-theme="pkmn-magnezone"] {
+  --theme-shell-overlay: linear-gradient(180deg,rgba(16,27,38,.10),rgba(16,27,38,.22));
+  --theme-cutout-opacity: 1;
+}
+body[data-theme="pkmn-magnezone"] .leaf-sidebar {
+  background: linear-gradient(180deg,rgba(16,27,38,.86),rgba(16,27,38,.81) 64%,rgba(16,27,38,.70)) !important;
+}
+body[data-pokemon="pkmn-magnezone"] .leaf-sidebar {
+  overflow: visible; z-index: 2;
+}
+body[data-pokemon="pkmn-magnezone"] #leafShell:after { display: none; }
+body[data-pokemon="pkmn-magnezone"] #leafAccountList { flex: 0 1 auto; max-height: calc(100vh - 390px); }
+body[data-pokemon="pkmn-magnezone"] .leaf-side-footer { margin-top: auto; }
+body[data-pokemon="pkmn-magnezone"] .leaf-sidebar:before {
+  top: auto; right: auto; left: -2px; bottom: 62px; width: 245px; height: 165px;
+  background-size: contain; background-position: center bottom;
+  mask-image: none; opacity: 1; z-index: 2; pointer-events: none;
+}
+body[data-pokemon="pkmn-magnezone"] .leaf-aside-epilogue {
+  position: absolute; left: 16px; right: auto; bottom: 232px; padding: 0;
+  max-width: 220px; align-items: flex-start; text-align: left; z-index: 3; pointer-events: none;
+}
+body[data-pokemon="pkmn-magnezone"] .leaf-aside-epilogue strong {
+  white-space: pre-line; color: #c5e8f3; font-size: 17px; line-height: 1.3;
+}
+body[data-pokemon="pkmn-magnezone"] .leaf-epilogue-kicker { font-size: 6px; letter-spacing: 1px; }
+body[data-pokemon="pkmn-magnezone"] .leaf-epilogue-line {
+  width: 85px; align-self: flex-start; background: linear-gradient(90deg,#8bd6ee,transparent);
+}
+@media (min-height: 1000px) {
+  body[data-pokemon="pkmn-magnezone"] .leaf-sidebar:before { width: 300px; height: 210px; left: -20px; bottom: 50px; }
+  body[data-pokemon="pkmn-magnezone"] .leaf-aside-epilogue { bottom: 275px; }
+}
+@media (max-height: 920px) {
+  body[data-pokemon="pkmn-magnezone"] #leafAccountList { flex: 1 1 auto; max-height: none; }
+  body[data-pokemon="pkmn-magnezone"] .leaf-sidebar:before { width: 170px; height: 120px; left: -12px; bottom: 6px; }
+  body[data-pokemon="pkmn-magnezone"] .leaf-aside-epilogue { display: none; }
+}
+@media (max-width: 850px) {
+  body[data-pokemon="pkmn-magnezone"] .leaf-account-top { grid-template-columns: 26px minmax(0,1fr); }
+  body[data-pokemon="pkmn-magnezone"] .leaf-account-top > * { min-width: 0; }
+}
+
+/* Flareon: calor vulcânico, entardecer dourado e pelagem em chamas. */
+body[data-theme="pkmn-flareon"] {
+  --theme-shell-overlay: linear-gradient(180deg, rgba(24, 13, 9, 0.12), rgba(24, 13, 9, 0.28));
+  --theme-cutout-opacity: 1;
+}
+body[data-theme="pkmn-flareon"] .leaf-sidebar {
+  background: linear-gradient(180deg, rgba(24, 13, 9, 0.88), rgba(27, 15, 10, 0.82) 64%, rgba(20, 10, 7, 0.70)) !important;
+}
+body[data-pokemon="pkmn-flareon"] .leaf-sidebar {
+  overflow: visible; z-index: 2;
+}
+body[data-pokemon="pkmn-flareon"] #leafShell:after { display: none; }
+body[data-pokemon="pkmn-flareon"] #leafAccountList { flex: 0 1 auto; max-height: calc(100vh - 400px); }
+body[data-pokemon="pkmn-flareon"] .leaf-side-footer { margin-top: auto; }
+body[data-pokemon="pkmn-flareon"] .leaf-sidebar:before {
+  top: auto; right: auto; left: -24px; bottom: -8px; width: 280px; height: 350px;
+  background-size: contain; background-position: center bottom;
+  mask-image: none; opacity: 1; z-index: 2; pointer-events: none;
+}
+body[data-pokemon="pkmn-flareon"] .leaf-aside-epilogue {
+  position: absolute; left: 16px; right: auto; bottom: 245px; padding: 0;
+  max-width: 220px; align-items: flex-start; text-align: left; z-index: 3; pointer-events: none;
+}
+body[data-pokemon="pkmn-flareon"] .leaf-aside-epilogue strong {
+  white-space: pre-line; color: #fed7aa; font-size: 16px; line-height: 1.3;
+}
+body[data-pokemon="pkmn-flareon"] .leaf-epilogue-kicker {
+  color: #f97316; font-size: 6px; letter-spacing: 1px;
+}
+body[data-pokemon="pkmn-flareon"] .leaf-epilogue-line {
+  width: 80px; align-self: flex-start; background: linear-gradient(90deg, #f97316, transparent);
+}
+@media (min-height: 1000px) {
+  body[data-pokemon="pkmn-flareon"] .leaf-sidebar:before { width: 320px; height: 400px; left: -30px; bottom: -12px; }
+  body[data-pokemon="pkmn-flareon"] .leaf-aside-epilogue { bottom: 280px; }
+}
+@media (max-height: 920px) {
+  body[data-pokemon="pkmn-flareon"] #leafAccountList { flex: 1 1 auto; max-height: none; }
+  body[data-pokemon="pkmn-flareon"] .leaf-sidebar:before { width: 210px; height: 262px; left: -16px; bottom: 0; }
+  body[data-pokemon="pkmn-flareon"] .leaf-aside-epilogue { display: none; }
+}
+@media (max-width: 850px) {
+  body[data-pokemon="pkmn-flareon"] .leaf-account-top { grid-template-columns: 26px minmax(0, 1fr); }
+  body[data-pokemon="pkmn-flareon"] .leaf-account-top > * { min-width: 0; }
+}
+
+/* Mimikyu: floresta lunar das fadas, disfarce carinhoso e névoa espectral. */
+body[data-theme="pkmn-mimikyu"] {
+  --theme-shell-overlay: linear-gradient(180deg, rgba(15, 9, 26, 0.12), rgba(15, 9, 26, 0.28));
+  --theme-cutout-opacity: 1;
+}
+body[data-theme="pkmn-mimikyu"] .leaf-sidebar {
+  background: linear-gradient(180deg, rgba(15, 9, 26, 0.88), rgba(24, 14, 38, 0.82) 64%, rgba(18, 10, 30, 0.70)) !important;
+}
+body[data-pokemon="pkmn-mimikyu"] .leaf-sidebar {
+  overflow: visible; z-index: 2;
+}
+body[data-pokemon="pkmn-mimikyu"] #leafShell:after { display: none; }
+body[data-pokemon="pkmn-mimikyu"] #leafAccountList { flex: 0 1 auto; max-height: calc(100vh - 460px); }
+body[data-pokemon="pkmn-mimikyu"] .leaf-side-footer { margin-top: auto; }
+body[data-pokemon="pkmn-mimikyu"] .leaf-sidebar:before {
+  top: auto; right: auto; left: -24px; bottom: -10px; width: 280px; height: 380px;
+  background-size: contain; background-position: center bottom;
+  mask-image: none; opacity: 1; z-index: 2; pointer-events: none;
+}
+body[data-pokemon="pkmn-mimikyu"] .leaf-aside-epilogue {
+  position: absolute; left: 16px; right: auto; bottom: 315px; padding: 0;
+  max-width: 220px; align-items: flex-start; text-align: left; z-index: 3; pointer-events: none;
+}
+body[data-pokemon="pkmn-mimikyu"] .leaf-aside-epilogue strong {
+  white-space: pre-line; color: #e9d5ff; font-size: 16px; line-height: 1.35;
+}
+body[data-pokemon="pkmn-mimikyu"] .leaf-epilogue-kicker {
+  color: #c084fc; font-size: 6px; letter-spacing: 1px;
+}
+body[data-pokemon="pkmn-mimikyu"] .leaf-epilogue-line {
+  width: 80px; align-self: flex-start; background: linear-gradient(90deg, #c084fc, transparent);
+}
+@media (min-height: 1000px) {
+  body[data-pokemon="pkmn-mimikyu"] .leaf-sidebar:before { width: 310px; height: 420px; left: -28px; bottom: -14px; }
+  body[data-pokemon="pkmn-mimikyu"] .leaf-aside-epilogue { bottom: 355px; }
+}
+@media (max-height: 920px) {
+  body[data-pokemon="pkmn-mimikyu"] #leafAccountList { flex: 1 1 auto; max-height: none; }
+  body[data-pokemon="pkmn-mimikyu"] .leaf-sidebar:before { width: 200px; height: 275px; left: -16px; bottom: 0; }
+  body[data-pokemon="pkmn-mimikyu"] .leaf-aside-epilogue { display: none; }
+}
+@media (max-width: 850px) {
+  body[data-pokemon="pkmn-mimikyu"] .leaf-account-top { grid-template-columns: 26px minmax(0, 1fr); }
+  body[data-pokemon="pkmn-mimikyu"] .leaf-account-top > * { min-width: 0; }
+}

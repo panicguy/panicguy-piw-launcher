@@ -1,0 +1,106 @@
+# ==============================================================================
+# PIO Nailo / Absol Launcher - .gitignore
+# ==============================================================================
+
+# Node.js & Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Builds, Packaging & Distribution
+dist/
+build/
+out/
+target/
+rust-migration/src-tauri/gen/
+rust-migration/src-tauri/examples/
+rust-migration/tools/*
+!rust-migration/tools/turnstile_solver.py
+rust-migration/LEIA-ME-*.md
+rust-migration/SHA256-*.txt
+*.zip
+*.tar.gz
+*.tgz
+*.exe
+!icon.ico
+
+# User Sensitive Data & Local Credentials (CRITICAL - NEVER COMMIT)
+accounts.enc
+accounts.enc.*
+dom-dump.txt
+*.key
+*.secret
+.env
+.env.*
+*.pem
+*.crt
+
+# Runtime, Logs & Temporary Files
+.runtime/
+*.log
+logs/
+*.tmp
+tempmediaStorage/
+
+# Development Scratch, Backups & Benchmark Spikes
+scratch/
+backups/
+backup-*/
+ui-runtime-benchmark/
+docs/visual-qa/
+docs/fanart-candidates/
+docs/local-cutout-candidates/
+docs/art-reference/
+
+# Python Cache & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+env/
+venv/
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# IDE & Editor Settings
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+*.sublime-project
+*.sublime-workspace
+
+# Internal Development Docs, AI Agent Rules & Design Guidelines (Local Only - Never Commit to GitHub)
+AGENTS.MD
+AGENTS.md
+agents.md
+.agents/
+UI-AUDIT.md
+PIW-DESIGN-SYSTEM.md
+docs/
+tools/*
+!tools/turnstile_solver.py
+!tools/ensure-electron.js
+!tools/mem-report.js
+!tools/mem-bench.js
+!tools/start-rust.ps1
+!tools/update-source.ps1
+src/ui/themes/pokemon/**/*.json
+src/ui/themes/pokemon/**/*.md
+pokeidle_maps/
+
+
+!tools/launch-rust.vbs
+!tools/run-rust-hidden.ps1

@@ -1,0 +1,65 @@
+{
+  "id": "pkmn-meganium",
+  "dex": 154,
+  "name": "Meganium",
+  "pokemon": "Meganium — GRASS",
+  "t1": "GRASS",
+  "t2": "",
+  "isMega": false,
+  "tone": "mid",
+  "toneLabel": "Interm.",
+  "category": "pokemon",
+  "glyph": "❀",
+  "brandTitle": "MEGANIUM <span>LAUNCHER</span>",
+  "brandSub": "O JARDIM DE CADA RECOMEÇO",
+  "quote": "Há um novo caminho em cada primavera.",
+  "swatches": [
+    "#17261d",
+    "#284233",
+    "#f0a9bd"
+  ],
+  "colors": {
+    "tone": "mid",
+    "bgBase": "#17261d",
+    "bgElevated": "#1f3327",
+    "surface1": "#284233",
+    "surface2": "#325240",
+    "surfaceHover": "#406952",
+    "surfaceSelected": "#38614a",
+    "textPrimary": "#f0f7f2",
+    "textSecondary": "#b5d6be",
+    "textMuted": "#82a88d",
+    "accent": "#f0a9bd",
+    "accentSoft": "rgba(110, 231, 183, 0.16)",
+    "actionPrimary": "#22c55e",
+    "actionPrimaryHover": "#16a34a",
+    "borderSubtle": "#3b614b",
+    "borderStrong": "#5f9474"
+  },
+  "assets": {
+    "panorama": "src/ui/themes/pokemon/meganium/panorama-exclusive.png",
+    "cutout": "src/ui/themes/pokemon/meganium/cutout-exclusive.png",
+    "emblem": "src/ui/themes/pokemon/meganium/emblem-exclusive.svg",
+    "companions": "src/ui/themes/pokemon/meganium/companions-exclusive.png"
+  },
+  "schemaVersion": 1,
+  "exclusive": true,
+  "family": [
+    "chikorita",
+    "bayleef",
+    "meganium"
+  ],
+  "artworkProvenance": {
+    "panorama": "built-in image generation",
+    "cutout": "built-in image generation",
+    "companions": "local ComfyUI / DreamShaper 8 / reference-guided repaint; reference poses and silhouettes"
+  },
+  "companionSpecies": [
+    "chikorita",
+    "bayleef"
+  ],
+  "sideQuote": "Respire. A próxima jornada floresce.",
+  "footerQuote": "CADA RECOMEÇO TEM SUA PRÓPRIA PRIMAVERA.",
+  "productionStatus": "integrated-unverified",
+  "missingAssets": []
+}

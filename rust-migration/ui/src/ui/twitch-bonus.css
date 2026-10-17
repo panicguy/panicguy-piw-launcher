@@ -1,0 +1,184 @@
+/* Twitch follows the active Pokémon palette; no independent purple skin. */
+#twitchBonusOverlay { background:rgba(0,0,0,.68)!important; backdrop-filter:none!important; }
+#twitchBonusModal { width:min(920px,calc(100vw - 32px))!important; max-height:calc(100vh - 40px)!important; padding:24px!important; background:var(--color-bg-elevated)!important; color:var(--color-text-primary)!important; border:1px solid var(--border-strong)!important; border-radius:16px!important; box-shadow:0 18px 60px rgba(0,0,0,.4)!important; color-scheme:var(--theme-color-scheme); }
+#twitchBonusModal .twitch-bonus-head h2 { color:var(--color-text-primary)!important; font-size:22px; gap:12px; }
+#twitchBonusModal .twitch-bonus-icon { width:24px; height:24px; color:var(--color-accent); flex-shrink:0; }
+#twitchBonusModal .hint { color:var(--color-text-secondary)!important; margin:0 0 8px; font-size:13px; line-height:1.6; }
+#twitchBonusModal .twitch-bonus-close { background:transparent!important; border:0!important; color:var(--color-text-secondary)!important; width:36px; height:36px; padding:0!important; }
+#twitchBonusModal .twitch-bonus-content { gap:22px; }
+#twitchBonusModal .twitch-global-card { background:var(--color-surface-1); border:1px solid var(--border-subtle); border-radius:12px; padding:14px; }
+#twitchBonusModal .twitch-toggle-label { color:var(--color-text-primary); align-items:flex-start; font-size:13px; }
+#twitchBonusModal .twitch-toggle-text small { display:block; color:var(--color-text-secondary); font-size:12px; margin-top:4px; line-height:1.5; }
+#twitchBonusModal input[type=checkbox] { accent-color:var(--color-accent); width:16px; height:16px; flex-shrink:0; }
+#twitchBonusModal .twitch-global-kpis { flex-wrap:wrap; }
+#twitchBonusModal .twitch-kpi-pill, #twitchBonusModal .twitch-ingame-tag, #twitchBonusModal .twitch-linked-tag, #twitchBonusModal .twitch-chan-badge { background:var(--color-surface-2); color:var(--color-text-primary); font-weight:600; font-size:11px; padding:4px 7px; }
+#twitchBonusModal .twitch-kpi-bonus, #twitchBonusModal .twitch-ingame-tag { background:var(--color-accent-soft); color:var(--color-text-primary); }
+#twitchBonusModal .twitch-sec-head { gap:12px; flex-wrap:wrap; }
+#twitchBonusModal .twitch-sec-title { font-size:14px; color:var(--color-text-primary); }
+#twitchBonusModal a { color:var(--color-accent); font-size:12px; text-decoration:underline; text-underline-offset:3px; }
+#twitchBonusModal .twitch-accounts-grid { gap:12px; }
+#twitchBonusModal .twitch-account-card { min-width:0; padding:16px; gap:12px; background:var(--color-surface-1); border:1px solid var(--border-subtle); border-radius:12px; box-shadow:none; }
+#twitchBonusModal .twitch-account-card.is-disabled { opacity:1; }
+#twitchBonusModal .twitch-account-card.is-disabled .twitch-acc-badge { background:var(--color-surface-2); }
+#twitchBonusModal .twitch-acc-title { min-width:0; flex-wrap:wrap; gap:8px; }
+#twitchBonusModal .twitch-acc-name { font-size:14px; color:var(--color-text-primary); overflow-wrap:anywhere; }
+#twitchBonusModal .twitch-acc-badge { width:26px; height:26px; background:var(--color-accent-soft); color:var(--color-text-primary); font-size:12px; }
+#twitchBonusModal .twitch-acc-toggle, #twitchBonusModal .twitch-status-label, #twitchBonusModal .twitch-chans-label, #twitchBonusModal .twitch-chan-none, #twitchBonusModal .twitch-unlinked-tag { color:var(--color-text-secondary); font-size:12px; }
+#twitchBonusModal .twitch-acc-status-row { flex-wrap:wrap; }
+#twitchBonusModal .twitch-linked-tag { margin-left:0; overflow-wrap:anywhere; }
+#twitchBonusModal .twitch-acc-inputs { gap:10px; }
+#twitchBonusModal .twitch-input-group { gap:5px; }
+#twitchBonusModal .twitch-input-group label { font-size:12px; color:var(--color-text-secondary); }
+#twitchBonusModal .twitch-input-group input { min-width:0; box-sizing:border-box; background:var(--color-bg-elevated)!important; color:var(--color-text-primary)!important; border:1px solid var(--border-subtle)!important; padding:9px 10px!important; font-size:13px!important; caret-color:var(--color-accent); }
+#twitchBonusModal input::placeholder { color:var(--color-text-secondary)!important; opacity:1; }
+#twitchBonusModal .twitch-token-wrap input { padding-right:50px!important; }
+#twitchBonusModal .twitch-btn-eye { color:var(--color-text-secondary)!important; font-size:11px; }
+#twitchBonusModal .twitch-acc-actions { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+#twitchBonusModal .twitch-btn-test, #twitchBonusModal .modal-actions button { background:var(--color-surface-2)!important; color:var(--color-text-primary)!important; border:1px solid var(--border-subtle)!important; border-radius:8px!important; padding:9px 12px!important; font-size:12px!important; }
+#twitchBonusModal .twitch-btn-test:hover, #twitchBonusModal .modal-actions button:hover { background:var(--color-surface-hover)!important; }
+#twitchBonusModal .modal-actions .primary { background:var(--color-accent-soft)!important; border-color:var(--color-accent)!important; }
+#twitchBonusModal .modal-actions { margin-top:8px; padding-top:16px; border-top:1px solid var(--border-subtle); }
+#twitchBonusModal .twitch-streamers-list { background:transparent; border:0; padding:0; gap:0; max-height:224px; scrollbar-color:var(--border-strong) var(--color-bg-elevated); scrollbar-width:thin; }
+#twitchBonusModal .twitch-streamer-item { display:grid; grid-template-columns:minmax(0,1fr) auto; padding:13px 12px; background:transparent; border:0; border-bottom:1px solid var(--border-subtle); border-radius:0; gap:12px; }
+#twitchBonusModal .twitch-streamer-item.live { background:var(--color-accent-soft); border-left:0; }
+#twitchBonusModal .twitch-streamer-item:last-child { border-bottom:0; }
+#twitchBonusModal .twitch-streamer-meta { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+#twitchBonusModal .twitch-streamer-name { color:var(--color-text-primary); overflow-wrap:anywhere; }
+#twitchBonusModal .twitch-viewers { color:var(--color-text-secondary); font-size:12px; }
+#twitchBonusModal .twitch-streamer-name, #twitchBonusModal .twitch-empty-streamers, #twitchBonusModal .twitch-streamers-count { color:var(--color-text-secondary); font-size:12px; }
+#twitchBonusModal .twitch-badge-live, #twitchBonusModal .twitch-badge-off, #twitchBonusModal .twitch-badge-bonus, #twitchBonusModal .twitch-badge-nobonus { background:transparent; color:var(--color-text-secondary); font-size:12px; padding:0; border-radius:0; font-weight:500; }
+#twitchBonusModal .twitch-badge-live { color:var(--color-text-primary); font-weight:700; display:inline-flex; align-items:center; gap:6px; }
+#twitchBonusModal .twitch-badge-live::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--color-accent); }
+#twitchBonusModal .twitch-badge-bonus { color:var(--color-text-primary); }
+@media(max-width:700px) { #twitchBonusModal .twitch-streamer-item { grid-template-columns:1fr; gap:8px; } #twitchBonusModal .twitch-streamer-meta { justify-content:flex-start; } }
+#twitchBonusModal .twitch-guide { border-bottom:1px solid var(--border-subtle); padding-bottom:14px; }
+#twitchBonusModal .twitch-guide summary { cursor:pointer; color:var(--color-text-primary); font-size:14px; font-weight:600; padding:8px 0; }
+#twitchBonusModal .twitch-guide summary span { color:var(--color-text-secondary); font-size:12px; margin-left:12px; font-weight:400; }
+#twitchBonusModal .twitch-guide-body { max-width:72ch; font-size:13px; line-height:1.7; color:var(--color-text-secondary); }
+#twitchBonusModal .twitch-guide h3 { margin:22px 0 8px; font-size:14px; color:var(--color-text-primary); }
+#twitchBonusModal .twitch-guide ol { margin:0; padding-left:24px; }
+#twitchBonusModal .twitch-guide li { margin-bottom:8px; }
+#twitchBonusModal :focus-visible { outline:2px solid var(--color-accent)!important; outline-offset:3px; }
+#twitchBonusModal button:disabled { opacity:.6; cursor:wait; }
+#twitchBonusModal ::selection { background:var(--color-accent-soft); color:var(--color-text-primary); }
+#twitchBonusModal { scrollbar-color:var(--border-strong) var(--color-bg-elevated); scrollbar-width:thin; }
+@media(max-width:680px) { #twitchBonusModal { padding:16px!important; } #twitchBonusModal .twitch-accounts-grid { grid-template-columns:1fr; } }
+#twitchBonusModal .twitch-btn-eye { background:transparent!important; box-shadow:none!important; border:0!important; }
+#twitchBonusModal .twitch-account-card { padding:12px 14px; gap:8px; }
+#twitchBonusModal .twitch-acc-inputs { gap:7px; }
+#twitchBonusModal .twitch-input-group input { padding-top:7px!important; padding-bottom:7px!important; }
+#twitchBonusModal .twitch-bonus-content { gap:16px; }
+/* Account rail and dedicated setup surface replace the repeated form grid. */
+#twitchBonusModal { width:min(980px,calc(100vw - 40px))!important; padding:0!important; overflow:hidden!important; gap:0!important; }
+#twitchBonusModal .twitch-bonus-head { padding:24px 28px 12px; }
+#twitchBonusModal .twitch-bonus-head h2 { font-size:26px; font-weight:650; }
+#twitchBonusModal > .hint { padding:0 28px 20px; margin:0; border-bottom:1px solid var(--border-subtle); }
+#twitchBonusModal .twitch-bonus-content { padding:20px 28px; overflow-y:auto; min-height:0; gap:20px; }
+#twitchBonusModal .twitch-guide { order:3; border-top:1px solid var(--border-subtle); border-bottom:0; padding:12px 0 0; }
+#twitchBonusModal .twitch-global-card { background:transparent; border:0; border-radius:0; padding:0 0 18px; border-bottom:1px solid var(--border-subtle); }
+#twitchBonusModal .twitch-workspace { display:grid; grid-template-columns:230px minmax(0,1fr); min-height:340px; background:var(--color-surface-1); border:1px solid var(--border-subtle); border-radius:12px; overflow:hidden; }
+#twitchBonusModal .twitch-account-nav { background:var(--color-bg-base); padding:12px; display:flex; flex-direction:column; gap:5px; border-right:1px solid var(--border-subtle); }
+#twitchBonusModal .twitch-account-choice { display:flex; align-items:center; gap:12px; text-align:left; width:100%; padding:14px 12px!important; border:1px solid transparent!important; border-radius:8px!important; background:transparent!important; color:var(--color-text-secondary)!important; box-shadow:none!important; cursor:pointer; }
+#twitchBonusModal .twitch-account-choice:hover { background:var(--color-surface-1)!important; }
+#twitchBonusModal .twitch-account-choice.selected { background:var(--color-surface-selected)!important; color:var(--color-text-primary)!important; border-color:var(--border-strong)!important; }
+#twitchBonusModal .twitch-choice-number { font-size:20px; font-weight:500; color:var(--color-accent); min-width:20px; }
+#twitchBonusModal .twitch-choice-info { display:flex; flex-direction:column; gap:5px; min-width:0; }
+#twitchBonusModal .twitch-choice-info b { font-size:13px; overflow-wrap:anywhere; }
+#twitchBonusModal .twitch-choice-info small { font-size:11px; color:var(--color-text-secondary); overflow-wrap:anywhere; }
+#twitchBonusModal .twitch-accounts-grid { display:block; min-width:0; }
+#twitchBonusModal .twitch-account-card { border:0; border-radius:0; background:transparent; padding:24px; gap:16px; }
+#twitchBonusModal .twitch-account-card[hidden] { display:none!important; }
+#twitchBonusModal .twitch-acc-badge { display:none; }
+#twitchBonusModal .twitch-acc-name { font-size:19px; font-weight:650; }
+#twitchBonusModal .twitch-acc-status-row { padding-bottom:14px; border-bottom:1px solid var(--border-subtle); }
+#twitchBonusModal .twitch-acc-channels-row { order:5; padding-top:12px; border-top:1px solid var(--border-subtle); }
+#twitchBonusModal .twitch-acc-inputs { gap:10px; }
+#twitchBonusModal .twitch-input-group input { padding:11px 12px!important; font-size:14px!important; }
+#twitchBonusModal .twitch-token-wrap input { padding-right:50px!important; }
+#twitchBonusModal .twitch-field-help { color:var(--color-text-secondary); font-size:12px; line-height:1.5; margin:0; }
+#twitchBonusModal .twitch-acc-actions { margin:0; }
+#twitchBonusModal .twitch-btn-test { padding:10px 16px!important; }
+#twitchBonusModal .modal-actions { flex-shrink:0; margin:0; padding:16px 28px; background:var(--color-bg-base); border-top:1px solid var(--border-subtle); }
+#twitchBonusModal .modal-actions .primary { background:var(--color-surface-selected)!important; padding:11px 20px!important; }
+#twitchBonusModal .twitch-status-bar { margin:0 28px; }
+@media(max-width:700px) { #twitchBonusModal .twitch-workspace { grid-template-columns:1fr; } #twitchBonusModal .twitch-account-nav { display:grid; grid-template-columns:1fr 1fr; border-right:0; border-bottom:1px solid var(--border-subtle); } #twitchBonusModal .twitch-bonus-content { padding:16px; } #twitchBonusModal .twitch-account-card { padding:18px; } }
+/* Three work areas stay on screen; guides and partners advance without page scroll. */
+#twitchBonusModal { width:min(1320px,calc(100vw - 32px))!important; max-height:calc(100vh - 32px)!important; }
+#twitchBonusModal .twitch-bonus-head { padding:20px 24px 10px; }
+#twitchBonusModal > .hint { padding:0 24px 16px; }
+#twitchBonusModal > .twitch-global-card { flex-shrink:0; padding:14px 24px; margin:0; background:var(--color-bg-base); }
+#twitchBonusModal .twitch-bonus-content { display:grid; grid-template-columns:260px minmax(0,1fr) 250px; overflow:hidden; padding:0; gap:0; min-height:0; }
+#twitchBonusModal .twitch-guide { order:0; border:0; border-right:1px solid var(--border-subtle); padding:22px; background:var(--color-bg-base); min-width:0; display:flex; flex-direction:column; }
+#twitchBonusModal .twitch-side-title { font-size:16px; margin:0 0 16px; color:var(--color-text-primary); }
+#twitchBonusModal .twitch-guide-tabs { display:flex; gap:6px; margin-bottom:18px; }
+#twitchBonusModal .twitch-guide-tabs button { padding:6px 9px!important; background:transparent!important; border:1px solid var(--border-subtle)!important; color:var(--color-text-secondary)!important; border-radius:6px!important; box-shadow:none!important; }
+#twitchBonusModal .twitch-guide-tabs button[aria-pressed=true] { background:var(--color-surface-selected)!important; border-color:var(--color-accent)!important; color:var(--color-text-primary)!important; }
+#twitchBonusModal .twitch-guide h3 { margin:0 0 12px; font-size:14px; }
+#twitchBonusModal .twitch-guide-body { font-size:12px; line-height:1.6; }
+#twitchBonusModal .twitch-guide li { margin-bottom:10px; }
+#twitchBonusModal .twitch-guide-step[hidden] { display:none!important; }
+#twitchBonusModal .twitch-guide-pager, #twitchBonusModal .twitch-partners-pager { display:flex; align-items:center; justify-content:space-between; gap:5px; margin-top:auto; padding-top:18px; color:var(--color-text-secondary); font-size:11px; }
+#twitchBonusModal .twitch-guide-pager button, #twitchBonusModal .twitch-partners-pager button { border:0!important; background:transparent!important; box-shadow:none!important; color:var(--color-text-primary)!important; padding:6px 0!important; font-size:11px!important; }
+#twitchBonusModal .twitch-setup { padding:22px; min-width:0; gap:16px; }
+#twitchBonusModal .twitch-workspace { display:flex; flex-direction:column; min-height:0; background:transparent; border:0; border-radius:0; overflow:visible; }
+#twitchBonusModal .twitch-account-nav { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); padding:0 0 16px; gap:6px; background:transparent; border:0; }
+#twitchBonusModal .twitch-account-choice { padding:9px 6px!important; gap:6px; flex-direction:column; align-items:flex-start; }
+#twitchBonusModal .twitch-choice-number { font-size:14px; }
+#twitchBonusModal .twitch-choice-info b { font-size:11px; }
+#twitchBonusModal .twitch-choice-info small { display:none; }
+#twitchBonusModal .twitch-account-card { padding:18px; background:var(--color-surface-1); border:1px solid var(--border-subtle); border-radius:12px; gap:12px; }
+#twitchBonusModal .twitch-input-group input { padding:9px 10px!important; }
+#twitchBonusModal .twitch-token-wrap input { padding-right:45px!important; }
+#twitchBonusModal .twitch-partners { padding:22px 18px; border-left:1px solid var(--border-subtle); background:var(--color-bg-base); min-width:0; gap:16px; }
+#twitchBonusModal .twitch-partners .twitch-sec-head { align-items:flex-start; }
+#twitchBonusModal .twitch-partners .twitch-sec-title { font-size:15px; }
+#twitchBonusModal .twitch-streamers-list { max-height:none; overflow:visible; border-radius:0; }
+#twitchBonusModal .twitch-streamer-item { grid-template-columns:1fr; padding:14px 10px; gap:8px; }
+#twitchBonusModal .twitch-streamer-meta { justify-content:flex-start; gap:7px 10px; }
+#twitchBonusModal .twitch-streamer-name { font-size:13px; }
+#twitchBonusModal .twitch-badge-live, #twitchBonusModal .twitch-badge-off, #twitchBonusModal .twitch-badge-bonus, #twitchBonusModal .twitch-badge-nobonus, #twitchBonusModal .twitch-viewers { font-size:11px; }
+#twitchBonusModal .modal-actions { padding:14px 24px; }
+@media(max-width:1100px) {
+ #twitchBonusModal .twitch-bonus-content { grid-template-columns:190px minmax(0,1fr) 180px; }
+ #twitchBonusModal .twitch-guide, #twitchBonusModal .twitch-setup, #twitchBonusModal .twitch-partners { padding:14px; }
+ #twitchBonusModal .twitch-guide-body { font-size:11px; line-height:1.5; }
+ #twitchBonusModal .twitch-account-card { padding:12px; gap:10px; }
+ #twitchBonusModal .twitch-field-help { font-size:11px; }
+ #twitchBonusModal .twitch-acc-name { font-size:16px; }
+ #twitchBonusModal .twitch-account-choice { padding:7px 4px!important; }
+}
+@media(max-height:800px) {
+ #twitchBonusModal .twitch-bonus-head { padding-top:14px; }
+ #twitchBonusModal .twitch-bonus-head h2 { font-size:22px; }
+ #twitchBonusModal > .hint { padding-bottom:10px; }
+ #twitchBonusModal > .twitch-global-card { padding-top:10px; padding-bottom:10px; }
+ #twitchBonusModal .twitch-setup, #twitchBonusModal .twitch-guide, #twitchBonusModal .twitch-partners { padding-top:14px; padding-bottom:14px; }
+ #twitchBonusModal .twitch-account-nav { padding-bottom:10px; }
+}
+@media(max-width:1100px) and (max-height:800px) {
+ #twitchBonusModal .twitch-setup { gap:10px; }
+ #twitchBonusModal .twitch-account-card { gap:8px; }
+ #twitchBonusModal .twitch-acc-status-row { padding-bottom:8px; font-size:11px; }
+ #twitchBonusModal .twitch-status-label, #twitchBonusModal .twitch-unlinked-tag { font-size:11px; }
+ #twitchBonusModal .twitch-input-group input { padding:7px 9px!important; font-size:12px!important; }
+ #twitchBonusModal .twitch-acc-inputs { gap:6px; }
+ #twitchBonusModal .twitch-input-group { gap:4px; }
+ #twitchBonusModal .twitch-acc-channels-row { padding-top:8px; }
+ #twitchBonusModal .twitch-streamer-item { padding:10px 8px; }
+ #twitchBonusModal .twitch-streamer-meta { gap:5px 8px; }
+ #twitchBonusModal .twitch-guide-tabs { gap:5px; margin-bottom:12px; }
+ #twitchBonusModal .twitch-guide-tabs button { padding:5px 8px!important; }
+ #twitchBonusModal .twitch-guide li { margin-bottom:8px; }
+ #twitchBonusModal .twitch-guide-pager, #twitchBonusModal .twitch-partners-pager { padding-top:12px; }
+}
+#twitchBonusModal .twitch-guide { display:grid; grid-template-rows:auto auto minmax(0,1fr) auto; min-height:0; }
+#twitchBonusModal .twitch-guide-pager { margin-top:0; }
+#twitchBonusModal .twitch-partners { display:grid; grid-template-rows:auto minmax(0,1fr) auto auto; min-height:0; }
+#twitchBonusModal .twitch-partners-pager { margin-top:0; }
+#twitchBonusModal .twitch-streamers-list { display:block; min-height:0; }
+@media(max-width:1100px) and (max-height:800px) {
+ #twitchBonusModal .twitch-partners { gap:8px; }
+ #twitchBonusModal .twitch-streamer-item { padding:8px; gap:5px; }
+ #twitchBonusModal .twitch-guide-pager, #twitchBonusModal .twitch-partners-pager { padding-top:8px; }
+ #twitchBonusModal .twitch-guide-body p { margin:8px 0; }
+}

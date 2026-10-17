@@ -1,0 +1,39 @@
+{
+  "id": "pkmn-eevee",
+  "pokemonId": 133,
+  "name": "Eevee",
+  "pokemon": "Eevee",
+  "tone": "light",
+  "toneLabel": "Claro (Creme)",
+  "glyph": "☘",
+  "brandTitle": "EEVEE <span>LAUNCHER</span>",
+  "brandSub": "INFINITAS POSSIBILIDADES. UM SÓ CAMINHO.",
+  "quote": "Um código genético instável que floresce com o afeto do treinador.",
+  "swatches": [
+    "#f5eedf",
+    "#e2d5bd",
+    "#b46927"
+  ],
+  "colors": {
+    "tone": "light",
+    "bgBase": "#f5eedf",
+    "bgElevated": "#ece2ce",
+    "surface1": "#e2d5bd",
+    "surface2": "#d6c6aa",
+    "surfaceHover": "#cbba9d",
+    "surfaceSelected": "#edd8bc",
+    "textPrimary": "#2d2116",
+    "textSecondary": "#5a4534",
+    "textMuted": "#856e5a",
+    "accent": "#b46927",
+    "accentSoft": "rgba(180, 105, 39, 0.14)",
+    "actionPrimary": "#4e7845",
+    "actionPrimaryHover": "#3d6035",
+    "borderSubtle": "#cbb9a3",
+    "borderStrong": "#a48f76"
+  },
+  "assets": {
+    "panorama": "src/ui/themes/pokemon/eevee/panorama.jpg",
+    "cutout": "src/ui/themes/pokemon/eevee/cutout.png"
+  }
+}

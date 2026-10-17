@@ -1,0 +1,57 @@
+{
+  "id": "pkmn-mimikyu",
+  "dex": 778,
+  "name": "Mimikyu",
+  "pokemon": "Mimikyu — GHOST/FAIRY",
+  "t1": "GHOST",
+  "t2": "FAIRY",
+  "isMega": false,
+  "tone": "dark",
+  "toneLabel": "Escuro",
+  "category": "pokemon",
+  "glyph": "👻",
+  "brandTitle": "MIMIKYU <span>LAUNCHER</span>",
+  "brandSub": "O DISFARCE DE QUEM SÓ QUER AMOR",
+  "quote": "Por baixo do tecido antigo,<br>um coração que só busca um amigo.",
+  "swatches": [
+    "#0f091a",
+    "#231436",
+    "#c084fc"
+  ],
+  "colors": {
+    "tone": "dark",
+    "bgBase": "#0f091a",
+    "bgElevated": "#180e26",
+    "surface1": "#231436",
+    "surface2": "#301b4a",
+    "surfaceHover": "#432668",
+    "surfaceSelected": "#3a205b",
+    "textPrimary": "#fbf7ff",
+    "textSecondary": "#e5d4f7",
+    "textMuted": "#b799db",
+    "accent": "#c084fc",
+    "accentSoft": "rgba(192, 132, 252, 0.18)",
+    "actionPrimary": "#8b5cf6",
+    "actionPrimaryHover": "#7c3aed",
+    "borderSubtle": "#3c2459",
+    "borderStrong": "#6d429a"
+  },
+  "assets": {
+    "panorama": "src/ui/themes/pokemon/mimikyu/panorama-exclusive.png",
+    "cutout": "src/ui/themes/pokemon/mimikyu/cutout-exclusive.png"
+  },
+  "exclusive": true,
+  "schemaVersion": 1,
+  "sideQuote": "Não olhe por baixo.\nApenas caminhe comigo.",
+  "sideKicker": "O MISTÉRIO DO DISFARCE",
+  "footerQuote": "TODO CORAÇÃO ENCONTRA SEU LUGAR SOB A LUA.",
+  "family": [
+    "mimikyu"
+  ],
+  "artworkProvenance": {
+    "cutout": "Built-in image generation & BiRefNet transparent background extraction (runic pedestal candidate; alt crate saved as cutout-crate-alt.png)",
+    "panorama": "Built-in image generation (enchanted moonlit fairy forest with wisteria & gothic ruins)"
+  },
+  "productionStatus": "integrated-local-review",
+  "missingAssets": []
+}

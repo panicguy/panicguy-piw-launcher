@@ -1,0 +1,11 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "gameplay-state",
+  "description": "Read-only gameplay observation from account game views.",
+  "local": false,
+  "remote": {
+    "urls": ["https://poke.idleworld.online/*"]
+  },
+  "webviews": ["game-account-*", "embedded-acc-*", "account-viewer-*", "family-*-viewer-*"],
+  "permissions": ["allow-report-gameplay", "allow-auto-depot"]
+}

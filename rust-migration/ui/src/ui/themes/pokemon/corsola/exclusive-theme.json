@@ -1,0 +1,57 @@
+{
+  "id": "pkmn-corsola",
+  "dex": 222,
+  "name": "Corsola",
+  "pokemon": "Corsola — WATER/ROCK",
+  "t1": "WATER",
+  "t2": "ROCK",
+  "isMega": false,
+  "tone": "dark",
+  "toneLabel": "Escuro",
+  "category": "pokemon",
+  "glyph": "✧",
+  "brandTitle": "CORSOLA <span>LAUNCHER</span>",
+  "brandSub": "O GUARDIÃO DE WATER / ROCK",
+  "quote": "Cada corrente traz<br>uma nova descoberta.",
+  "swatches": [
+    "#112e37",
+    "#28535c",
+    "#efa9bf"
+  ],
+  "colors": {
+    "tone": "dark",
+    "bgBase": "#112e37",
+    "bgElevated": "#193b45",
+    "surface1": "#204650",
+    "surface2": "#2c5961",
+    "surfaceHover": "#396d73",
+    "surfaceSelected": "#48676e",
+    "textPrimary": "#f0fcfb",
+    "textSecondary": "#c0e3e4",
+    "textMuted": "#8db7bd",
+    "accent": "#efa9bf",
+    "accentSoft": "rgba(239,169,191,.16)",
+    "actionPrimary": "#a06582",
+    "actionPrimaryHover": "#ba7e9c",
+    "borderSubtle": "#41646e",
+    "borderStrong": "#91b6bb"
+  },
+  "assets": {
+    "panorama": "src/ui/themes/pokemon/corsola/panorama-exclusive.png",
+    "cutout": "src/ui/themes/pokemon/corsola/cutout-manual-v2.png"
+  },
+  "exclusive": true,
+  "schemaVersion": 1,
+  "sideQuote": "O mar renova.\nA jornada floresce.",
+  "sideKicker": "UM RECIFE DE POSSIBILIDADES",
+  "footerQuote": "NOVOS CAMINHOS EM CADA MARÉ.",
+  "family": [
+    "corsola"
+  ],
+  "artworkProvenance": {
+    "cutout": "User-supplied artwork; manual alpha contour authorized by user",
+    "panorama": "Built-in image generation"
+  },
+  "productionStatus": "integrated-local-review",
+  "missingAssets": []
+}

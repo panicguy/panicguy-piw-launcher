@@ -1,0 +1,58 @@
+{
+  "id": "pkmn-flareon",
+  "dex": 136,
+  "name": "Flareon",
+  "pokemon": "Flareon — FIRE",
+  "t1": "FIRE",
+  "t2": "",
+  "isMega": false,
+  "tone": "dark",
+  "toneLabel": "Escuro",
+  "category": "pokemon",
+  "glyph": "🔥",
+  "brandTitle": "FLAREON <span>LAUNCHER</span>",
+  "brandSub": "A CHAMA QUE NUNCA SE APAGA",
+  "quote": "Nas cinzas de ontem,<br>o fogo renasce com mais força.",
+  "swatches": [
+    "#180d09",
+    "#341c14",
+    "#f97316"
+  ],
+  "colors": {
+    "tone": "dark",
+    "bgBase": "#180d09",
+    "bgElevated": "#24140e",
+    "surface1": "#321b13",
+    "surface2": "#422419",
+    "surfaceHover": "#562f21",
+    "surfaceSelected": "#5a2d1d",
+    "textPrimary": "#fff4ed",
+    "textSecondary": "#fed7aa",
+    "textMuted": "#c99b7b",
+    "accent": "#f97316",
+    "accentSoft": "rgba(249, 115, 22, 0.16)",
+    "actionPrimary": "#ea580c",
+    "actionPrimaryHover": "#c2410c",
+    "borderSubtle": "#573022",
+    "borderStrong": "#9a563b"
+  },
+  "assets": {
+    "panorama": "src/ui/themes/pokemon/flareon/panorama-exclusive.png",
+    "cutout": "src/ui/themes/pokemon/flareon/cutout-exclusive.png"
+  },
+  "exclusive": true,
+  "schemaVersion": 1,
+  "sideQuote": "O fogo acende.\nA jornada continua.",
+  "sideKicker": "O ESPÍRITO DO FOGO",
+  "footerQuote": "ONDE HÁ CALOR, NENHUMA SOMBRA PREVALECE.",
+  "family": [
+    "eevee",
+    "flareon"
+  ],
+  "artworkProvenance": {
+    "cutout": "Built-in image generation & BiRefNet transparent background extraction",
+    "panorama": "Built-in image generation"
+  },
+  "productionStatus": "integrated-local-review",
+  "missingAssets": []
+}

@@ -1,0 +1,54 @@
+{
+  "id": "pkmn-magnezone",
+  "dex": 462,
+  "name": "Magnezone",
+  "pokemon": "Magnezone — ELECTRIC/STEEL",
+  "t1": "ELECTRIC",
+  "t2": "STEEL",
+  "isMega": false,
+  "tone": "dark",
+  "toneLabel": "Escuro",
+  "category": "pokemon",
+  "glyph": "⚡",
+  "brandTitle": "MAGNEZONE <span>LAUNCHER</span>",
+  "brandSub": "O GUARDIÃO DE ELECTRIC / STEEL",
+  "quote": "Uma força silenciosa.<br>Um horizonte elétrico.",
+  "swatches": [
+    "#101b26",
+    "#2c4052",
+    "#8bd6ee"
+  ],
+  "colors": {
+    "tone": "dark",
+    "bgBase": "#101b26",
+    "bgElevated": "#192735",
+    "surface1": "#223444",
+    "surface2": "#2c4052",
+    "surfaceHover": "#3a5267",
+    "surfaceSelected": "#304c60",
+    "textPrimary": "#f1f6fa",
+    "textSecondary": "#c2d5e2",
+    "textMuted": "#94adbf",
+    "accent": "#8bd6ee",
+    "accentSoft": "rgba(139,214,238,.16)",
+    "actionPrimary": "#326a85",
+    "actionPrimaryHover": "#40809d",
+    "borderSubtle": "#425b70",
+    "borderStrong": "#7898ae"
+  },
+  "assets": {
+    "panorama": "src/ui/themes/pokemon/magnezone/panorama-exclusive.png",
+    "cutout": "src/ui/themes/pokemon/magnezone/cutout-exclusive.png"
+  },
+  "exclusive": true,
+  "schemaVersion": 1,
+  "sideQuote": "A força que une.\nO campo que guia.",
+  "sideKicker": "ALÉM DO CAMPO MAGNÉTICO",
+  "footerQuote": "SOB O MESMO CÉU, CADA JORNADA ENCONTRA SUA DIREÇÃO.",
+  "artworkProvenance": {
+    "panorama": "Built-in image generation, 2026-10-07; prompt recorded in ARTWORK.md",
+    "cutout": "Generated metallic saucer cutout with BiRefNet alpha extraction, 2026-10-07"
+  },
+  "productionStatus": "integrated-local-review",
+  "missingAssets": []
+}

@@ -1,0 +1,58 @@
+{
+  "id": "pkmn-umbreon",
+  "dex": 197,
+  "name": "Umbreon",
+  "pokemon": "Umbreon — DARK",
+  "t1": "DARK",
+  "t2": "",
+  "isMega": false,
+  "tone": "dark",
+  "toneLabel": "Escuro",
+  "category": "pokemon",
+  "glyph": "☾",
+  "brandTitle": "UMBREON <span>LAUNCHER</span>",
+  "brandSub": "ENTRE A LUA E O SILÊNCIO",
+  "quote": "Quando a noite desperta,<br>os anéis mostram o caminho.",
+  "swatches": [
+    "#0c191e",
+    "#233539",
+    "#eed06b"
+  ],
+  "colors": {
+    "tone": "dark",
+    "bgBase": "#0c191e",
+    "bgElevated": "#14252a",
+    "surface1": "#1a3034",
+    "surface2": "#243d40",
+    "surfaceHover": "#304c4e",
+    "surfaceSelected": "#3d493b",
+    "textPrimary": "#f5f1d9",
+    "textSecondary": "#c7d4cc",
+    "textMuted": "#92aaa6",
+    "accent": "#eed06b",
+    "accentSoft": "rgba(238,208,107,.16)",
+    "actionPrimary": "#756033",
+    "actionPrimaryHover": "#947942",
+    "borderSubtle": "#354d4c",
+    "borderStrong": "#7e7950"
+  },
+  "assets": {
+    "panorama": "src/ui/themes/pokemon/umbreon/panorama-exclusive.png",
+    "cutout": "src/ui/themes/pokemon/umbreon/cutout-exclusive.png"
+  },
+  "exclusive": true,
+  "schemaVersion": 1,
+  "sideQuote": "A noite revela novos caminhos.",
+  "sideKicker": "ENTRE A LUA E O SILÊNCIO",
+  "footerQuote": "SIGA A LUZ QUE A NOITE GUARDA.",
+  "family": [
+    "eevee",
+    "umbreon"
+  ],
+  "artworkProvenance": {
+    "cutout": "User-supplied artwork; built-in background extraction",
+    "panorama": "Built-in image generation"
+  },
+  "productionStatus": "integrated-local-review",
+  "missingAssets": []
+}

@@ -1,31 +1,23 @@
-# PIW Nailo Launcher
+# PIW Nailo — versão experimental para Poke Idle World
 
-Launcher experimental para [PokeIdle World](https://poke.idleworld.online/play), adaptado do projeto PIO Nailo.
+Adaptado a partir do launcher **PIO Nailo / PIO Rebosteio** (créditos e licença MIT preservados no arquivo LICENSE).
 
 ## Objetivo
+Manter a arquitetura leve em **Rust + Tauri + Microsoft Edge WebView2**, com até quatro contas, sem usar quatro processos Electron.
 
-Executar múltiplas contas com consumo de memória menor que uma implementação baseada em Electron, preservando a arquitetura nativa **Rust + Tauri 2 + WebView2** e os recursos de gerenciamento de contas/headless.
+## Abrir no Windows
+1. Extraia esta pasta integralmente.
+2. Execute `Abrir PIW Nailo.bat` (usa `tools/launch-rust.vbs` e `tools/start-rust.ps1`).
+3. O processo de compilação pode exigir Rust/Cargo, Visual Studio C++ Build Tools e WebView2 Runtime.
+4. Também pode compilar manualmente com `cd rust-migration/src-tauri` e `cargo build`.
 
-> **Estado:** adaptação inicial. A compatibilidade com o servidor, o login, as funções de jogo e o uso de quatro contas ainda precisam ser testados. Não há medição de consumo de RAM validada.
+## Estado da migração
+- URLs de abertura, verificações de host, permissões e origem alteradas para `https://poke.idleworld.online/play`.
+- Preservada a arquitetura Rust/WebView2 e o gerenciamento de perfis do projeto original.
+- **Ainda não testado em execução no Windows nem com login real**.
+- A implementação headless original presume `wss://poke.idleworld.online/ws`, mas o endpoint e o protocolo do WebSocket **não foram verificados**. Essa parte pode não funcionar e exige análise específica do PIW.
+- Recursos específicos do antigo PokeIdle (economia, HUD, combate, seletores e automação) podem necessitar adaptação ao PIW.
+- Consumo de memória não foi medido. O uso de Rust/Tauri não garante sozinho consumo baixo em quatro WebViews.
 
-## Código-fonte
-
-O projeto adaptado deve ser enviado preservando a estrutura de `rust-migration/` na raiz do repositório, especialmente:
-
-- `rust-migration/src-tauri/` — backend Rust/Tauri;
-- `rust-migration/ui/` — interface;
-- `rust-migration/Abrir PIO Rust.bat` — compilação e abertura no Windows.
-
-O código-fonte original foi entregue em arquivo ZIP na conversa de desenvolvimento; **o ZIP não é uma versão executável já compilada**.
-
-## Pré-requisitos (Windows)
-
-- Rust e Cargo, com toolchain MSVC;
-- Microsoft C++ Build Tools / SDK necessários ao Tauri;
-- WebView2 Runtime.
-
-A partir da pasta `rust-migration/src-tauri`, executar `cargo build`. O atalho `Abrir PIO Rust.bat` faz isso automaticamente e tenta abrir o binário de debug.
-
-## Atenção
-
-Este é um projeto independente, não oficial. Não publique `accounts.enc`, credenciais, arquivos `.env`, tokens, logs de sessão, nem pastas `target/` e `node_modules/`. Respeite a licença e os créditos do projeto original.
+## Publicar no GitHub
+Crie um repositório novo chamado `piw-nailo-launcher`, público ou privado, sem README inicial. Extraia o ZIP e envie todo o conteúdo da pasta `piw-nailo` para esse repositório. Não envie dados de conta, senhas ou perfis pessoais.

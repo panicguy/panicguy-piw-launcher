@@ -1,0 +1,208 @@
+/* Moon Garden: one landscape, quiet surfaces, and game windows that belong to it. */
+:root {
+  --leaf-sidebar: 252px;
+  --leaf-top: 56px;
+  --garden-ink: #263c39;
+  --garden-muted: #687e78;
+  --garden-moss: #46785c;
+  --garden-hairline: rgba(79, 112, 105, .16);
+}
+
+html, body {background:#d6dfdc!important;color:var(--garden-ink)!important}
+#leafShell {
+  isolation:isolate;
+  background:
+    linear-gradient(90deg,rgba(226,235,231,.26),rgba(232,239,238,.03) 42%,rgba(219,229,230,.08)),
+    url('assets/absol-panorama.png') center center/cover no-repeat;
+}
+#leafShell:before {
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(235,242,242,.1),transparent 54%,rgba(16,46,42,.08));
+}
+#leafShell:after,.leaf-landscape-footer {display:none!important}
+
+.leaf-topbar {
+  z-index:6;height:var(--leaf-top);grid-template-columns:var(--leaf-sidebar) minmax(0,1fr) auto;
+  border:0;background:
+    linear-gradient(90deg,rgba(244,248,244,.97),rgba(238,245,243,.89) 44%,rgba(220,235,232,.67) 77%,rgba(220,235,232,.76)),
+    url('assets/absol-panorama.png') center 18%/cover no-repeat!important;
+  box-shadow:0 7px 25px rgba(18,53,50,.12),inset 0 1px rgba(255,255,255,.86);
+  backdrop-filter:blur(18px);
+}
+.leaf-topbar:after,.leaf-top-center:before {display:none!important}
+.leaf-brand {border:0;padding:0 12px 0 14px;gap:8px}
+.leaf-logo-mark {
+  width:35px;height:35px;flex:none;border-radius:50%;font-size:0;line-height:35px;
+  color:transparent;background:#d5e6df url('assets/absol-cutout.png') center -43px/70px auto no-repeat;
+  box-shadow:0 2px 10px rgba(42,80,78,.16),inset 0 0 0 1px rgba(255,255,255,.75);
+}
+.leaf-brand-title {color:#263b3e;font:600 16px/1 Georgia,serif;letter-spacing:2.2px;white-space:nowrap}
+.leaf-brand-title span {font-weight:400}
+.leaf-brand-sub {color:#66817d;font-size:5.8px;letter-spacing:1px;margin-top:4px}
+.leaf-brand-sub i {background:#91aaa2}
+.leaf-top-center {gap:5px;padding:0 9px;overflow:hidden}
+.leaf-top-right {gap:5px;padding-right:10px}
+.leaf-segment {height:33px;padding:3px;border:0;border-radius:18px;background:rgba(157,185,174,.18);box-shadow:inset 0 1px 2px rgba(40,77,68,.08)}
+.leaf-segment button {height:27px;min-width:62px;border-radius:15px;color:#647a73;font-size:10px}
+.leaf-segment button.is-active {background:linear-gradient(#52896b,#42785d);color:#fff;box-shadow:0 2px 7px rgba(37,90,63,.22)}
+.leaf-segment button:hover:not(.is-active),.leaf-chip:hover,.leaf-icon-btn:hover,.leaf-tools-btn:hover {background:rgba(255,255,255,.66);color:#2e5947}
+.leaf-chip {height:29px;padding:0 9px!important;border:0;background:rgba(255,255,255,.43);color:#4c6860;border-radius:16px;font-size:9.5px;box-shadow:inset 0 0 0 1px rgba(107,144,128,.18)}
+.leaf-chip.is-active {background:#d5e9d9;color:#31654b;box-shadow:inset 0 0 0 1px rgba(65,135,93,.22)}
+.leaf-chip .switch {background:#bed0c3}
+.leaf-chip.is-active .switch {background:#4d9267}
+.leaf-icon-btn,.leaf-tools-btn {width:30px;height:30px;border:0;background:rgba(255,255,255,.47);color:#54716b;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(107,144,128,.19)}
+.leaf-tools-btn {width:auto;padding:0 10px;border-radius:16px;font-size:9px}
+.leaf-top-note {color:#768c90;font:italic 10px/1.12 Georgia,serif;margin-right:3px}
+.leaf-header-moon {color:#7d9da1;font-size:27px;margin-right:1px}
+.leaf-connected {height:29px;border:0;background:rgba(255,255,255,.35);color:#567467;box-shadow:inset 0 0 0 1px rgba(107,144,128,.17);border-radius:16px}
+
+.leaf-body {z-index:1;grid-template-columns:var(--leaf-sidebar) minmax(0,1fr);min-height:0}
+.leaf-sidebar {
+  position:relative;z-index:1;isolation:isolate;min-height:0;padding:7px 8px 7px;
+  overflow:hidden;border:0;
+  background:linear-gradient(180deg,rgba(236,244,239,.88) 0%,rgba(228,238,232,.84) 60%,rgba(224,236,231,.65));
+  box-shadow:8px 0 20px rgba(31,61,56,.08);
+}
+.leaf-sidebar:before {
+  content:"";position:absolute;z-index:-1;inset:auto auto 8px -62px;width:370px;height:555px;
+  background:url('assets/absol-cutout.png') center bottom/contain no-repeat;
+  opacity:.8;mask-image:linear-gradient(180deg,transparent 0%,#000 28%,#000 87%,transparent 100%);
+  pointer-events:none;
+}
+.leaf-sidebar:after {
+  content:"";position:absolute;z-index:0;inset:auto 7px 280px 7px;height:92px;
+  background:none;
+  opacity:.5;pointer-events:none;
+}
+.leaf-summary {min-height:46px;flex:none;margin:0 0 7px;border:0;border-radius:10px;background:rgba(255,255,255,.55);box-shadow:0 2px 8px rgba(30,63,53,.06),inset 0 1px rgba(255,255,255,.75)}
+.leaf-summary-item {padding:7px 7px 5px}
+.leaf-summary-item+.leaf-summary-item {border:0}
+.leaf-summary-item .k {color:#789088;font-size:7px;letter-spacing:.85px}
+.leaf-summary-item .v {color:#385b4a;font-size:14px;margin-top:2px}
+.leaf-summary-item .v.good {color:#397553}
+.leaf-sidebar-title {height:21px;flex:none;padding:0 2px 3px;color:#527363;font-size:8px;letter-spacing:1.1px}
+.leaf-sidebar-rule {background:linear-gradient(90deg,rgba(81,125,96,.32),transparent)}
+.leaf-add-account {color:#4f805d}
+.leaf-add-account:hover {background:rgba(255,255,255,.65);color:#2b6242}
+#leafAccountList {min-height:0;gap:6px;padding:0 1px 3px 0;scrollbar-gutter:auto}
+#leafAccountList::-webkit-scrollbar-thumb {background:#91aba0}
+.leaf-account {
+  min-height:114px;padding:6px 7px 5px;border:0;border-radius:11px;filter:none!important;
+  background:linear-gradient(120deg,rgba(255,255,255,.9),rgba(246,250,246,.79));
+  box-shadow:0 3px 11px rgba(28,69,49,.09),inset 0 1px rgba(255,255,255,.84);
+  transition:transform 150ms ease,background-color 150ms ease,box-shadow 150ms ease;
+}
+.leaf-account:before,.leaf-account:after {display:none}
+.leaf-account:hover {transform:translateY(-1px);border:0;background:rgba(255,255,255,.97);box-shadow:0 6px 16px rgba(25,64,43,.14)}
+.leaf-account.is-selected {border:0;background:linear-gradient(110deg,rgba(233,248,233,.96),rgba(255,255,255,.9));box-shadow:0 0 0 1px rgba(67,137,77,.35),0 6px 14px rgba(24,83,51,.15)}
+.leaf-account.is-attention {background:linear-gradient(110deg,rgba(255,248,229,.95),rgba(255,255,255,.84))}
+.leaf-account.state-off {opacity:.68}
+.leaf-account.state-err {background:linear-gradient(110deg,rgba(255,236,235,.96),rgba(255,255,255,.85))}
+.leaf-account-top {grid-template-columns:12px 33px minmax(0,1fr) auto;grid-template-rows:18px 15px;gap:0 4px;min-height:34px}
+.leaf-account-number {font-size:8px;color:#7da18b}
+.leaf-poke-avatar {width:32px;height:32px;border:0;border-radius:8px;background:radial-gradient(circle at 40% 20%,#f0f5e9,#dce8db);box-shadow:inset 0 0 0 1px #d4e5d5}
+.leaf-poke-avatar img {width:38px;height:38px;filter:drop-shadow(0 1px 1px #687d6e66)}
+.leaf-account-name {color:#29483a;font-size:11px;line-height:14px}
+.leaf-pokemon-line {color:#6a8072;font-size:8px;line-height:10px}
+.leaf-pokemon-line span {color:#9aa99e}.leaf-pokemon-line b {color:#416746}
+.leaf-lv {background:#e8f0e5;border:0;border-radius:8px;color:#5b7d61;font-size:7px;padding:2px 5px}
+.leaf-account-state {color:#488861;font-size:8px}.leaf-account-state:before {box-shadow:0 0 6px currentColor}
+.leaf-account-state.wait {color:#ae9256}.leaf-account-state.off {color:#9aa69c}.leaf-account-state.err {color:#bd7375}
+.leaf-hunt-row {height:17px;min-height:17px;margin-top:3px;padding:0 4px;border:0;border-radius:5px;background:rgba(204,225,205,.42);color:#667e69;font-size:8px}
+.leaf-hunt-glyph {color:#649a6f}.leaf-hunt-name b {color:#3b6746}.leaf-hunt-time {color:#67826c}
+.leaf-account-metrics {margin-top:5px;gap:3px}
+.leaf-metric {padding:0 3px;border:0;border-radius:4px;background:rgba(238,246,236,.76);text-align:center}
+.leaf-metric:first-child {padding-left:3px}
+.leaf-metric .mk {color:#849487;font-size:6.5px;line-height:8px;letter-spacing:.2px}
+.leaf-metric .mv {color:#355944;font-size:9.3px;line-height:10px;margin-top:1px}
+.leaf-account-actions {grid-template-columns:minmax(0,1fr) 62px;gap:5px;margin-top:4px;padding:0}
+.leaf-open-account {height:21px;border:0;border-radius:10px;background:linear-gradient(#69ad70,#4b985c);color:#fff;font-size:8.5px;box-shadow:inset 0 1px #ffffff70,0 2px 4px rgba(40,92,52,.18)}
+.leaf-open-account:hover {background:linear-gradient(#7abd7f,#58a667)}
+.leaf-open-account:active,.leaf-reload-account:active {transform:translateY(1px);box-shadow:inset 0 2px 4px rgba(0,0,0,.15)}
+.leaf-reload-account {height:21px;width:auto;border:0;border-radius:10px;background:#e8f0e7;color:#6c8c77;font-size:7.5px}
+.leaf-reload-account:hover {background:#d8eadb;color:#326b45}
+.leaf-reload-account svg {width:9px;height:9px}
+.leaf-account-footnote {display:none}
+.leaf-aside-epilogue {
+  position:relative;z-index:1;min-height:0;flex:1;display:flex;flex-direction:column;justify-content:center;
+  align-items:flex-end;padding:14px 7px 56px 0;text-align:right;pointer-events:none;
+  color:#59776c;text-shadow:0 1px 9px rgba(239,249,242,.9);
+}
+.leaf-epilogue-kicker {font:700 7px/1.3 'Segoe UI',sans-serif;letter-spacing:1.7px;color:#6d9182}
+.leaf-aside-epilogue strong {margin-top:8px;font:italic 15px/1.16 Georgia,serif;font-weight:400;color:#3f6157}
+.leaf-epilogue-line {width:50px;height:1px;margin-top:12px;background:linear-gradient(90deg,transparent,#719885)}
+.leaf-side-footer {z-index:1;flex:none;margin:6px 0 0;padding:0 1px;border:0;background:transparent;gap:5px}
+.leaf-login-all,.leaf-side-round {height:28px;border:0;border-radius:14px}
+.leaf-login-all {background:linear-gradient(#5b9c70,#43815c);color:#fff;box-shadow:0 2px 8px rgba(28,94,53,.2),inset 0 1px #ffffff59;font-size:9px}
+.leaf-side-round {background:rgba(255,255,255,.71);color:#537d66;box-shadow:inset 0 0 0 1px rgba(119,158,131,.27)}
+.leaf-version,.leaf-side-motto {display:none}
+
+.leaf-main {padding:6px 7px 7px;background:transparent}
+.leaf-main:before {display:none}
+#grid {gap:7px!important}
+.panel {
+  grid-template-rows:25px minmax(0,1fr) 23px!important;
+  border:0!important;border-radius:11px!important;overflow:hidden!important;
+  background:rgba(241,247,241,.9)!important;
+  box-shadow:0 5px 17px rgba(14,48,41,.22),0 1px 3px rgba(14,48,41,.12)!important;
+  transition:transform 150ms ease!important;
+}
+.panel:before {display:none}
+.panel:hover {border:0!important;transform:translateY(-1px);box-shadow:0 7px 20px rgba(14,48,41,.27)!important}
+.panel.expanded {border:0!important;transform:none;box-shadow:0 11px 36px rgba(12,44,39,.35)!important}
+.panel:has(.dot.err),.panel:has(.dot.off) {border:0!important}
+.panel-header {
+  height:25px!important;padding:0 7px!important;gap:5px!important;border:0!important;
+  background:linear-gradient(90deg,rgba(246,251,245,.97),rgba(234,245,237,.93))!important;
+  color:#3c624f!important;box-shadow:none!important;
+}
+.panel-header:before {width:13px;height:13px;border:0;border-radius:4px;background:#dcece1;color:#4a865e;font-size:7px;box-shadow:none}
+.panel-header:after {display:none}
+.panel-header .dot {width:5px!important;height:5px!important}
+.panel-header .name {color:#325842!important;font-size:9px!important;max-width:43%}
+.panel-header .status {color:#708e77!important;font-size:8px!important;letter-spacing:0}
+.panel-header .dot.ok ~ .status {color:#4b8f5b!important}.panel-header .dot.err ~ .status {color:#b87575!important}
+.panel-header button {height:18px!important;min-width:18px!important;border:0!important;border-radius:9px!important;background:transparent!important;color:#7e998b!important;font-size:11px!important}
+.panel-header button:hover {background:#dcecdf!important;color:#3c7050!important}
+.panel-header button:active {transform:translateY(1px);background:#cce3d2!important}
+.panel>webview {background:#f1f6ee!important}
+.leaf-panel-footer {
+  height:23px;padding:0 8px;border:0;background:linear-gradient(90deg,rgba(249,253,248,.98),rgba(238,247,239,.97));
+  color:#6b866f;box-shadow:none;gap:4px;
+}
+.leaf-panel-footer:after {display:none}
+.leaf-panel-footer .pf-orbit {width:16px;height:16px;border:0;color:#74a77b;font-size:11px;margin-right:1px}
+.leaf-panel-footer .pf-sprite {width:21px;height:21px;margin-top:-6px}
+.leaf-panel-footer .pf-hunt,.leaf-panel-footer .pf-balls {font-size:8px;gap:4px}
+.leaf-panel-footer small {font-size:6px;color:#88a18b;letter-spacing:.3px}
+.leaf-panel-footer .pf-hunt b,.leaf-panel-footer .pf-balls b {font-size:8px;color:#3e684b}
+.leaf-panel-footer .pf-balls {border:0;padding:0}
+
+#leafListView {background:rgba(244,249,243,.9);border:0;border-radius:12px;box-shadow:0 7px 25px rgba(20,62,45,.15);backdrop-filter:blur(13px);color:#31533f}
+.leaf-page-head h1 {color:#2e5540}.leaf-page-head p {color:#758d79}.leaf-page-count {background:#e5f0e4;color:#587460;border:0}
+.leaf-list-card {background:rgba(255,255,255,.8);border:0;color:#31533f;box-shadow:0 3px 11px rgba(34,83,52,.09)}
+.leaf-list-card:hover {background:#fff}.leaf-list-card .name,.leaf-list-hunt b,.leaf-list-cell .value {color:#355c44}
+.leaf-list-card .sub,.leaf-list-hunt,.leaf-list-actions {color:#718777}
+.leaf-list-card .avatar {border:0;background:#e3efdf}.leaf-list-card .leaf-list-cell {border-left-color:#dce9dc}
+.leaf-list-hunt {border-bottom-color:#dce9dc}.leaf-list-open {border:0;background:#5da66b;color:#fff}
+#leafToolsMenu {top:51px;right:40px;border:0;border-radius:13px;background:rgba(247,251,245,.97);box-shadow:0 16px 35px rgba(15,54,41,.24);color:#33533f}
+.leaf-tools-title {color:#78937e}.leaf-tool-item {color:#466751}.leaf-tool-item:hover {background:#e2efe2;color:#2e6743}.leaf-tool-item .ico {background:#e3efe4;color:#679471}.leaf-tool-sep {background:#dbe8dc}
+#leafSettingsDrawer {top:var(--leaf-top);border:0;background:linear-gradient(180deg,rgba(248,251,246,.98),rgba(229,241,232,.98));box-shadow:-9px 0 30px rgba(13,53,39,.22);color:#375844}
+.leaf-drawer-head h2 {color:#31543f}.leaf-drawer-subtitle,.leaf-setting-title {color:#7b927f}
+.leaf-drawer-close,.leaf-setting-btn {border:0;background:#f6faf4;color:#4d7155;box-shadow:0 1px 5px rgba(33,73,44,.08)}
+.leaf-setting-btn:hover,.leaf-setting-btn.is-on {background:#dfeee0;color:#306e42}
+#cards {background:rgba(239,247,238,.98)!important;color:#3d6047!important}
+
+#leafShell button:focus-visible,#leafToolsMenu button:focus-visible,#leafSettingsDrawer button:focus-visible {
+  outline:2px solid #356d51!important;outline-offset:2px!important;
+}
+#leafToolsMenu,#leafSettingsDrawer,#leafListView {overscroll-behavior:contain}
+
+@media(max-width:1650px) {:root {--leaf-sidebar:232px}.leaf-main {padding:5px 6px 6px}#grid {gap:6px!important}}
+@media(max-width:1250px) {.leaf-top-note,.leaf-header-moon {display:none}.leaf-chip {padding:0 6px!important}.leaf-tools-btn {font-size:0}.leaf-tools-btn svg {width:14px}}
+@media(min-width:1251px) {.leaf-top-note,.leaf-header-moon {display:block}}
+@media(max-width:1080px) {:root {--leaf-sidebar:218px}.leaf-brand-title {font-size:13px}.leaf-brand-sub {display:none}}
+@media(max-width:850px) {:root {--leaf-sidebar:190px;--leaf-top:52px}.leaf-main {padding:4px}#grid {gap:4px!important}.leaf-chip:nth-of-type(3),.leaf-chip:nth-of-type(4) {display:none}.leaf-account {padding:5px}.leaf-account-actions {grid-template-columns:minmax(0,1fr) 24px}.leaf-reload-label {display:none}}
+@media(max-height:680px) {.leaf-sidebar {padding-top:5px}.leaf-summary {min-height:41px;margin-bottom:4px}.leaf-sidebar-title {height:18px}#leafAccountList {gap:4px}.leaf-account {min-height:108px;padding:5px 6px 4px}.leaf-account-top {grid-template-rows:17px 14px;min-height:31px}.leaf-poke-avatar {width:30px;height:30px}.leaf-poke-avatar img {width:36px;height:36px}.leaf-hunt-row {margin-top:2px}.leaf-account-metrics {margin-top:3px}.leaf-account-actions {margin-top:3px}.leaf-side-footer {margin-top:4px}.leaf-login-all,.leaf-side-round {height:25px}}
+@media(max-height:760px) {.leaf-aside-epilogue {display:none}.leaf-sidebar:before {inset:auto auto -38px -35px;width:210px;height:315px;opacity:.28}.leaf-sidebar:after {opacity:.65}}
+@media(prefers-reduced-motion:reduce) {.leaf-account,.panel {transition:none!important}}

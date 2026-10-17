@@ -1,0 +1,54 @@
+{
+  "id": "pkmn-psyduck",
+  "dex": 54,
+  "name": "Psyduck",
+  "pokemon": "Psyduck — WATER",
+  "t1": "WATER",
+  "t2": "",
+  "isMega": false,
+  "tone": "dark",
+  "toneLabel": "Escuro",
+  "category": "pokemon",
+  "glyph": "≈",
+  "brandTitle": "PSYDUCK <span>LAUNCHER</span>",
+  "brandSub": "O GUARDIÃO DE WATER",
+  "quote": "Psy… ain, ain, ain…",
+  "swatches": [
+    "#101f2a",
+    "#25434d",
+    "#e8bd65"
+  ],
+  "colors": {
+    "tone": "dark",
+    "bgBase": "#101f2a",
+    "bgElevated": "#182e39",
+    "surface1": "#203c47",
+    "surface2": "#294c56",
+    "surfaceHover": "#355f68",
+    "surfaceSelected": "#38555a",
+    "textPrimary": "#f6f4e9",
+    "textSecondary": "#c4d8d8",
+    "textMuted": "#91b4ba",
+    "accent": "#e8bd65",
+    "accentSoft": "rgba(232,189,101,.16)",
+    "actionPrimary": "#946e2f",
+    "actionPrimaryHover": "#ac8038",
+    "borderSubtle": "#3d5e69",
+    "borderStrong": "#809e9d"
+  },
+  "assets": {
+    "panorama": "src/ui/themes/pokemon/psyduck/panorama-water-v2.png",
+    "cutout": "src/ui/themes/pokemon/psyduck/cutout-exclusive.png"
+  },
+  "exclusive": true,
+  "schemaVersion": 1,
+  "sideQuote": "Devagar.\nO lago espera.",
+  "sideKicker": "À MARGEM DO ENTARDECER",
+  "footerQuote": "CADA JORNADA TEM SEU PRÓPRIO RITMO.",
+  "artworkProvenance": {
+    "panorama": "Built-in image generation, 2026-10-07",
+    "cutout": "User-supplied Psyduck floating illustration, background extracted with BiRefNet"
+  },
+  "productionStatus": "integrated-local-review",
+  "missingAssets": []
+}

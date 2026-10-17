@@ -1,0 +1,39 @@
+{
+  "id": "pkmn-rayquaza",
+  "pokemonId": 384,
+  "name": "Rayquaza",
+  "pokemon": "Rayquaza",
+  "tone": "dark",
+  "toneLabel": "Escuro (Esmeralda)",
+  "glyph": "🐉",
+  "brandTitle": "RAYQUAZA <span>LAUNCHER</span>",
+  "brandSub": "ALÉM DAS TEMPESTADES. O GUARDIÃO DOS CÉUS.",
+  "quote": "Habita a camada de ozônio por milhões de anos, acima das nuvens.",
+  "swatches": [
+    "#0b1a14",
+    "#173327",
+    "#34d399"
+  ],
+  "colors": {
+    "tone": "dark",
+    "bgBase": "#0b1a14",
+    "bgElevated": "#11261d",
+    "surface1": "#173327",
+    "surface2": "#1f4434",
+    "surfaceHover": "#2a5a45",
+    "surfaceSelected": "#25503e",
+    "textPrimary": "#ecfdf5",
+    "textSecondary": "#a7f3d0",
+    "textMuted": "#6ee7b7",
+    "accent": "#34d399",
+    "accentSoft": "rgba(52, 211, 153, 0.18)",
+    "actionPrimary": "#059669",
+    "actionPrimaryHover": "#047857",
+    "borderSubtle": "#26543e",
+    "borderStrong": "#428867"
+  },
+  "assets": {
+    "panorama": "src/ui/themes/pokemon/rayquaza/panorama.jpg",
+    "cutout": "src/ui/themes/pokemon/rayquaza/cutout.png"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "pkmn-espeon",
+  "dex": 196,
+  "name": "Espeon",
+  "pokemon": "Espeon — PSYCHIC",
+  "t1": "PSYCHIC",
+  "t2": "",
+  "isMega": false,
+  "tone": "dark",
+  "toneLabel": "Escuro",
+  "category": "pokemon",
+  "glyph": "◆",
+  "brandTitle": "ESPEON <span>LAUNCHER</span>",
+  "brandSub": "O GUARDIÃO DE PSYCHIC",
+  "quote": "A luz encontra o caminho.<br>O instinto sabe a direção.",
+  "swatches": [
+    "#211d32",
+    "#453657",
+    "#e5accd"
+  ],
+  "colors": {
+    "tone": "dark",
+    "bgBase": "#211d32",
+    "bgElevated": "#2d263e",
+    "surface1": "#382e4b",
+    "surface2": "#483958",
+    "surfaceHover": "#584366",
+    "surfaceSelected": "#644a70",
+    "textPrimary": "#fff1f9",
+    "textSecondary": "#dac9df",
+    "textMuted": "#b8a0bf",
+    "accent": "#e5accd",
+    "accentSoft": "rgba(229,172,205,.16)",
+    "actionPrimary": "#936288",
+    "actionPrimaryHover": "#ad789f",
+    "borderSubtle": "#5b4666",
+    "borderStrong": "#a477a4"
+  },
+  "assets": {
+    "panorama": "src/ui/themes/pokemon/espeon/panorama-exclusive.png",
+    "cutout": "src/ui/themes/pokemon/espeon/cutout-exclusive.png"
+  },
+  "exclusive": true,
+  "schemaVersion": 1,
+  "sideQuote": "A luz aponta.\nO instinto guia.",
+  "sideKicker": "ALÉM DO QUE OS OLHOS VEEM",
+  "footerQuote": "O HORIZONTE COMEÇA NO SEU INSTINTO.",
+  "family": [
+    "eevee",
+    "espeon"
+  ],
+  "artworkProvenance": {
+    "cutout": "User-supplied artwork; built-in background extraction",
+    "panorama": "Built-in image generation"
+  },
+  "productionStatus": "integrated-local-review",
+  "missingAssets": []
+}

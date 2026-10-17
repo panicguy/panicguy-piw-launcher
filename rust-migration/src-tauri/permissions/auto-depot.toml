@@ -1,0 +1,4 @@
+[[permission]]
+identifier = "allow-auto-depot"
+description = "Share Depot automation preferences between game views and the native Headless connection."
+commands.allow = ["auto_depot_get", "auto_depot_set"]

@@ -1,0 +1,2 @@
+# Login bridge used by Rust; isolated in .runtime/python.
+camoufox==0.5.4

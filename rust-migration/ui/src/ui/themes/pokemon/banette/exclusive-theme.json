@@ -1,0 +1,63 @@
+{
+  "id": "pkmn-banette",
+  "dex": 354,
+  "name": "Banette",
+  "pokemon": "Banette — GHOST",
+  "t1": "GHOST",
+  "t2": "",
+  "isMega": false,
+  "tone": "dark",
+  "toneLabel": "Escuro",
+  "category": "pokemon",
+  "glyph": "✧",
+  "brandTitle": "BANETTE <span>LAUNCHER</span>",
+  "brandSub": "FIOS DOURADOS NA NOITE",
+  "quote": "Entre os fios da noite, uma nova jornada.",
+  "swatches": [
+    "#12091f",
+    "#25173c",
+    "#dfb970"
+  ],
+  "colors": {
+    "tone": "dark",
+    "bgBase": "#12091f",
+    "bgElevated": "#1a0f2b",
+    "surface1": "#25173c",
+    "surface2": "#33204f",
+    "surfaceHover": "#442d68",
+    "surfaceSelected": "#3c255e",
+    "textPrimary": "#faf5ff",
+    "textSecondary": "#e9d5ff",
+    "textMuted": "#c084fc",
+    "accent": "#dfb970",
+    "accentSoft": "rgba(192, 132, 252, 0.18)",
+    "actionPrimary": "#9333ea",
+    "actionPrimaryHover": "#7e22ce",
+    "borderSubtle": "#3d2561",
+    "borderStrong": "#6d42ad"
+  },
+  "assets": {
+    "panorama": "src/ui/themes/pokemon/banette/panorama-exclusive.png",
+    "cutout": "src/ui/themes/pokemon/banette/cutout-exclusive.png",
+    "emblem": "src/ui/themes/pokemon/banette/emblem-exclusive.svg",
+    "companions": "src/ui/themes/pokemon/banette/companions-exclusive.png"
+  },
+  "schemaVersion": 1,
+  "exclusive": true,
+  "family": [
+    "shuppet",
+    "banette"
+  ],
+  "artworkProvenance": {
+    "panorama": "built-in image generation",
+    "cutout": "built-in image generation",
+    "companions": "local ComfyUI / DreamShaper 8 / reference-guided repaint; reference poses and silhouettes"
+  },
+  "companionSpecies": [
+    "shuppet"
+  ],
+  "sideQuote": "Toda sombra guarda uma história.",
+  "footerQuote": "A PRÓXIMA JORNADA COMEÇA ENTRE AS SOMBRAS.",
+  "productionStatus": "integrated-unverified",
+  "missingAssets": []
+}

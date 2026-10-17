@@ -1,0 +1,760 @@
+/* Kick Bonus Modal & Components - PIO Nailo */
+#kickBonusOverlay {
+  background: rgba(0, 0, 0, .72) !important;
+  backdrop-filter: blur(4px) !important;
+  position: fixed;
+  inset: 0;
+  z-index: 1400;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#kickBonusOverlay.show {
+  display: flex !important;
+}
+
+#kickBonusModal {
+  width: min(1080px, calc(100vw - 32px)) !important;
+  max-height: calc(100vh - 36px) !important;
+  padding: 22px 24px !important;
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--border-strong) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, .5) !important;
+  color-scheme: var(--theme-color-scheme);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+#kickBonusModal .kick-bonus-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+#kickBonusModal .kick-bonus-head h2 {
+  color: var(--color-text-primary) !important;
+  font-size: 21px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-weight: 700;
+}
+
+#kickBonusModal .kick-bonus-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+#kickBonusModal .hint {
+  color: var(--color-text-secondary) !important;
+  margin: 0 0 10px;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+#kickBonusModal .kick-bonus-close {
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--color-text-secondary) !important;
+  width: 34px;
+  height: 34px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background .15s ease, color .15s ease;
+}
+
+#kickBonusModal .kick-bonus-close:hover {
+  background: var(--color-surface-hover) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Master Cards & Automation Row */
+#kickBonusModal .kick-global-card {
+  background: var(--color-surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#kickBonusModal .kick-global-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+#kickBonusModal .kick-toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: var(--color-text-primary);
+  font-size: 13px;
+}
+
+#kickBonusModal .kick-toggle-text small {
+  display: block;
+  color: var(--color-text-secondary);
+  font-size: 11.5px;
+  margin-top: 2px;
+  line-height: 1.35;
+}
+
+#kickBonusModal input[type=checkbox] {
+  accent-color: var(--color-accent);
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+#kickBonusModal .kick-global-kpis {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#kickBonusModal .kick-kpi-pill {
+  background: var(--color-surface-2);
+  color: var(--color-text-primary);
+  font-weight: 600;
+  font-size: 11px;
+  padding: 5px 9px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#kickBonusModal .kick-kpi-pill.active {
+  background: rgba(83, 252, 24, 0.15);
+  color: var(--color-accent);
+  border: 1px solid rgba(83, 252, 24, 0.35);
+}
+
+#kickBonusModal .kick-kpi-bonus {
+  background: var(--color-accent-soft);
+  color: var(--color-text-primary);
+}
+
+/* Reward Tier Pills */
+#kickBonusModal .kick-rewards-banner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+#kickBonusModal .kick-reward-card {
+  background: var(--color-surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform .15s ease, border-color .15s ease;
+}
+
+#kickBonusModal .kick-reward-card:hover {
+  border-color: rgba(83, 252, 24, 0.4);
+  transform: translateY(-1px);
+}
+
+#kickBonusModal .kick-reward-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+#kickBonusModal .kick-reward-info {
+  display: flex;
+  flex-direction: column;
+}
+
+#kickBonusModal .kick-reward-title {
+  font-weight: 700;
+  font-size: 12.5px;
+  color: var(--color-text-primary);
+}
+
+#kickBonusModal .kick-reward-cost {
+  font-size: 11px;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+#kickBonusModal .kick-reward-meta {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+}
+
+/* Content Columns Layout */
+#kickBonusModal .kick-bonus-content {
+  display: grid;
+  grid-template-columns: minmax(190px, 220px) minmax(280px, 1fr) minmax(280px, 340px);
+  gap: 12px;
+  min-height: 0;
+  flex: 1;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 880px) {
+  #kickBonusModal .kick-bonus-content {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+}
+
+/* Left Sidebar: Guide */
+#kickBonusModal .kick-guide {
+  background: var(--color-surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+#kickBonusModal .kick-side-title {
+  font-size: 12.5px;
+  color: var(--color-text-primary);
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+}
+
+#kickBonusModal .kick-guide-body {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#kickBonusModal .kick-guide-body b {
+  color: var(--color-text-primary);
+}
+
+#kickBonusModal .kick-guide-alert {
+  background: rgba(83, 252, 24, 0.08);
+  border-left: 3px solid var(--color-accent);
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+/* Middle: Accounts Setup */
+#kickBonusModal .kick-section {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 12px 14px;
+  min-height: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#kickBonusModal .kick-sec-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  gap: 8px;
+}
+
+#kickBonusModal .kick-sec-title {
+  font-size: 13.5px;
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+
+#kickBonusModal .kick-account-nav {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+#kickBonusModal .kick-account-choice {
+  flex: 1;
+  min-width: 0;
+  background: var(--color-surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 7px 4px;
+  cursor: pointer;
+  color: var(--color-text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  transition: background .15s ease, border-color .15s ease;
+  box-sizing: border-box;
+}
+
+#kickBonusModal .kick-account-choice:hover {
+  background: var(--color-surface-hover);
+}
+
+#kickBonusModal .kick-account-choice.selected {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+#kickBonusModal .kick-choice-number {
+  font-weight: 700;
+  font-size: 11.5px;
+}
+
+#kickBonusModal .kick-choice-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  line-height: 1.25;
+}
+
+#kickBonusModal .kick-choice-info b {
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  color: var(--color-text-primary);
+  display: block;
+}
+
+#kickBonusModal .kick-choice-info small {
+  font-size: 9.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  color: var(--color-text-secondary);
+  display: block;
+}
+
+#kickBonusModal .kick-account-card {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 12px 14px;
+  overflow-y: auto;
+}
+
+#kickBonusModal .kick-acc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#kickBonusModal .kick-acc-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+#kickBonusModal .kick-acc-status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  flex-wrap: wrap;
+}
+
+#kickBonusModal .kick-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+#kickBonusModal .kick-linked-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(34, 197, 94, 0.14);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  border-radius: 6px;
+  padding: 2px 7px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+#kickBonusModal .kick-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#kickBonusModal .kick-input-group label {
+  font-size: 11.5px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+#kickBonusModal .kick-input-group input {
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 8px !important;
+  padding: 7px 9px !important;
+  font-size: 12.5px !important;
+  outline: none;
+}
+
+#kickBonusModal .kick-input-group input:focus {
+  border-color: var(--color-accent) !important;
+}
+
+#kickBonusModal .kick-token-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#kickBonusModal .kick-token-wrap input {
+  width: 100%;
+  padding-right: 48px !important;
+}
+
+#kickBonusModal .kick-btn-eye {
+  position: absolute;
+  right: 8px;
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--color-text-secondary) !important;
+  font-size: 11px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+#kickBonusModal .kick-acc-actions,
+#kickBonusModal .kick-session-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+#kickBonusModal .kick-btn-test {
+  background: var(--color-surface-hover) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 8px !important;
+  padding: 7px 13px !important;
+  font-size: 12px !important;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background .15s ease;
+}
+
+#kickBonusModal .kick-btn-test:hover {
+  background: var(--color-surface-1) !important;
+  border-color: var(--color-accent) !important;
+}
+
+#kickBonusModal .kick-test-result {
+  font-size: 11.5px;
+}
+
+#kickBonusModal .kick-linked-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(83, 252, 24, 0.12);
+  color: #53fc18;
+  border: 1px solid rgba(83, 252, 24, 0.35);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Right Sidebar: Partner Streamers */
+#kickBonusModal .kick-streamers-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+  background: var(--color-surface-2);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+}
+
+#kickBonusModal .kick-streamers-tab {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  border-radius: 5px;
+  padding: 4px 6px;
+  font-size: 10.5px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background .15s ease, color .15s ease;
+  white-space: nowrap;
+  text-align: center;
+}
+
+#kickBonusModal .kick-streamers-tab.active {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+#kickBonusModal .kick-streamers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  overflow-y: auto;
+  max-height: 290px;
+  padding-right: 3px;
+}
+
+#kickBonusModal .kick-streamer-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 9px 11px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  font-size: 11.5px;
+  box-sizing: border-box;
+}
+
+#kickBonusModal .kick-streamer-item.live {
+  border-color: rgba(83, 252, 24, 0.4);
+  background: rgba(83, 252, 24, 0.05);
+}
+
+#kickBonusModal .kick-streamer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+#kickBonusModal .kick-streamer-name {
+  font-weight: 700;
+  color: var(--color-text-primary);
+  font-size: 12.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#kickBonusModal .kick-badge-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--color-accent);
+  font-weight: 700;
+  font-size: 10.5px;
+  flex-shrink: 0;
+}
+
+#kickBonusModal .kick-badge-live::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 6px var(--color-accent);
+  flex-shrink: 0;
+}
+
+#kickBonusModal .kick-badge-off {
+  color: var(--color-text-secondary);
+  font-size: 10.5px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+#kickBonusModal .kick-streamer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 11px;
+  padding-top: 5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+#kickBonusModal .kick-points-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  color: var(--color-accent);
+  background: rgba(83, 252, 24, 0.1);
+  padding: 2px 7px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: border-color .15s ease, background .15s ease;
+}
+
+#kickBonusModal .kick-points-tag:hover {
+  background: rgba(83, 252, 24, 0.2);
+  border-color: rgba(83, 252, 24, 0.3);
+}
+
+#kickBonusModal .kick-reward-pill {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+#kickBonusModal .kick-reward-pill.ready-exp {
+  background: rgba(83, 252, 24, 0.2);
+  color: var(--color-accent);
+  border: 1px solid rgba(83, 252, 24, 0.35);
+}
+
+#kickBonusModal .kick-reward-pill.ready-catch {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+#kickBonusModal .kick-reward-pill.ready-lure {
+  background: rgba(192, 132, 252, 0.2);
+  color: #c084fc;
+  border: 1px solid rgba(192, 132, 252, 0.35);
+}
+
+#kickBonusModal .kick-reward-pill.progress {
+  background: var(--color-surface-hover);
+  color: var(--color-text-secondary);
+}
+
+/* Modal Actions Footer */
+#kickBonusModal .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+#kickBonusModal .modal-actions button {
+  padding: 8px 16px !important;
+  border-radius: 8px !important;
+  font-size: 12.5px !important;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#kickBonusModal .modal-actions .primary {
+  background: var(--color-accent) !important;
+  color: #0b110b !important;
+  border: 0 !important;
+  box-shadow: 0 2px 10px rgba(83, 252, 24, 0.3) !important;
+}
+
+#kickBonusModal .modal-actions .primary:hover {
+  background: var(--color-accent) !important;
+}
+
+#kickBonusModal .kick-status-bar {
+  margin-top: 8px;
+  padding: 7px 11px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  background: rgba(83, 252, 24, 0.15);
+  color: var(--color-accent);
+}
+
+/* Match Twitch control tokens and override the legacy launcher button skin. */
+#kickBonusModal .kick-account-choice,
+#kickBonusModal .kick-streamers-tab,
+#kickBonusModal .modal-actions button {
+  background: var(--color-surface-2) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--border-subtle) !important;
+  box-shadow: none !important;
+}
+#kickBonusModal .kick-account-choice:hover,
+#kickBonusModal .kick-streamers-tab:hover,
+#kickBonusModal .modal-actions button:hover {
+  background: var(--color-surface-hover) !important;
+}
+#kickBonusModal .kick-account-choice.selected,
+#kickBonusModal .kick-streamers-tab.active,
+#kickBonusModal .modal-actions .primary {
+  background: var(--color-accent-soft) !important;
+  border: 1px solid var(--color-accent) !important;
+  color: var(--color-text-primary) !important;
+  box-shadow: none !important;
+}
+#kickBonusModal button:focus-visible,
+#kickBonusModal summary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+#kickBonusModal .kick-token-help {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 4px 0 0;
+}
+#kickBonusModal .kick-token-help p { margin: 6px 0; }
+#kickBonusModal .kick-token-help summary { cursor: pointer; color: var(--color-text-primary); }
+#kickBonusModal .kick-input-group input { box-sizing: border-box; min-width: 0; }
+#kickBonusModal .kick-input-group input:disabled { opacity: .65; cursor: not-allowed; }
+#kickBonusModal .kick-account-card { min-height: 0; }
+
+#kickBonusModal .kick-session-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+#kickBonusModal .kick-streamer-bottom { flex-wrap: wrap; }
+#kickBonusModal .kick-points-tag { cursor: default; color: var(--color-text-primary); background: var(--color-surface-2); }
+#kickBonusModal .kick-open-channel { font-size: 11px !important; padding: 4px 7px !important; }
+#kickBonusModal .kick-toggle-label:has(input:disabled) { cursor: default; color: var(--color-text-secondary); }
+@media (max-width: 880px) {
+  #kickBonusModal .kick-bonus-content { grid-template-rows: max-content max-content max-content; align-content: start; }
+  #kickBonusModal .kick-guide, #kickBonusModal .kick-section { overflow: visible; }
+  #kickBonusModal .kick-account-card { overflow: visible; }
+  #kickBonusModal .kick-streamers-list { max-height: 320px; }
+}

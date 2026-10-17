@@ -1,0 +1,59 @@
+{
+  "id": "pkmn-mewtwo",
+  "dex": 150,
+  "name": "Mewtwo",
+  "pokemon": "Mewtwo — PSYCHIC",
+  "t1": "PSYCHIC",
+  "t2": "",
+  "isMega": false,
+  "tone": "mid",
+  "toneLabel": "Interm.",
+  "category": "pokemon",
+  "glyph": "◈",
+  "brandTitle": "MEWTWO <span>LAUNCHER</span>",
+  "brandSub": "UM DESTINO ESCRITO POR VOCÊ",
+  "quote": "O próximo capítulo pertence a quem escolhe seguir.",
+  "swatches": [
+    "#18212a",
+    "#2b3846",
+    "#c8a9f7"
+  ],
+  "colors": {
+    "tone": "mid",
+    "bgBase": "#18212a",
+    "bgElevated": "#202b36",
+    "surface1": "#2b3846",
+    "surface2": "#354556",
+    "surfaceHover": "#46596e",
+    "surfaceSelected": "#3c4f64",
+    "textPrimary": "#f0f6fc",
+    "textSecondary": "#c8d7e6",
+    "textMuted": "#93aabf",
+    "accent": "#c8a9f7",
+    "accentSoft": "rgba(88, 166, 255, 0.16)",
+    "actionPrimary": "#238636",
+    "actionPrimaryHover": "#2ea043",
+    "borderSubtle": "#3d4f62",
+    "borderStrong": "#617b96"
+  },
+  "assets": {
+    "panorama": "src/ui/themes/pokemon/mewtwo/panorama-exclusive.png",
+    "cutout": "src/ui/themes/pokemon/mewtwo/cutout-user-manual-v3.png",
+    "emblem": "src/ui/themes/pokemon/mewtwo/emblem-exclusive.svg"
+  },
+  "schemaVersion": 1,
+  "exclusive": true,
+  "family": [
+    "mewtwo"
+  ],
+  "companionSpecies": [],
+  "sideQuote": "Além da origem, um caminho próprio.",
+  "footerQuote": "O FUTURO AINDA ESPERA SUA ESCOLHA.",
+  "productionStatus": "integrated-unverified",
+  "missingAssets": [],
+  "artworkProvenance": {
+    "panorama": "built-in image generation",
+    "cutout": "User-supplied artwork; manual contour extraction authorized in chat",
+    "companions": "no evolutionary companions"
+  }
+}

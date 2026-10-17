@@ -1,0 +1,1294 @@
+/* ==========================================================================
+   KUROMI XP — tema webcore (Windows XP + Kuromi + pixel art)
+   Dois modos:
+     body[data-theme="kuromi-xp"]        -> Noite (escuro, SEM branco)
+     body[data-theme="kuromi-xp-light"]  -> Dia   (claro,  SEM preto)
+   As regras de layout usam body[data-theme^="kuromi-xp"] e só leem variáveis --kx-*.
+   Carregar DEPOIS de themes.css. Assets: src/ui/assets/kuromi-xp/
+   Cursor dentro dos painéis do jogo: src/ui/kuromi-xp.js
+   ========================================================================== */
+
+@font-face {
+  font-family: "VT323";
+  src: url("assets/kuromi-xp/VT323-Regular.ttf") format("truetype");
+  font-display: block;
+}
+
+/* --------------------------------------------------------------------------
+   0. TOKENS COMUNS
+   -------------------------------------------------------------------------- */
+body[data-theme^="kuromi-xp"] {
+  --kx-pink: #ff7ac8;
+  --kx-purple: #8a5cc2;
+
+  --kx-cursor: url("assets/kuromi-xp/cursors/kuromi.cur") 0 0, auto;
+  --kx-cursor-link: url("assets/kuromi-xp/cursors/link-select.cur") 0 0, pointer;
+  --kx-cursor-text: url("assets/kuromi-xp/cursors/text-select.cur") 16 16, text;
+  --kx-cursor-busy: url("assets/kuromi-xp/cursors/busy.cur") 16 15, wait;
+  --kx-cursor-no: url("assets/kuromi-xp/cursors/unavailable.cur") 0 0, not-allowed;
+
+  /* alturas (trocam nas media queries de altura de tela) */
+  --kx-list-h: 298px;   /* 3 cards + 2 gaps */
+  --kx-mascot-w: 205px;
+  --kx-mascot-h: 244px;
+  --kx-mascot-b: 6px;
+
+  /* molduras pixel (dependem dos tokens de cada modo) */
+  --kx-bevel: inset 0 0 0 2px var(--kx-line), inset 4px 4px 0 -2px var(--kx-btn-hi), inset -4px -4px 0 -2px var(--kx-btn-lo);
+  --kx-bevel-in: inset 0 0 0 2px var(--kx-line), inset 4px 4px 0 -2px var(--kx-btn-lo), inset -4px -4px 0 -2px var(--kx-btn-hi);
+  --kx-bevel-pink: inset 0 0 0 2px var(--kx-line), inset 4px 4px 0 -2px var(--kx-pbtn-hi), inset -4px -4px 0 -2px var(--kx-pbtn-lo);
+  --kx-bevel-pink-in: inset 0 0 0 2px var(--kx-line), inset 4px 4px 0 -2px var(--kx-pbtn-lo), inset -4px -4px 0 -2px var(--kx-pbtn-hi);
+  --kx-frame: inset 0 0 0 2px var(--kx-line), inset 4px 4px 0 0 var(--kx-frame-hi), inset -4px -4px 0 0 var(--kx-frame-lo);
+  --kx-field: inset 2px 2px 0 var(--kx-field-lo), inset -2px -2px 0 var(--kx-field-hi);
+  --kx-drop: 4px 4px 0 0 var(--kx-shadow);
+  --kx-drop-lg: 6px 6px 0 0 var(--kx-shadow);
+  --kx-dots: repeating-linear-gradient(90deg, var(--kx-hl) 0 4px, transparent 4px 8px);
+}
+
+/* --------------------------------------------------------------------------
+   1A. MODO NOITE (escuro) — nenhum branco puro
+   -------------------------------------------------------------------------- */
+body[data-theme="kuromi-xp"] {
+  --kx-line: #0d0614;                 /* contorno */
+  --kx-desk: #221433;                 /* fundo da área de trabalho */
+  --kx-desk-check: rgba(0, 0, 0, .3);
+  --kx-desk-star1: rgba(255, 122, 200, .35);
+  --kx-desk-star2: rgba(227, 208, 245, .22);
+  --kx-face: #2a1a3e;                 /* fundo das janelas */
+  --kx-face-2: #1c1029;               /* campos / áreas internas */
+  --kx-face-hover: #34214d;
+  --kx-face-sel: #43265a;
+  --kx-text: #ecdcfb;
+  --kx-text-dim: #b9a3d1;
+  --kx-hl: #ff8fd2;                   /* destaque (números, links) */
+  --kx-hl-2: #c9a2f5;
+  --kx-on-btn: #f3dcff;               /* texto sobre botões */
+  --kx-tshadow: #0d0614;
+  --kx-shadow: rgba(5, 2, 10, .75);
+  --kx-frame-hi: #c2408f;
+  --kx-frame-lo: #3a1f5c;
+  --kx-field-lo: #0d0614;
+  --kx-field-hi: #4b2a74;
+  --kx-btn: #6d44a0;  --kx-btn-hover: #8257b8;  --kx-btn-hi: #a77ddc;  --kx-btn-lo: #3a1f5c;  --kx-btn-down: #3f2462;
+  --kx-pbtn: #b0397f; --kx-pbtn-hover: #cf4c98; --kx-pbtn-hi: #ff9fd6; --kx-pbtn-lo: #6a1a4c;
+  --kx-good: #9be3b4; --kx-warn: #f3cf74; --kx-bad: #ff8fa6;
+  --kx-dither: url("assets/kuromi-xp/ui/dither-lilac.svg") repeat 0 0 / 4px 4px;
+  --kx-dither-2: url("assets/kuromi-xp/ui/dither-dark.svg") repeat 0 0 / 4px 4px;
+  --kx-titlebar:
+    var(--kx-dither),
+    linear-gradient(180deg, #c99af7 0 2px, #a070d8 2px 4px, #8a5cc2 4px 8px, #7347ad 8px 14px, #4b2a74 14px 20px, #3a1f5c 20px 100%);
+  --kx-topbar:
+    var(--kx-dither),
+    linear-gradient(180deg, #ff7ac8 0 2px, #0d0614 2px 4px, #a070d8 4px 6px, #8a5cc2 6px 12px,
+      #7347ad 12px 22px, #4b2a74 22px 44px, #3a1f5c 44px calc(100% - 4px), #0d0614 calc(100% - 4px) 100%);
+  --kx-pinkbar:
+    var(--kx-dither),
+    linear-gradient(180deg, #ffb3df 0 2px, #ff7ac8 2px 6px, #d9529f 6px 14px, #b0397f 14px 100%);
+  --kx-sidebar-bg: var(--kx-dither-2), rgba(20, 11, 31, .86);
+  --kx-overlay: rgba(13, 6, 20, .66);
+  --kx-logo-filter: drop-shadow(2px 2px 0 #0d0614);
+  --kx-glyph-close: url("assets/kuromi-xp/ui/g-close-lilac.svg");
+
+  --color-bg-base: #150c1f;
+  --color-bg-elevated: #221433;
+  --color-surface-1: #2a1a3e;
+  --color-surface-2: #34214d;
+  --color-surface-hover: #43265a;
+  --color-surface-selected: #5a2f6e;
+  --color-text-primary: #ecdcfb;
+  --color-text-secondary: #d6c1ee;
+  --color-text-muted: #b9a3d1;
+  --color-accent: #ff8fd2;
+  --color-accent-soft: rgba(255, 122, 200, .18);
+  --color-action-primary: #b0397f;
+  --color-action-primary-hover: #cf4c98;
+  --border-subtle: #4b2a74;
+  --border-strong: #8a5cc2;
+  --theme-color-scheme: dark;
+  --theme-shell-overlay: transparent;
+  --theme-cutout-opacity: 1;
+  --theme-preview-bg: #150c1f;
+  --theme-preview-surface: #2a1a3e;
+  --theme-preview-accent: #ff8fd2;
+}
+
+/* --------------------------------------------------------------------------
+   1B. MODO DIA (claro) — nenhum preto; contornos em ameixa
+   -------------------------------------------------------------------------- */
+body[data-theme="kuromi-xp-light"] {
+  --kx-line: #5b2d86;
+  --kx-desk: #ecdcf8;
+  --kx-desk-check: rgba(138, 92, 194, .10);
+  --kx-desk-star1: rgba(255, 122, 200, .55);
+  --kx-desk-star2: rgba(138, 92, 194, .35);
+  --kx-face: #fff4fb;
+  --kx-face-2: #ffffff;
+  --kx-face-hover: #ffe6f5;
+  --kx-face-sel: #f6dcff;
+  --kx-text: #4b2a74;
+  --kx-text-dim: #8a5cc2;
+  --kx-hl: #c2408f;
+  --kx-hl-2: #7a4bb3;
+  --kx-on-btn: #ffffff;
+  --kx-tshadow: #7a3f9e;
+  --kx-shadow: rgba(107, 61, 153, .32);
+  --kx-frame-hi: #ff9fd6;
+  --kx-frame-lo: #c9a4ee;
+  --kx-field-lo: #a77ddc;
+  --kx-field-hi: #fbeaff;
+  --kx-btn: #b48ae0;  --kx-btn-hover: #c39cec;  --kx-btn-hi: #ecd8ff;  --kx-btn-lo: #8a5cc2;  --kx-btn-down: #9a6fd0;
+  --kx-pbtn: #ff7ac8; --kx-pbtn-hover: #ff94d4; --kx-pbtn-hi: #ffe0f2; --kx-pbtn-lo: #c2408f;
+  --kx-good: #2f8a55; --kx-warn: #a8740e; --kx-bad: #c2304f;
+  --kx-dither: url("assets/kuromi-xp/ui/dither-pinklight.svg") repeat 0 0 / 4px 4px;
+  --kx-dither-2: url("assets/kuromi-xp/ui/dither-plum.svg") repeat 0 0 / 4px 4px;
+  --kx-titlebar:
+    var(--kx-dither),
+    linear-gradient(180deg, #f6e0ff 0 2px, #e2bdfb 2px 4px, #cfa2f3 4px 8px, #bb88e8 8px 14px, #a874dc 14px 20px, #9a66d2 20px 100%);
+  --kx-topbar:
+    var(--kx-dither),
+    linear-gradient(180deg, #ff9fd6 0 2px, #7a4bb3 2px 4px, #f3dcff 4px 6px, #e6c6fb 6px 12px,
+      #d6b0f5 12px 22px, #c49aec 22px 44px, #b386e2 44px calc(100% - 4px), #7a4bb3 calc(100% - 4px) 100%);
+  --kx-pinkbar:
+    var(--kx-dither),
+    linear-gradient(180deg, #ffe0f2 0 2px, #ffb3df 2px 6px, #ff94d4 6px 14px, #ff7ac8 14px 100%);
+  --kx-sidebar-bg: var(--kx-dither-2), rgba(250, 238, 255, .88);
+  --kx-overlay: rgba(91, 45, 134, .32);
+  --kx-logo-filter: drop-shadow(2px 2px 0 #7a3f9e);
+  --kx-glyph-close: url("assets/kuromi-xp/ui/g-close.svg");
+
+  --color-bg-base: #f3e6fb;
+  --color-bg-elevated: #fff4fb;
+  --color-surface-1: #fff4fb;
+  --color-surface-2: #f6e6ff;
+  --color-surface-hover: #ffe6f5;
+  --color-surface-selected: #f6dcff;
+  --color-text-primary: #4b2a74;
+  --color-text-secondary: #6d44a0;
+  --color-text-muted: #8a5cc2;
+  --color-accent: #c2408f;
+  --color-accent-soft: rgba(194, 64, 143, .14);
+  --color-action-primary: #ff7ac8;
+  --color-action-primary-hover: #ff94d4;
+  --border-subtle: #d9b8ff;
+  --border-strong: #a77ddc;
+  --theme-color-scheme: light;
+  --theme-shell-overlay: transparent;
+  --theme-cutout-opacity: 1;
+  --theme-preview-bg: #f3e6fb;
+  --theme-preview-surface: #fff4fb;
+  --theme-preview-accent: #c2408f;
+}
+
+/* --------------------------------------------------------------------------
+   2. BASE: fonte VT323 em tudo, cursores Kuromi, sem cantos/blur
+   -------------------------------------------------------------------------- */
+body[data-theme^="kuromi-xp"],
+body[data-theme^="kuromi-xp"] *:not(webview),
+body[data-theme^="kuromi-xp"] *::before,
+body[data-theme^="kuromi-xp"] *::after {
+  font-family: "VT323", monospace !important;
+  -webkit-font-smoothing: none;
+}
+html:has(body[data-theme="kuromi-xp"]) { background: #150c1f !important; }
+html:has(body[data-theme="kuromi-xp-light"]) { background: #f3e6fb !important; }
+
+body[data-theme^="kuromi-xp"],
+body[data-theme^="kuromi-xp"] *:not(webview) { cursor: var(--kx-cursor); }
+body[data-theme^="kuromi-xp"] :is(button, a, summary, label, select, [role="button"], .leaf-theme-card, .leaf-account, .leaf-list-card, .cd-table tbody tr, .tm-row, .st-tab) { cursor: var(--kx-cursor-link) !important; }
+body[data-theme^="kuromi-xp"] :is(button, a, label) * { cursor: var(--kx-cursor-link) !important; }
+body[data-theme^="kuromi-xp"] :is(input[type="text"], input[type="search"], input[type="email"], input[type="password"], input[type="number"], textarea) { cursor: var(--kx-cursor-text) !important; }
+body[data-theme^="kuromi-xp"] :is(button:disabled, input:disabled) { cursor: var(--kx-cursor-no) !important; }
+/* alças de redimensionar/arrastar mantêm o cursor funcional */
+body[data-theme^="kuromi-xp"] :is(.st-resize, .cd-rz) { cursor: ew-resize !important; }
+body[data-theme^="kuromi-xp"] .cd-rz2 { cursor: ns-resize !important; }
+body[data-theme^="kuromi-xp"] :is(.cd-mv, .dgrip, .cfg-grip, .cd-grip) { cursor: grab !important; }
+
+body[data-theme^="kuromi-xp"] { text-shadow: none !important; }
+body[data-theme^="kuromi-xp"] ::selection { background: var(--kx-pink); color: var(--kx-on-btn); }
+
+/* scrollbars pixel */
+body[data-theme^="kuromi-xp"] ::-webkit-scrollbar { width: 12px; height: 12px; }
+body[data-theme^="kuromi-xp"] ::-webkit-scrollbar-track { background: var(--kx-dither-2), var(--kx-face-2); }
+body[data-theme^="kuromi-xp"] ::-webkit-scrollbar-thumb,
+body[data-theme^="kuromi-xp"] :is(#leafAccountList, .leaf-theme-grid, #stats .st-body, #stats .st-cfg, .cd-sec, .cd-kpis)::-webkit-scrollbar-thumb {
+  background: var(--kx-btn) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--kx-bevel);
+}
+
+/* --------------------------------------------------------------------------
+   3. FUNDO (xadrez + estrelinhas) — substitui o panorama
+   -------------------------------------------------------------------------- */
+body[data-theme^="kuromi-xp"] #leafShell {
+  background-color: var(--kx-desk) !important;
+  background-image:
+    radial-gradient(circle at 25% 25%, var(--kx-desk-star1) 1px, transparent 2px),
+    radial-gradient(circle at 75% 75%, var(--kx-desk-star2) 1px, transparent 2px),
+    linear-gradient(45deg, var(--kx-desk-check) 25%, transparent 25%, transparent 75%, var(--kx-desk-check) 75%),
+    linear-gradient(45deg, var(--kx-desk-check) 25%, transparent 25%, transparent 75%, var(--kx-desk-check) 75%) !important;
+  background-size: 48px 48px, 48px 48px, 32px 32px, 32px 32px !important;
+  background-position: 0 0, 0 0, 0 0, 16px 16px !important;
+  background-repeat: repeat !important;
+}
+body[data-theme^="kuromi-xp"] #leafShell:before { background: transparent !important; transform: none !important; }
+body[data-theme^="kuromi-xp"] #leafShell:after { display: none !important; }
+
+/* --------------------------------------------------------------------------
+   4. TOPBAR = barra de tarefas XP pixel
+   -------------------------------------------------------------------------- */
+body[data-theme^="kuromi-xp"] .leaf-topbar {
+  background: var(--kx-topbar) !important;
+  border-bottom: 0 !important;
+  box-shadow: 0 4px 0 var(--kx-shadow) !important;
+  backdrop-filter: none !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-topbar:before,
+body[data-theme^="kuromi-xp"] .leaf-topbar:after { display: none !important; }
+
+body[data-theme^="kuromi-xp"] .leaf-brand-logos img { image-rendering: pixelated; filter: var(--kx-logo-filter) !important; }
+body[data-theme^="kuromi-xp"] .leaf-brand-logos .leaf-brand-by { color: var(--kx-pbtn-hi) !important; font-size: 16px !important; font-style: normal !important; text-shadow: 1px 1px 0 var(--kx-tshadow); }
+body[data-theme^="kuromi-xp"] .leaf-brand-title { color: var(--kx-on-btn) !important; text-shadow: 2px 2px 0 var(--kx-tshadow); }
+body[data-theme^="kuromi-xp"] .leaf-brand-sub { color: var(--kx-pbtn-hi) !important; font-size: 12px !important; }
+
+body[data-theme^="kuromi-xp"] .leaf-top-note {
+  color: var(--kx-on-btn) !important;
+  font-size: 15px !important;
+  font-style: normal !important;
+  line-height: 1 !important;
+  text-shadow: 2px 2px 0 var(--kx-tshadow) !important;
+}
+body[data-theme="kuromi-xp-light"] .leaf-top-note { color: var(--kx-text) !important; text-shadow: 1px 1px 0 var(--kx-face) !important; }
+body[data-theme^="kuromi-xp"] .leaf-header-moon,
+body[data-theme^="kuromi-xp"] .leaf-header-moon.leaf-pokemon-header-icon {
+  width: 40px !important; height: 40px !important; flex: 0 0 40px !important;
+  border: 0 !important; border-radius: 0 !important; transform: none !important;
+  background: var(--kx-face-sel) !important;
+  box-shadow: inset 0 0 0 2px var(--kx-line), 0 0 0 2px var(--kx-pbtn-hi), 2px 2px 0 2px var(--kx-line) !important;
+  overflow: hidden;
+  color: var(--kx-hl) !important;
+  text-shadow: none !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-pokemon-header-icon img {
+  image-rendering: pixelated;
+  object-fit: cover !important;
+  object-position: center 8% !important;
+}
+
+/* chips/botões = botões XP pixel */
+body[data-theme^="kuromi-xp"] :is(.leaf-chip, .leaf-icon-btn, .leaf-tools-btn, .leaf-connected) {
+  height: 28px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: var(--kx-btn) !important;
+  color: var(--kx-on-btn) !important;
+  box-shadow: var(--kx-bevel) !important;
+  font-size: 16px !important;
+  text-shadow: 1px 1px 0 var(--kx-tshadow);
+  backdrop-filter: none !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-icon-btn { width: 30px !important; }
+body[data-theme^="kuromi-xp"] :is(.leaf-chip, .leaf-icon-btn, .leaf-tools-btn):hover { background: var(--kx-btn-hover) !important; color: var(--kx-on-btn) !important; }
+body[data-theme^="kuromi-xp"] :is(.leaf-chip, .leaf-icon-btn, .leaf-tools-btn):active,
+body[data-theme^="kuromi-xp"] :is(.leaf-chip.is-active, .leaf-chip[aria-pressed="true"], .leaf-icon-btn[aria-expanded="true"], .leaf-tools-btn[aria-expanded="true"]) {
+  background: var(--kx-dither-2), var(--kx-btn-down) !important;
+  box-shadow: var(--kx-bevel-in) !important;
+  transform: none !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-connected {
+  background: var(--kx-dither-2), var(--kx-btn-down) !important;
+  box-shadow: var(--kx-bevel-in) !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-connected .dot { border-radius: 0 !important; box-shadow: none !important; }
+body[data-theme^="kuromi-xp"] .leaf-chip .switch { border-radius: 0 !important; background: var(--kx-btn-lo) !important; box-shadow: inset 0 0 0 1px var(--kx-line); }
+body[data-theme^="kuromi-xp"] .leaf-chip.is-active .switch { background: var(--kx-pink) !important; }
+body[data-theme^="kuromi-xp"] .leaf-chip .switch:before,
+body[data-theme^="kuromi-xp"] .leaf-chip .switch:after { border-radius: 0 !important; background: var(--kx-on-btn) !important; }
+body[data-theme^="kuromi-xp"] :is(.leaf-chip, .leaf-tools-btn, .leaf-icon-btn) svg { stroke-width: 2.2; }
+
+/* topo direito: só ícones (sem rótulo), todos do mesmo tamanho */
+body[data-theme^="kuromi-xp"] .leaf-top-right { gap: 4px !important; }
+body[data-theme^="kuromi-xp"] :is(#leafHeaderLoginAll, #leafToolsBtn, #leafSettingsBtn, #leafMoreBtn) {
+  width: 30px !important;
+  min-width: 30px !important;
+  flex: 0 0 30px !important;
+  padding: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  gap: 0 !important;
+  font-size: 0 !important;
+  overflow: hidden;
+}
+/* mantém só o 1º filho (o ícone) visível */
+body[data-theme^="kuromi-xp"] :is(#leafHeaderLoginAll, #leafToolsBtn) > span:not(:first-child) { display: none !important; }
+body[data-theme^="kuromi-xp"] :is(#leafHeaderLoginAll, #leafToolsBtn) > span:first-child {
+  display: grid !important;
+  place-items: center;
+  width: 15px !important; height: 15px !important;
+  font-size: 15px !important;
+  line-height: 1 !important;
+}
+body[data-theme^="kuromi-xp"] #leafHeaderLoginAll > span:first-child { color: var(--kx-on-btn) !important; }
+/* "Mais": os 3 pontinhos são feitos com box-shadow, não com fonte */
+body[data-theme^="kuromi-xp"] .leaf-menu-dot {
+  width: 3px !important; height: 3px !important;
+  border-radius: 0 !important;
+  background: var(--kx-on-btn) !important;
+  box-shadow: 6px 0 0 var(--kx-on-btn), -6px 0 0 var(--kx-on-btn) !important;
+}
+
+/* "Logar equipe" = botão Iniciar rosa */
+body[data-theme^="kuromi-xp"] :is(.leaf-chip-login-all, .leaf-login-all, .leaf-login-all-top) {
+  background: var(--kx-pinkbar) !important;
+  color: var(--kx-on-btn) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: var(--kx-bevel-pink) !important;
+  text-shadow: 2px 2px 0 var(--kx-tshadow);
+  font-size: 18px !important;
+}
+body[data-theme^="kuromi-xp"] :is(.leaf-chip-login-all, .leaf-login-all, .leaf-login-all-top):hover { filter: brightness(1.08); }
+body[data-theme^="kuromi-xp"] :is(.leaf-chip-login-all, .leaf-login-all, .leaf-login-all-top):active { box-shadow: var(--kx-bevel-pink-in) !important; transform: none !important; }
+body[data-theme^="kuromi-xp"] .leaf-chip-login-all span:first-child { color: var(--kx-on-btn) !important; }
+
+/* barra central: 7 botões iguais, padrão [ícone] Texto, mesmo espaçamento */
+body[data-theme^="kuromi-xp"] .leaf-top-center {
+  gap: 4px !important;
+  padding: 0 10px !important;
+  align-items: center !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-top-center:before { display: none !important; }
+/* o contêiner das abas Janelas/Lista sai do caminho (era a borda grossa) */
+body[data-theme^="kuromi-xp"] .leaf-segment {
+  display: contents !important;
+}
+body[data-theme^="kuromi-xp"] :is(.leaf-segment button, .leaf-top-center > .leaf-chip) {
+  flex: 0 0 var(--kx-chip-w, 90px) !important;
+  width: var(--kx-chip-w, 90px) !important;
+  min-width: 0 !important;
+  height: 28px !important;
+  margin: 0 !important;
+  padding: 0 6px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 5px !important;
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-btn) !important; color: var(--kx-on-btn) !important;
+  box-shadow: var(--kx-bevel) !important;
+  font-size: 16px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-shadow: 1px 1px 0 var(--kx-tshadow);
+  transform: none !important;
+}
+/* ícone: sempre visível, mesmo tamanho, sem esticar */
+body[data-theme^="kuromi-xp"] :is(.leaf-segment button, .leaf-top-center > .leaf-chip) > span:first-child {
+  display: grid !important;
+  place-items: center;
+  flex: 0 0 13px !important;
+  width: 13px !important; height: 13px !important;
+}
+body[data-theme^="kuromi-xp"] :is(.leaf-segment button, .leaf-top-center > .leaf-chip) svg { width: 13px !important; height: 13px !important; }
+body[data-theme^="kuromi-xp"] .leaf-map-icon { display: grid !important; }
+body[data-theme^="kuromi-xp"] .leaf-top-center .txt-hide-sm { display: inline !important; }
+
+/* textos curtos pra caber: "Modo Eco" -> "Eco", "Só a caça" -> "Caça" (texto original vira leitura de tela) */
+body[data-theme^="kuromi-xp"] :is(#leafEco, #leafHuntOnly) > span:nth-child(2) { font-size: 0 !important; }
+body[data-theme^="kuromi-xp"] #leafEco > span:nth-child(2)::after { content: "Eco"; font-size: 16px; }
+body[data-theme^="kuromi-xp"] #leafHuntOnly > span:nth-child(2)::after { content: "Caça"; font-size: 16px; }
+/* chave do Eco sai: o estado ligado aparece como botão afundado, igual aos outros */
+body[data-theme^="kuromi-xp"] #leafEco .switch { display: none !important; }
+
+body[data-theme^="kuromi-xp"] :is(.leaf-segment button, .leaf-top-center > .leaf-chip):hover { background: var(--kx-btn-hover) !important; }
+/* ativo (aba atual ou opção ligada): rosa afundado em todos */
+body[data-theme^="kuromi-xp"] :is(.leaf-segment button.is-active, .leaf-top-center > .leaf-chip.is-active, .leaf-top-center > .leaf-chip[aria-pressed="true"]) {
+  background: var(--kx-pbtn) !important;
+  box-shadow: var(--kx-bevel-pink-in) !important;
+}
+@media (max-width: 1280px) {
+  body[data-theme^="kuromi-xp"] { --kx-chip-w: 30px; }
+  body[data-theme^="kuromi-xp"] :is(.leaf-segment button, .leaf-top-center > .leaf-chip) { justify-content: center !important; padding: 0 !important; font-size: 0 !important; }
+  body[data-theme^="kuromi-xp"] :is(#leafEco, #leafHuntOnly) > span:nth-child(2)::after { display: none; }
+}
+
+/* min/max/fechar do app */
+body[data-theme^="kuromi-xp"] .leaf-window-controls { gap: 2px; padding: 0 6px; align-items: center; box-shadow: none !important; }
+body[data-theme^="kuromi-xp"] .leaf-window-controls button {
+  width: 26px !important; height: 24px !important; align-self: center;
+  border-radius: 0 !important;
+  background: var(--kx-btn) !important; color: var(--kx-on-btn) !important;
+  box-shadow: var(--kx-bevel) !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-window-controls button svg { stroke-width: 2.4; shape-rendering: crispEdges; }
+body[data-theme^="kuromi-xp"] .leaf-window-controls button:hover { background: var(--kx-btn-hover) !important; }
+body[data-theme^="kuromi-xp"] .leaf-window-controls button[data-window-action="close"] { background: var(--kx-pbtn) !important; box-shadow: var(--kx-bevel-pink) !important; }
+body[data-theme^="kuromi-xp"] .leaf-window-controls button[data-window-action="close"]:hover { background: var(--kx-pbtn-hover) !important; }
+
+/* --------------------------------------------------------------------------
+   5. SIDEBAR
+   -------------------------------------------------------------------------- */
+body[data-theme^="kuromi-xp"] .leaf-sidebar {
+  background: var(--kx-sidebar-bg) !important;
+  border: 0 !important;
+  box-shadow: inset -2px 0 0 var(--kx-line), inset -4px 0 0 var(--kx-btn) !important;
+  overflow: hidden;
+}
+body[data-theme^="kuromi-xp"] .leaf-sidebar:before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  inset: auto auto var(--kx-mascot-b, 6px) 50% !important;
+  width: var(--kx-mascot-w, 205px) !important;
+  height: var(--kx-mascot-h, 244px) !important;
+  transform: translateX(-50%) !important;
+  background: url("assets/kuromi-xp/kuromi.gif") center bottom / contain no-repeat !important;
+  image-rendering: pixelated;
+  mask-image: none !important; -webkit-mask-image: none !important;
+  filter: drop-shadow(3px 3px 0 var(--kx-shadow));
+  opacity: 1 !important;
+  z-index: 0 !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-sidebar:after { display: none !important; }
+@media (max-height: 760px) {
+  body[data-theme^="kuromi-xp"] { --kx-mascot-w: 150px; --kx-mascot-h: 178px; --kx-list-h: 248px; }
+}
+@media (max-height: 640px) {
+  body[data-theme^="kuromi-xp"] { --kx-mascot-w: 0px; --kx-mascot-h: 0px; --kx-list-h: 200px; }
+  body[data-theme^="kuromi-xp"] .leaf-sidebar:before { display: none !important; }
+}
+/* a lista mostra só 2 contas; o resto rola dentro dela */
+body[data-theme^="kuromi-xp"] #leafAccountList {
+  flex: 0 0 auto !important;
+  max-height: var(--kx-list-h, 298px) !important; /* 3 cards + 2 espaçamentos de 8px */
+  overflow-y: auto !important;
+  padding-bottom: 0 !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-version { display: none !important; }
+
+body[data-theme^="kuromi-xp"] .leaf-summary {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face) !important;
+  box-shadow: var(--kx-frame), var(--kx-drop) !important;
+  padding: 4px !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-summary-item + .leaf-summary-item { border-left: 2px dotted var(--kx-btn) !important; }
+body[data-theme^="kuromi-xp"] .leaf-summary-item .k { color: var(--kx-text-dim) !important; font-size: 13px !important; letter-spacing: 1px !important; }
+body[data-theme^="kuromi-xp"] .leaf-summary-item .v { color: var(--kx-hl) !important; font-size: 22px !important; }
+body[data-theme^="kuromi-xp"] .leaf-summary-item .v.good { color: var(--kx-hl-2) !important; }
+
+body[data-theme^="kuromi-xp"] .leaf-sidebar-title { color: var(--kx-hl) !important; font-size: 15px !important; letter-spacing: 1px !important; }
+body[data-theme="kuromi-xp"] .leaf-sidebar-title { color: var(--kx-pbtn-hi) !important; text-shadow: 2px 2px 0 var(--kx-tshadow); }
+body[data-theme^="kuromi-xp"] .leaf-sidebar-rule { height: 2px !important; background: var(--kx-dots) !important; }
+body[data-theme^="kuromi-xp"] .leaf-add-account {
+  border-radius: 0 !important; background: var(--kx-btn) !important; color: var(--kx-on-btn) !important; box-shadow: var(--kx-bevel) !important;
+}
+
+/* card da conta = janelinha XP */
+body[data-theme^="kuromi-xp"] .leaf-account {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: var(--kx-face) !important;
+  color: var(--kx-text) !important;
+  box-shadow: var(--kx-frame), var(--kx-drop) !important;
+  transform: none !important;
+  filter: none !important;
+  padding: 6px 8px 6px !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-account:hover { background: var(--kx-face-hover) !important; box-shadow: var(--kx-frame), var(--kx-drop-lg) !important; }
+body[data-theme^="kuromi-xp"] .leaf-account.is-selected {
+  background: var(--kx-face-sel) !important;
+  box-shadow: inset 0 0 0 2px var(--kx-line), inset 4px 4px 0 0 var(--kx-pink), inset -4px -4px 0 0 var(--kx-pbtn-lo), 0 0 0 2px var(--kx-pink), var(--kx-drop) !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-account.is-attention { box-shadow: var(--kx-frame), 0 0 0 2px var(--kx-warn), var(--kx-drop) !important; }
+body[data-theme^="kuromi-xp"] .leaf-account.state-err { box-shadow: var(--kx-frame), 0 0 0 2px var(--kx-bad), var(--kx-drop) !important; }
+body[data-theme^="kuromi-xp"] .leaf-account:before,
+body[data-theme^="kuromi-xp"] .leaf-account:after { display: none !important; }
+
+body[data-theme^="kuromi-xp"] .leaf-account-number {
+  color: var(--kx-on-btn) !important; background: var(--kx-btn-lo); padding: 0 3px;
+  font-size: 13px !important; line-height: 16px; align-self: start;
+}
+body[data-theme^="kuromi-xp"] .leaf-poke-avatar {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important;
+  box-shadow: inset 0 0 0 2px var(--kx-line) !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-poke-avatar img { image-rendering: pixelated; filter: drop-shadow(1px 1px 0 var(--kx-shadow)) !important; }
+body[data-theme^="kuromi-xp"] .leaf-account-name { color: var(--kx-text) !important; font-size: 17px !important; line-height: 16px !important; }
+body[data-theme^="kuromi-xp"] .leaf-pokemon-line { color: var(--kx-text-dim) !important; font-size: 14px !important; line-height: 13px !important; }
+body[data-theme^="kuromi-xp"] .leaf-pokemon-line b { color: var(--kx-hl) !important; font-weight: normal !important; }
+body[data-theme^="kuromi-xp"] .leaf-lv {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important; color: var(--kx-hl) !important;
+  box-shadow: inset 0 0 0 1px var(--kx-btn) !important;
+  font-size: 13px !important; padding: 0 4px !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-account-state { font-size: 14px !important; color: var(--kx-good) !important; }
+body[data-theme^="kuromi-xp"] .leaf-account-state:before { border-radius: 0 !important; box-shadow: none !important; }
+body[data-theme^="kuromi-xp"] .leaf-account-state.wait { color: var(--kx-warn) !important; }
+body[data-theme^="kuromi-xp"] .leaf-account-state.err { color: var(--kx-bad) !important; }
+body[data-theme^="kuromi-xp"] .leaf-account-state.off { color: var(--kx-text-dim) !important; }
+
+body[data-theme^="kuromi-xp"] .leaf-hunt-row {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important; color: var(--kx-text-dim) !important;
+  box-shadow: var(--kx-field) !important;
+  font-size: 14px !important; height: 18px !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-hunt-row :is(.leaf-hunt-glyph, .leaf-hunt-time) { color: var(--kx-hl) !important; }
+body[data-theme^="kuromi-xp"] .leaf-hunt-name b { color: var(--kx-text) !important; font-weight: normal !important; }
+
+/* métricas compactas: [ícone pixel] valor, tudo numa linha só.
+   O rótulo (.mk) fica oculto visualmente mas continua acessível; o ícone identifica. */
+body[data-theme^="kuromi-xp"] .leaf-account-metrics {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 0 !important;
+  margin-top: 4px !important;
+  background: var(--kx-face-2);
+  box-shadow: var(--kx-field);
+  padding: 2px !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-metric {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  height: 18px;
+  border: 0 !important; border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 2px !important;
+  text-align: left !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-metric + .leaf-metric { border-left: 2px dotted var(--kx-btn) !important; }
+body[data-theme^="kuromi-xp"] .leaf-metric:before {
+  content: "";
+  flex: 0 0 12px;
+  width: 12px; height: 12px;
+  background: center / 12px 12px no-repeat;
+  image-rendering: pixelated;
+}
+/* contorno ameixa some no fundo escuro: clareia os ícones no modo Noite */
+body[data-theme="kuromi-xp"] .leaf-metric:before { filter: brightness(1.9) saturate(.8); }
+body[data-theme^="kuromi-xp"] .leaf-metric:nth-child(1):before { background-image: url("assets/kuromi-xp/ui/m-balls.svg"); }
+body[data-theme^="kuromi-xp"] .leaf-metric:nth-child(2):before { background-image: url("assets/kuromi-xp/ui/m-shiny.svg"); }
+body[data-theme^="kuromi-xp"] .leaf-metric:nth-child(3):before { background-image: url("assets/kuromi-xp/ui/m-exp.svg"); }
+body[data-theme^="kuromi-xp"] .leaf-metric:nth-child(4):before { background-image: url("assets/kuromi-xp/ui/m-kills.svg"); }
+body[data-theme^="kuromi-xp"] .leaf-metric .mk {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+body[data-theme^="kuromi-xp"] .leaf-metric .mv {
+  margin: 0 !important;
+  color: var(--kx-hl) !important;
+  font-size: 16px !important;
+  line-height: 1 !important;
+  font-weight: normal !important;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* card mais enxuto */
+body[data-theme^="kuromi-xp"] .leaf-account { min-height: 0 !important; }
+body[data-theme^="kuromi-xp"] .leaf-hunt-row { margin-top: 4px !important; min-height: 18px !important; }
+body[data-theme^="kuromi-xp"] .leaf-account-actions { display: none !important; }
+/* a conta inteira abre a janela (ver kuromi-xp.js) */
+body[data-theme^="kuromi-xp"] .leaf-account { cursor: var(--kx-cursor-link); }
+/* "Recarregar" sai da barra lateral (pega-se pelo menu de ferramentas) */
+body[data-theme^="kuromi-xp"] .leaf-reload-account { display: none !important; }
+body[data-theme^="kuromi-xp"] :is(.leaf-open-account, .leaf-reload-account) { height: 22px !important; min-height: 22px !important; }
+body[data-theme^="kuromi-xp"] #leafAccountList { gap: 8px !important; }
+
+/* botões dos cards */
+body[data-theme^="kuromi-xp"] :is(.leaf-open-account, .leaf-reload-account, .leaf-side-round, .leaf-list-open) {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-btn) !important; color: var(--kx-on-btn) !important;
+  box-shadow: var(--kx-bevel) !important;
+  font-size: 15px !important;
+  text-shadow: 1px 1px 0 var(--kx-tshadow);
+  transform: none !important;
+}
+body[data-theme^="kuromi-xp"] :is(.leaf-open-account, .leaf-list-open) { background: var(--kx-pbtn) !important; box-shadow: var(--kx-bevel-pink) !important; }
+body[data-theme^="kuromi-xp"] :is(.leaf-open-account, .leaf-list-open):hover { background: var(--kx-pbtn-hover) !important; }
+body[data-theme^="kuromi-xp"] :is(.leaf-reload-account, .leaf-side-round):hover { background: var(--kx-btn-hover) !important; }
+body[data-theme^="kuromi-xp"] :is(.leaf-open-account, .leaf-list-open):active { box-shadow: var(--kx-bevel-pink-in) !important; }
+body[data-theme^="kuromi-xp"] :is(.leaf-reload-account, .leaf-side-round):active { box-shadow: var(--kx-bevel-in) !important; }
+body[data-theme^="kuromi-xp"] .leaf-reload-account { overflow: hidden; padding: 0 4px !important; font-size: 13px !important; }
+body[data-theme^="kuromi-xp"] :is(.leaf-side-round, .leaf-reload-account, .leaf-add-account) svg { stroke: currentColor; color: var(--kx-on-btn); }
+
+/* rodapé da sidebar: removido (só fica a arte da Kuromi) */
+body[data-theme^="kuromi-xp"] .leaf-side-footer { display: none !important; }
+
+/* frase lateral: texto da Kuromi, acima da arte */
+body[data-theme^="kuromi-xp"] .leaf-aside-epilogue {
+  display: flex !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  flex-direction: column;
+  align-items: center !important;
+  justify-content: flex-end !important; /* texto encostado na cabeça da Kuromi */
+  text-align: center !important;
+  padding: 8px 7px calc(var(--kx-mascot-h, 244px) + var(--kx-mascot-b, 6px) - 24px) !important;
+  color: var(--kx-text) !important;
+  text-shadow: none !important;
+}
+body[data-theme="kuromi-xp"] .leaf-aside-epilogue { text-shadow: 2px 2px 0 var(--kx-tshadow) !important; }
+body[data-theme^="kuromi-xp"] .leaf-epilogue-kicker { color: var(--kx-hl) !important; font-size: 14px !important; letter-spacing: 2px !important; }
+body[data-theme^="kuromi-xp"] .leaf-aside-epilogue strong { color: var(--kx-text) !important; font-size: 20px !important; font-style: normal !important; line-height: 1 !important; white-space: pre-line; }
+body[data-theme^="kuromi-xp"] .leaf-epilogue-line { width: 100px !important; height: 2px !important; align-self: center !important; background: var(--kx-dots) !important; }
+
+/* --------------------------------------------------------------------------
+   6. PAINÉIS DO JOGO = janelas XP
+   -------------------------------------------------------------------------- */
+body[data-theme^="kuromi-xp"] .panel {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: var(--kx-face) !important;
+  padding: 4px !important;
+  box-shadow: var(--kx-frame), var(--kx-drop) !important;
+  transform: none !important;
+}
+body[data-theme^="kuromi-xp"] .panel:before,
+body[data-theme^="kuromi-xp"] .panel-header:after { display: none !important; }
+body[data-theme^="kuromi-xp"] .panel.expanded { box-shadow: var(--kx-frame), var(--kx-drop-lg) !important; }
+body[data-theme^="kuromi-xp"] .panel webview { box-shadow: 0 0 0 2px var(--kx-line); }
+
+body[data-theme^="kuromi-xp"] .panel-header {
+  background: var(--kx-titlebar) !important;
+  border: 0 !important;
+  box-shadow: inset 0 -2px 0 var(--kx-line) !important;
+  color: var(--kx-on-btn) !important;
+  text-shadow: 2px 2px 0 var(--kx-tshadow);
+}
+body[data-theme^="kuromi-xp"] .panel-header:before {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-pbtn) !important; color: var(--kx-on-btn) !important;
+  box-shadow: inset 0 0 0 2px var(--kx-line) !important;
+  font-size: 13px !important;
+}
+body[data-theme^="kuromi-xp"] .panel-header .name { color: var(--kx-on-btn) !important; font-size: 17px !important; font-weight: normal !important; }
+body[data-theme^="kuromi-xp"] .panel-header .status { color: var(--kx-pbtn-hi) !important; font-size: 14px !important; }
+body[data-theme^="kuromi-xp"] .panel-header .dot { border-radius: 0 !important; box-shadow: 0 0 0 1px var(--kx-line) !important; }
+body[data-theme^="kuromi-xp"] .panel-header .zpct { color: var(--kx-on-btn) !important; font-size: 13px !important; }
+body[data-theme^="kuromi-xp"] .panel-header button {
+  min-width: 20px !important; height: 20px !important;
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-btn) !important; color: var(--kx-on-btn) !important;
+  box-shadow: var(--kx-bevel) !important;
+  font-size: 14px !important; line-height: 1 !important;
+  transform: none !important;
+}
+body[data-theme^="kuromi-xp"] .panel-header button:hover { background: var(--kx-btn-hover) !important; }
+body[data-theme^="kuromi-xp"] .panel-header button:active { box-shadow: var(--kx-bevel-in) !important; }
+body[data-theme^="kuromi-xp"] .panel-header button.expand { background: var(--kx-pbtn) !important; box-shadow: var(--kx-bevel-pink) !important; }
+
+/* rodapé = status bar */
+body[data-theme^="kuromi-xp"] .leaf-panel-footer {
+  background: var(--kx-face) !important;
+  border: 0 !important;
+  box-shadow: inset 0 2px 0 var(--kx-line) !important;
+  color: var(--kx-text-dim) !important;
+  font-size: 14px !important;
+}
+/* tudo no mesmo eixo vertical: sprite, rótulo e valor centralizados na barra */
+body[data-theme^="kuromi-xp"] .leaf-panel-footer {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  height: 28px !important;
+  padding: 2px 10px 0 !important;
+  overflow: hidden;
+}
+body[data-theme^="kuromi-xp"] .leaf-panel-footer:after { display: none !important; }
+body[data-theme^="kuromi-xp"] .leaf-panel-footer :is(.pf-sprite, .pf-orbit) {
+  flex: 0 0 22px !important;
+  width: 22px !important; height: 22px !important;
+  margin: 0 !important;
+  align-self: center !important;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(1px 1px 0 var(--kx-shadow)) !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-panel-footer .pf-orbit {
+  display: grid !important; place-items: center;
+  border: 0 !important; border-radius: 0 !important;
+  font-size: 16px !important; line-height: 1 !important;
+  color: var(--kx-hl) !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-panel-footer :is(.pf-hunt, .pf-balls) {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  height: 100%;
+  min-width: 0;
+  line-height: 1 !important;
+  white-space: nowrap;
+}
+body[data-theme^="kuromi-xp"] .leaf-panel-footer .pf-hunt b { overflow: hidden; text-overflow: ellipsis; }
+body[data-theme^="kuromi-xp"] .leaf-panel-footer .pf-balls { padding-left: 10px !important; border-left: 2px dotted var(--kx-btn) !important; }
+body[data-theme^="kuromi-xp"] .leaf-panel-footer :is(.pf-hunt b, .pf-balls b) { font-size: 16px !important; line-height: 1 !important; }
+body[data-theme^="kuromi-xp"] .leaf-panel-footer small {
+  display: block;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  color: var(--kx-text-dim) !important;
+  letter-spacing: 1px !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-panel-footer :is(b, .pf-hunt b, .pf-balls b) { color: var(--kx-hl) !important; font-weight: normal !important; }
+
+/* --------------------------------------------------------------------------
+   7. MODO LISTA (botão "Lista")
+   -------------------------------------------------------------------------- */
+body[data-theme^="kuromi-xp"] #leafListView {
+  background: var(--kx-face) !important; color: var(--kx-text) !important;
+  border: 0 !important; border-radius: 0 !important;
+  box-shadow: var(--kx-frame), var(--kx-drop) !important;
+}
+body[data-theme^="kuromi-xp"] #leafListView:before {
+  content: "C:\\kuromi\\contas";
+  display: block;
+  margin: -2px -2px 10px;
+  padding: 4px 10px;
+  background: var(--kx-titlebar);
+  color: var(--kx-on-btn);
+  font-size: 18px;
+  text-shadow: 2px 2px 0 var(--kx-tshadow);
+  box-shadow: inset 0 -2px 0 var(--kx-line);
+}
+body[data-theme^="kuromi-xp"] .leaf-page-head h1 { color: var(--kx-text) !important; font-size: 34px !important; text-shadow: 2px 2px 0 var(--kx-pink); }
+body[data-theme^="kuromi-xp"] :is(.leaf-page-head p, .leaf-page-count) { color: var(--kx-text-dim) !important; font-size: 16px !important; }
+body[data-theme^="kuromi-xp"] .leaf-page-count {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important; box-shadow: var(--kx-field) !important; padding: 2px 8px !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-list-card {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important; color: var(--kx-text) !important;
+  box-shadow: var(--kx-frame), var(--kx-drop) !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-list-card:hover { background: var(--kx-face-hover) !important; }
+body[data-theme^="kuromi-xp"] .leaf-list-card .avatar {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-sel) !important; box-shadow: inset 0 0 0 2px var(--kx-line) !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-list-card .avatar img { image-rendering: pixelated; }
+body[data-theme^="kuromi-xp"] .leaf-list-index { color: var(--kx-on-btn) !important; background: var(--kx-btn-lo); padding: 0 3px; font-size: 13px !important; }
+body[data-theme^="kuromi-xp"] :is(.leaf-list-card .name, .leaf-list-hunt b, .leaf-list-cell .value) { color: var(--kx-text) !important; font-weight: normal !important; }
+body[data-theme^="kuromi-xp"] .leaf-list-card .name { font-size: 19px !important; }
+body[data-theme^="kuromi-xp"] .leaf-list-cell .value { color: var(--kx-hl) !important; font-size: 18px !important; }
+body[data-theme^="kuromi-xp"] :is(.leaf-list-card .sub, .leaf-list-hunt, .leaf-list-actions, .leaf-list-cell .label) { color: var(--kx-text-dim) !important; font-size: 14px !important; }
+body[data-theme^="kuromi-xp"] .leaf-list-hunt { border-bottom: 2px dotted var(--kx-btn) !important; }
+body[data-theme^="kuromi-xp"] .leaf-list-card .leaf-list-cell { border-left: 2px dotted var(--kx-btn) !important; }
+body[data-theme^="kuromi-xp"] .leaf-list-state { color: var(--kx-good) !important; font-size: 14px !important; }
+body[data-theme^="kuromi-xp"] .leaf-list-state.wait { color: var(--kx-warn) !important; }
+body[data-theme^="kuromi-xp"] .leaf-list-state.err { color: var(--kx-bad) !important; }
+body[data-theme^="kuromi-xp"] .leaf-list-state.off { color: var(--kx-text-dim) !important; }
+body[data-theme^="kuromi-xp"] .leaf-companions img { display: none !important; }
+body[data-theme^="kuromi-xp"] .leaf-companions {
+  background: url("assets/kuromi-xp/blinkie-kuromi.gif") center / auto 40px no-repeat;
+  image-rendering: pixelated;
+  opacity: 1 !important;
+  border-color: var(--kx-btn) !important;
+}
+/* o blinkie tem fundo preto: no modo Dia vira um divisor de texto */
+body[data-theme="kuromi-xp-light"] .leaf-companions {
+  background: none;
+  display: grid !important;
+  place-items: center;
+  color: var(--kx-hl);
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+body[data-theme="kuromi-xp-light"] .leaf-companions:before { content: "｡･:*:･ﾟ☆ kuromi ☆･ﾟ:*:･｡"; }
+body[data-theme^="kuromi-xp"] :is(.leaf-page-head, #leafListView hr, .leaf-companions) { border-color: var(--kx-btn) !important; }
+
+/* --------------------------------------------------------------------------
+   8. PAINEL DE RESUMO (botão "Painel" -> #stats) = janela XP
+   -------------------------------------------------------------------------- */
+body[data-theme^="kuromi-xp"] #stats {
+  background: var(--kx-face) !important;
+  color: var(--kx-text) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 4px !important;
+  box-shadow: var(--kx-frame), var(--kx-drop-lg) !important;
+}
+body[data-theme^="kuromi-xp"] #stats .sb-top { display: none !important; }
+body[data-theme^="kuromi-xp"] #stats .st-head {
+  background: var(--kx-titlebar) !important;
+  color: var(--kx-on-btn) !important;
+  border: 0 !important;
+  box-shadow: inset 0 -2px 0 var(--kx-line);
+  font-size: 18px !important;
+  letter-spacing: 1px !important;
+  text-shadow: 2px 2px 0 var(--kx-tshadow);
+  padding: 4px 6px 4px 10px !important;
+}
+body[data-theme^="kuromi-xp"] #stats .st-head:before { content: "☠"; color: var(--kx-pbtn-hi); }
+body[data-theme^="kuromi-xp"] #stats button,
+body[data-theme^="kuromi-xp"] #stats .cfg-ballbtn {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-btn) !important; color: var(--kx-on-btn) !important;
+  box-shadow: var(--kx-bevel) !important;
+  font-size: 15px !important;
+  text-shadow: 1px 1px 0 var(--kx-tshadow);
+}
+body[data-theme^="kuromi-xp"] #stats button:hover { background: var(--kx-btn-hover) !important; }
+body[data-theme^="kuromi-xp"] #stats .st-head .st-x { background: var(--kx-pbtn) !important; box-shadow: var(--kx-bevel-pink) !important; }
+body[data-theme^="kuromi-xp"] #stats .st-head .st-gear.on { background: var(--kx-btn-down) !important; box-shadow: var(--kx-bevel-in) !important; color: var(--kx-on-btn) !important; }
+
+/* abas XP */
+body[data-theme^="kuromi-xp"] #stats .st-tabs {
+  background: var(--kx-face) !important;
+  border: 0 !important;
+  border-bottom: 2px solid var(--kx-line) !important;
+  padding: 6px 6px 0 !important;
+  gap: 2px !important;
+}
+body[data-theme^="kuromi-xp"] #stats .st-tab {
+  border-radius: 0 !important;
+  background: var(--kx-face-2) !important;
+  color: var(--kx-text-dim) !important;
+  box-shadow: inset 2px 2px 0 var(--kx-line), inset -2px 0 0 var(--kx-line) !important;
+  font-size: 15px !important;
+  padding: 4px 4px 3px !important;
+}
+body[data-theme^="kuromi-xp"] #stats .st-tab.on {
+  background: var(--kx-face-sel) !important;
+  color: var(--kx-hl) !important;
+  box-shadow: inset 2px 2px 0 var(--kx-line), inset -2px 0 0 var(--kx-line), inset 0 4px 0 var(--kx-pink) !important;
+}
+body[data-theme^="kuromi-xp"] #stats .st-tab.on::after { display: none !important; }
+
+body[data-theme^="kuromi-xp"] #stats :is(.st-body, .st-cfg) { background: var(--kx-face) !important; color: var(--kx-text) !important; }
+body[data-theme^="kuromi-xp"] #stats .div { height: 2px !important; background: var(--kx-dots) !important; opacity: .7; }
+body[data-theme^="kuromi-xp"] #stats :is(.nm, .kv, .g4 .v, .r .v, .drop .dn b, .bg .bt, .agg span, .agg-t .an, .acn, .cat .ct, .tm b, .it .q, .a4v) { color: var(--kx-text) !important; font-weight: normal !important; }
+body[data-theme^="kuromi-xp"] #stats :is(.loc, .gl, .kl, .sec .lb, .cat .cn, .bg .bn, .r .l, .it, .drop .dn, .drop .dq, .g4 .l, .acm, .ac2, .agg .an, .agg-h span, .cmp .cl, .cmp .cp, .cmp-h span, .a4l, .st-empty, .st-vazio, .cfg-h, .cfg-credit, .cfg-iq, .cfg-isub, .cfg-noc) { color: var(--kx-text-dim) !important; }
+body[data-theme^="kuromi-xp"] #stats .nm { font-size: 22px !important; }
+body[data-theme^="kuromi-xp"] #stats .kv { font-size: 24px !important; color: var(--kx-hl) !important; }
+body[data-theme^="kuromi-xp"] #stats .r { font-size: 16px !important; }
+body[data-theme^="kuromi-xp"] #stats .sec .lb { font-size: 15px !important; letter-spacing: 1px !important; }
+body[data-theme^="kuromi-xp"] #stats .sec .mk { border-radius: 0 !important; transform: none !important; background: var(--kx-pink) !important; }
+body[data-theme^="kuromi-xp"] #stats .sec .rt,
+body[data-theme^="kuromi-xp"] #stats .tm {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important; color: var(--kx-text) !important;
+  box-shadow: var(--kx-field) !important;
+}
+body[data-theme^="kuromi-xp"] #stats .gv { color: var(--kx-warn) !important; font-size: 19px !important; font-weight: normal !important; }
+body[data-theme^="kuromi-xp"] #stats .ava .lvl { border-radius: 0 !important; background: var(--kx-face-2) !important; border-color: var(--kx-pink) !important; color: var(--kx-hl) !important; }
+body[data-theme^="kuromi-xp"] #stats :is(.kpi.g, .kpi.b, .kpi.n, .kpi) {
+  background: var(--kx-face-2) !important;
+  box-shadow: var(--kx-field);
+  border: 0 !important;
+}
+body[data-theme^="kuromi-xp"] #stats .kpi + .kpi { margin-left: 2px; }
+body[data-theme^="kuromi-xp"] #stats .kpi .ac { height: 4px !important; }
+body[data-theme^="kuromi-xp"] #stats :is(.g4, .a4, .acard, .agg-h, .agg-t) { border-color: var(--kx-btn) !important; border-style: dotted !important; }
+body[data-theme^="kuromi-xp"] #stats .baggrid { background: var(--kx-line) !important; gap: 2px !important; }
+body[data-theme^="kuromi-xp"] #stats .bg { background: var(--kx-face-2) !important; }
+body[data-theme^="kuromi-xp"] #stats :is(.bg .bcd, .cat .cd, .acd) { border-radius: 0 !important; box-shadow: none !important; }
+body[data-theme^="kuromi-xp"] #stats .saldo { border-radius: 0 !important; box-shadow: var(--kx-field) !important; }
+body[data-theme^="kuromi-xp"] #stats .tm-row { border-radius: 0 !important; }
+body[data-theme^="kuromi-xp"] #stats .tm-row:hover { background: var(--kx-face-hover) !important; }
+body[data-theme^="kuromi-xp"] #stats .tm-row.lead { background: var(--kx-face-sel) !important; }
+body[data-theme^="kuromi-xp"] #stats .tm-bar { border-radius: 0 !important; background: var(--kx-face-2) !important; box-shadow: inset 0 0 0 1px var(--kx-line); }
+body[data-theme^="kuromi-xp"] #stats .tm-bar i { background: var(--kx-pink) !important; }
+body[data-theme^="kuromi-xp"] #stats .tm-bar.xp i { background: var(--kx-hl-2) !important; }
+body[data-theme^="kuromi-xp"] #stats :is(.cfg-row, .cfg-pin) {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important; color: var(--kx-text) !important;
+  box-shadow: var(--kx-field) !important;
+}
+body[data-theme^="kuromi-xp"] #stats :is(.cfg-chk, .cfg-toggle, .cfg-item, .cfg-res) { color: var(--kx-text) !important; font-size: 15px !important; }
+body[data-theme^="kuromi-xp"] #stats .cfg-res:hover { background: var(--kx-pink) !important; color: var(--kx-on-btn) !important; }
+body[data-theme^="kuromi-xp"] #stats .cfg-search {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important; color: var(--kx-text) !important;
+  box-shadow: var(--kx-field) !important; font-size: 16px !important;
+}
+body[data-theme^="kuromi-xp"] #stats input[type="checkbox"] { accent-color: var(--kx-pink) !important; }
+body[data-theme^="kuromi-xp"] #stats .st-resize::before { border-radius: 0 !important; background: var(--kx-btn) !important; }
+body[data-theme^="kuromi-xp"] #stats .dsect.dragover { outline-color: var(--kx-pink) !important; border-radius: 0 !important; }
+
+/* --------------------------------------------------------------------------
+   9. MODO SIMPLES (botão "Simples" -> #cards) = área de trabalho com janelas
+   -------------------------------------------------------------------------- */
+body[data-theme^="kuromi-xp"] #cards {
+  background-color: var(--kx-desk) !important;
+  background-image:
+    radial-gradient(circle at 25% 25%, var(--kx-desk-star1) 1px, transparent 2px),
+    linear-gradient(45deg, var(--kx-desk-check) 25%, transparent 25%, transparent 75%, var(--kx-desk-check) 75%),
+    linear-gradient(45deg, var(--kx-desk-check) 25%, transparent 25%, transparent 75%, var(--kx-desk-check) 75%) !important;
+  background-size: 48px 48px, 32px 32px, 32px 32px !important;
+  background-position: 0 0, 0 0, 16px 16px !important;
+  color: var(--kx-text) !important;
+}
+body[data-theme^="kuromi-xp"] #cards :is(.cd-kpi, .cd-sec, .cd-cfg) {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face) !important; color: var(--kx-text) !important;
+  box-shadow: var(--kx-frame), var(--kx-drop) !important;
+  padding: 6px 10px 8px !important;
+}
+body[data-theme^="kuromi-xp"] #cards .cd-row { background: transparent !important; border-color: transparent !important; border-bottom: 2px dotted var(--kx-btn) !important; }
+body[data-theme^="kuromi-xp"] #cards .cd-row:last-child { border-bottom: 0 !important; }
+body[data-theme^="kuromi-xp"] #cards .cd-kpi .v { color: var(--kx-hl) !important; font-size: 26px !important; font-weight: normal !important; }
+body[data-theme^="kuromi-xp"] #cards .cd-kpi .l { color: var(--kx-text-dim) !important; font-size: 14px !important; }
+/* título de cada seção vira barra de título */
+body[data-theme^="kuromi-xp"] #cards :is(.cd-h, .cd-cfg-h) {
+  margin: -2px -6px 8px !important;
+  padding: 3px 8px !important;
+  background: var(--kx-titlebar) !important;
+  color: var(--kx-on-btn) !important;
+  font-size: 16px !important;
+  letter-spacing: 1px !important;
+  text-shadow: 2px 2px 0 var(--kx-tshadow);
+  box-shadow: inset 0 -2px 0 var(--kx-line);
+}
+body[data-theme^="kuromi-xp"] #cards .cd-top .cd-tt { color: var(--kx-text) !important; font-size: 20px !important; }
+body[data-theme="kuromi-xp"] #cards .cd-top .cd-tt { text-shadow: 2px 2px 0 var(--kx-tshadow); }
+body[data-theme^="kuromi-xp"] #cards :is(button, .cd-h button, .cd-top button) {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-btn) !important; color: var(--kx-on-btn) !important;
+  box-shadow: var(--kx-bevel) !important;
+  font-size: 15px !important;
+  text-shadow: 1px 1px 0 var(--kx-tshadow);
+}
+body[data-theme^="kuromi-xp"] #cards button:hover { background: var(--kx-btn-hover) !important; }
+body[data-theme^="kuromi-xp"] #cards :is(button.on, .cd-top button.on) { background: var(--kx-pbtn) !important; box-shadow: var(--kx-bevel-pink-in) !important; }
+body[data-theme^="kuromi-xp"] #cards :is(select, .cd-inp, .cd-h select, input[type="text"], input[type="number"]) {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important; color: var(--kx-text) !important;
+  box-shadow: var(--kx-field) !important; font-size: 15px !important;
+}
+body[data-theme^="kuromi-xp"] #cards .cd-table { font-size: 16px !important; }
+body[data-theme^="kuromi-xp"] #cards .cd-table th {
+  color: var(--kx-text-dim) !important; font-size: 14px !important;
+  border-bottom: 2px solid var(--kx-line) !important; background: var(--kx-face-sel);
+}
+body[data-theme^="kuromi-xp"] #cards .cd-table th:hover { color: var(--kx-hl) !important; }
+body[data-theme^="kuromi-xp"] #cards .cd-table td { color: var(--kx-text) !important; border-bottom: 2px dotted var(--kx-face-sel) !important; }
+body[data-theme^="kuromi-xp"] #cards .cd-table tbody tr:hover { background: var(--kx-face-hover) !important; }
+body[data-theme^="kuromi-xp"] #cards .cd-table tfoot td { color: var(--kx-hl) !important; font-weight: normal !important; }
+body[data-theme^="kuromi-xp"] #cards :is(.cd-row .rt, .cd-empty, .cd-sh-acc, .cd-sh-n) { color: var(--kx-text-dim) !important; font-size: 14px !important; }
+body[data-theme^="kuromi-xp"] #cards :is(.cd-dot, .cd-sh-dot) { border-radius: 0 !important; }
+body[data-theme^="kuromi-xp"] #cards .cd-goal { height: 10px !important; border-radius: 0 !important; background: var(--kx-face-2) !important; box-shadow: inset 0 0 0 2px var(--kx-line); padding: 2px; }
+body[data-theme^="kuromi-xp"] #cards .cd-goal > i { border-radius: 0 !important; background: repeating-linear-gradient(90deg, var(--kx-pink) 0 6px, transparent 6px 8px) !important; }
+body[data-theme^="kuromi-xp"] #cards .cd-sh {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important; box-shadow: var(--kx-field) !important;
+}
+body[data-theme^="kuromi-xp"] #cards .cd-sh-t { color: var(--kx-hl) !important; font-size: 16px !important; font-weight: normal !important; }
+body[data-theme^="kuromi-xp"] #cards .cd-cfg-row { color: var(--kx-text) !important; border-radius: 0 !important; font-size: 15px !important; }
+body[data-theme^="kuromi-xp"] #cards .cd-cfg-row:hover { background: var(--kx-face-hover) !important; }
+body[data-theme^="kuromi-xp"] #cards :is(.cd-mv, .cd-cfg-row .cd-grip) { color: var(--kx-text-dim) !important; }
+body[data-theme^="kuromi-xp"] #cards .cd-mv:hover { color: var(--kx-hl) !important; }
+body[data-theme^="kuromi-xp"] #cards :is(.cd-rz:hover::before, .cd-it.rz-on .cd-rz::before, .cd-rz2:hover::before, .cd-it.rz-on .cd-rz2::before) { background: var(--kx-pink) !important; border-radius: 0 !important; }
+body[data-theme^="kuromi-xp"] #cards .cd-it.cd-over { outline-color: var(--kx-pink) !important; border-radius: 0 !important; }
+body[data-theme^="kuromi-xp"] #cards input[type="checkbox"] { accent-color: var(--kx-pink) !important; }
+
+/* --------------------------------------------------------------------------
+   10. MENU FERRAMENTAS, CONFIGURAÇÕES, MODAIS
+   -------------------------------------------------------------------------- */
+body[data-theme^="kuromi-xp"] :is(#overlay, #scOverlay, #tlOverlay, #dtOverlay, #atOverlay, #dispatchOverlay, #autoSupplyOverlay, #twitchBonusOverlay) {
+  background: var(--kx-overlay) !important;
+  backdrop-filter: none !important;
+}
+body[data-theme^="kuromi-xp"] :is(#leafToolsMenu, #leafSettingsDrawer, #modal, #scModal, #tlModal, #dtModal, #atModal, #autoSupplyModal, #twitchBonusModal, #ivCard) {
+  background: var(--kx-face) !important;
+  color: var(--kx-text) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: var(--kx-frame), var(--kx-drop-lg) !important;
+}
+body[data-theme^="kuromi-xp"] :is(.leaf-tools-title, .leaf-drawer-head) {
+  background: var(--kx-titlebar) !important;
+  color: var(--kx-on-btn) !important;
+  text-shadow: 2px 2px 0 var(--kx-tshadow);
+  box-shadow: inset 0 -2px 0 var(--kx-line);
+  margin: 0 0 6px !important;
+  padding: 4px 8px !important;
+  font-size: 18px !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-drawer-head h2 { color: var(--kx-on-btn) !important; font-size: 26px !important; }
+body[data-theme^="kuromi-xp"] .leaf-drawer-subtitle { color: var(--kx-pbtn-hi) !important; font-size: 15px !important; }
+body[data-theme^="kuromi-xp"] .leaf-drawer-close {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-pbtn) var(--kx-glyph-close) center / 14px no-repeat !important;
+  color: transparent !important;
+  box-shadow: var(--kx-bevel-pink) !important;
+  image-rendering: pixelated;
+}
+body[data-theme^="kuromi-xp"] .leaf-setting-title { color: var(--kx-hl) !important; font-size: 17px !important; border-bottom: 2px dotted var(--kx-btn); }
+body[data-theme^="kuromi-xp"] :is(.leaf-layout-setting, .leaf-window-count-setting) > span { font-size: 15px !important; color: var(--kx-hl) !important; }
+body[data-theme^="kuromi-xp"] :is(.leaf-tool-item, .leaf-setting-btn, .leaf-window-count-options button, .leaf-layout-options button, .leaf-theme-filter-btn) {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important; color: var(--kx-text) !important;
+  box-shadow: inset 0 0 0 2px var(--kx-line), inset 4px 4px 0 -2px var(--kx-face-hover), inset -4px -4px 0 -2px var(--kx-btn) !important;
+  font-size: 16px !important;
+}
+body[data-theme^="kuromi-xp"] :is(.leaf-tool-item, .leaf-setting-btn, .leaf-theme-filter-btn):hover { background: var(--kx-pink) !important; color: var(--kx-on-btn) !important; }
+body[data-theme^="kuromi-xp"] :is(.leaf-setting-btn.is-on, .leaf-window-count-options button.is-on, .leaf-layout-options button.is-on, .leaf-theme-filter-btn.is-active) {
+  background: var(--kx-btn) !important; color: var(--kx-on-btn) !important;
+  box-shadow: var(--kx-bevel-in) !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-theme-filter-btn { white-space: nowrap; flex: 0 0 auto; padding: 2px 8px !important; }
+body[data-theme^="kuromi-xp"] .leaf-tool-badge { border-radius: 0 !important; background: var(--kx-face-sel) !important; color: var(--kx-hl) !important; }
+body[data-theme^="kuromi-xp"] .leaf-tool-sep { height: 2px !important; background: var(--kx-dots) !important; }
+
+/* seletor de temas */
+body[data-theme^="kuromi-xp"] .leaf-theme-search {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important; color: var(--kx-text) !important;
+  box-shadow: var(--kx-field) !important;
+  font-size: 16px !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-theme-card {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important; color: var(--kx-text) !important;
+  box-shadow: inset 0 0 0 2px var(--kx-line), 3px 3px 0 var(--kx-shadow) !important;
+  transform: none !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-theme-card:hover { background: var(--kx-face-hover) !important; }
+body[data-theme^="kuromi-xp"] .leaf-theme-card.is-active {
+  background: var(--kx-face-sel) !important;
+  box-shadow: inset 0 0 0 2px var(--kx-line), inset 4px 4px 0 0 var(--kx-pink), 3px 3px 0 var(--kx-shadow) !important;
+}
+body[data-theme^="kuromi-xp"] .leaf-theme-name { color: var(--kx-text) !important; font-size: 17px !important; font-weight: normal !important; }
+body[data-theme^="kuromi-xp"] .leaf-theme-desc { color: var(--kx-text-dim) !important; font-size: 13px !important; }
+body[data-theme^="kuromi-xp"] .leaf-theme-badge { border-radius: 0 !important; background: var(--kx-face-sel) !important; color: var(--kx-hl) !important; font-size: 12px !important; }
+body[data-theme^="kuromi-xp"] .leaf-theme-swatches { border-radius: 0 !important; background: var(--kx-line) !important; border: 0 !important; }
+body[data-theme^="kuromi-xp"] .leaf-theme-swatch { border-radius: 0 !important; border: 1px solid var(--kx-face) !important; }
+body[data-theme^="kuromi-xp"] .leaf-pokemon-lock { color: var(--kx-text) !important; font-size: 16px !important; }
+body[data-theme^="kuromi-xp"] .leaf-theme-empty { color: var(--kx-text-dim) !important; font-size: 16px !important; }
+
+/* modais */
+body[data-theme^="kuromi-xp"] :is(#modal, #scModal, #tlModal, #dtModal, #atModal, #autoSupplyModal) h2 {
+  color: var(--kx-text) !important; font-size: 26px !important; font-weight: normal !important;
+  text-shadow: 2px 2px 0 var(--kx-pink);
+}
+body[data-theme^="kuromi-xp"] :is(#modal, #scModal, #tlModal, #dtModal, #atModal, #autoSupplyModal) :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important; color: var(--kx-text) !important;
+  box-shadow: var(--kx-field) !important;
+  font-size: 16px !important;
+}
+body[data-theme^="kuromi-xp"] :is(#modal, #scModal, #tlModal, #dtModal, #atModal, #autoSupplyModal) button {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-btn) !important; color: var(--kx-on-btn) !important;
+  box-shadow: var(--kx-bevel) !important;
+  font-size: 16px !important;
+  text-shadow: 1px 1px 0 var(--kx-tshadow);
+}
+body[data-theme^="kuromi-xp"] :is(#modal, #scModal, #tlModal, #dtModal, #atModal, #autoSupplyModal) button:hover { background: var(--kx-btn-hover) !important; }
+body[data-theme^="kuromi-xp"] :is(#modal, #scModal, #tlModal, #dtModal, #atModal, #autoSupplyModal) .primary { background: var(--kx-pbtn) !important; box-shadow: var(--kx-bevel-pink) !important; }
+body[data-theme^="kuromi-xp"] :is(.sc-row, .tl-row) { border-radius: 0 !important; background: var(--kx-face-2) !important; border-color: var(--kx-btn) !important; color: var(--kx-text) !important; }
+body[data-theme^="kuromi-xp"] :is(.sc-tag, .tl-sub) { color: var(--kx-text-dim) !important; }
+body[data-theme^="kuromi-xp"] :is(input[type="checkbox"], input[type="radio"]) { accent-color: var(--kx-pink); }
+
+/* ---- "Treinadores salvos": o modal vinha com azul do tema base ---- */
+body[data-theme^="kuromi-xp"] #modal .hint { color: var(--kx-text-dim) !important; font-size: 15px !important; }
+body[data-theme^="kuromi-xp"] #accRows { scrollbar-color: var(--kx-btn) var(--kx-face-2) !important; }
+
+/* caixa da família = janelinha XP */
+body[data-theme^="kuromi-xp"] .acc-family {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face) !important;
+  color: var(--kx-text) !important;
+  box-shadow: var(--kx-frame), var(--kx-drop) !important;
+  overflow: visible !important;
+}
+body[data-theme^="kuromi-xp"] .acc-family-header {
+  background: var(--kx-titlebar) !important;
+  border: 0 !important;
+  box-shadow: inset 0 -2px 0 var(--kx-line) !important;
+  margin: 4px 4px 0 !important;
+  padding: 3px 8px !important;
+}
+body[data-theme^="kuromi-xp"] .fam-title { color: var(--kx-on-btn) !important; font-size: 18px !important; font-weight: normal !important; text-shadow: 2px 2px 0 var(--kx-tshadow); }
+body[data-theme^="kuromi-xp"] .fam-badge {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important; color: var(--kx-hl) !important;
+  box-shadow: inset 0 0 0 2px var(--kx-line) !important;
+  font-size: 14px !important; font-weight: normal !important; padding: 1px 6px !important;
+}
+body[data-theme^="kuromi-xp"] .fam-del {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-pbtn) !important; color: var(--kx-on-btn) !important;
+  box-shadow: var(--kx-bevel-pink) !important;
+  font-size: 15px !important; font-weight: normal !important;
+  text-shadow: 1px 1px 0 var(--kx-tshadow);
+}
+body[data-theme^="kuromi-xp"] .fam-del:hover { background: var(--kx-pbtn-hover) !important; }
+
+/* bloco do proxy */
+body[data-theme^="kuromi-xp"] .fam-proxy-block {
+  background: var(--kx-dither-2), var(--kx-face-sel) !important;
+  border: 0 !important;
+  box-shadow: inset 0 -2px 0 var(--kx-btn) !important;
+}
+body[data-theme^="kuromi-xp"] .acc-proxy { border-top-color: var(--kx-btn) !important; }
+body[data-theme^="kuromi-xp"] .acc-proxy summary { color: var(--kx-text) !important; font-size: 15px !important; font-weight: normal !important; }
+body[data-theme^="kuromi-xp"] .acc-proxy summary:before { color: var(--kx-hl) !important; }
+body[data-theme^="kuromi-xp"] .acc-proxy-status { color: var(--kx-hl) !important; font-size: 13px !important; font-weight: normal !important; }
+body[data-theme^="kuromi-xp"] .acc-proxy-note { color: var(--kx-text-dim) !important; font-size: 13px !important; line-height: 1.3 !important; }
+body[data-theme^="kuromi-xp"] #accProxyError { color: var(--kx-bad) !important; font-size: 14px !important; }
+
+/* linhas de conta */
+body[data-theme^="kuromi-xp"] .acc-account,
+body[data-theme^="kuromi-xp"] .acc-family-members .acc-account {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important;
+  box-shadow: var(--kx-field) !important;
+}
+body[data-theme^="kuromi-xp"] .acc-slot { color: var(--kx-hl) !important; font-size: 15px !important; font-weight: normal !important; }
+body[data-theme^="kuromi-xp"] #modal :is(.acc-row input, .acc-proxy-fields input, .acc-proxy-fields select) {
+  height: 28px !important;
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face) !important; color: var(--kx-text) !important;
+  box-shadow: var(--kx-field) !important;
+  font-size: 15px !important;
+}
+body[data-theme^="kuromi-xp"] #modal :is(.acc-row input, .acc-proxy-fields input, .acc-proxy-fields select)::placeholder { color: var(--kx-text-dim) !important; opacity: .8; }
+body[data-theme^="kuromi-xp"] #modal :is(.acc-row input:focus, .acc-proxy-fields input:focus, .acc-proxy-fields select:focus) {
+  box-shadow: var(--kx-field), inset 0 0 0 2px var(--kx-pink) !important;
+  border: 0 !important;
+}
+body[data-theme^="kuromi-xp"] #modal .acc-row button {
+  width: 28px !important; height: 28px !important;
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-btn) !important; color: var(--kx-on-btn) !important;
+  box-shadow: var(--kx-bevel) !important;
+  font-size: 14px !important;
+}
+body[data-theme^="kuromi-xp"] #modal .acc-row button:hover { background: var(--kx-btn-hover) !important; }
+body[data-theme^="kuromi-xp"] #modal .acc-row .acc-del:hover { background: var(--kx-pbtn) !important; box-shadow: var(--kx-bevel-pink) !important; }
+
+/* botões "+ família" e importar em massa */
+body[data-theme^="kuromi-xp"] .acc-add-family-btn {
+  border: 2px dashed var(--kx-btn) !important;
+  border-radius: 0 !important;
+  background: var(--kx-face-2) !important;
+  color: var(--kx-text) !important;
+  box-shadow: none !important;
+  font-size: 16px !important; font-weight: normal !important;
+}
+body[data-theme^="kuromi-xp"] .acc-add-family-btn:hover { background: var(--kx-face-hover) !important; border-color: var(--kx-pink) !important; color: var(--kx-hl) !important; }
+body[data-theme^="kuromi-xp"] .bulk-open-btn {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-btn) !important; color: var(--kx-on-btn) !important;
+  box-shadow: var(--kx-bevel) !important;
+  font-size: 15px !important; font-weight: normal !important;
+  text-shadow: 1px 1px 0 var(--kx-tshadow);
+}
+body[data-theme^="kuromi-xp"] .bulk-open-btn:hover { background: var(--kx-btn-hover) !important; }
+
+/* modal de importar em massa */
+body[data-theme^="kuromi-xp"] #bulkOverlay { background: var(--kx-overlay) !important; backdrop-filter: none !important; }
+body[data-theme^="kuromi-xp"] #bulkModal {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face) !important; color: var(--kx-text) !important;
+  box-shadow: var(--kx-frame), var(--kx-drop-lg) !important;
+}
+body[data-theme^="kuromi-xp"] .bulk-head h2 { color: var(--kx-text) !important; font-weight: normal !important; text-shadow: 2px 2px 0 var(--kx-pink); }
+body[data-theme^="kuromi-xp"] .bulk-close { color: var(--kx-hl) !important; }
+body[data-theme^="kuromi-xp"] #bulkModal .hint { color: var(--kx-text-dim) !important; font-size: 15px !important; }
+body[data-theme^="kuromi-xp"] #bulkModal .hint code {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important; color: var(--kx-hl) !important;
+  box-shadow: inset 0 0 0 1px var(--kx-btn) !important;
+}
+body[data-theme^="kuromi-xp"] :is(.bulk-file-bar, .bulk-stats-bar) {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important;
+  box-shadow: var(--kx-field) !important;
+}
+body[data-theme^="kuromi-xp"] .bulk-file-btn {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-btn) !important; color: var(--kx-on-btn) !important;
+  box-shadow: var(--kx-bevel) !important; font-size: 15px !important; font-weight: normal !important;
+}
+body[data-theme^="kuromi-xp"] .bulk-file-btn:hover { background: var(--kx-btn-hover) !important; }
+body[data-theme^="kuromi-xp"] :is(.bulk-file-name, .bulk-preview, .bulk-mode-group) { color: var(--kx-text-dim) !important; font-size: 15px !important; font-weight: normal !important; }
+body[data-theme^="kuromi-xp"] .bulk-preview.has-data { color: var(--kx-good) !important; }
+body[data-theme^="kuromi-xp"] .bulk-dropzone.drag-over { border-color: var(--kx-pink) !important; }
+body[data-theme^="kuromi-xp"] #bulkText {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-face-2) !important; color: var(--kx-text) !important;
+  box-shadow: var(--kx-field) !important; font-size: 16px !important;
+}
+body[data-theme^="kuromi-xp"] #bulkText:focus { box-shadow: var(--kx-field), inset 0 0 0 2px var(--kx-pink) !important; }
+body[data-theme^="kuromi-xp"] #bulkModal button {
+  border: 0 !important; border-radius: 0 !important;
+  background: var(--kx-btn) !important; color: var(--kx-on-btn) !important;
+  box-shadow: var(--kx-bevel) !important; font-size: 16px !important;
+  text-shadow: 1px 1px 0 var(--kx-tshadow);
+}
+body[data-theme^="kuromi-xp"] #bulkModal button.primary { background: var(--kx-pbtn) !important; box-shadow: var(--kx-bevel-pink) !important; }
+/* o tema base pinta .primary de azul com !important */
+body[data-theme^="kuromi-xp"] :is(#modal, #scModal, #tlModal, #dtModal, #bulkModal) button.primary,
+body[data-theme^="kuromi-xp"] .primary {
+  background: var(--kx-pbtn) !important;
+  border-color: transparent !important;
+  color: var(--kx-on-btn) !important;
+}
+body[data-theme^="kuromi-xp"] :is(#modal, #scModal, #tlModal, #dtModal, #bulkModal, #autoSupplyModal) button.primary:hover { background: var(--kx-pbtn-hover) !important; }
+
+/* Modais de suprimentos no Kuromi XP */
+body[data-theme^="kuromi-xp"] :is(#autoSupplyModal) {
+  border-radius: 0 !important;
+}
+
+body[data-theme^="kuromi-xp"] :is(.supply-global-card, .supply-section, .supply-sub-section, .supply-acc-card, .supply-acc-hero, .supply-item-chip, .supply-scope-context-banner, .supply-card, .supply-acc-row, .supply-row-stock-pill, .supply-status-bar) {
+  background: var(--kx-face-2) !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+  box-shadow: var(--kx-field) !important;
+  color: var(--kx-text) !important;
+}
+
+body[data-theme^="kuromi-xp"] .supply-acc-card.is-selected {
+  outline: 2px solid var(--kx-pink) !important;
+  background: var(--kx-face) !important;
+}
+
+body[data-theme^="kuromi-xp"] .supply-acc-card.is-active-tab {
+  outline: 2px solid var(--kx-hl) !important;
+}
+
+body[data-theme^="kuromi-xp"] .supply-card.active {
+  outline: 2px solid var(--kx-pink) !important;
+  background: var(--kx-face) !important;
+}
+
+body[data-theme^="kuromi-xp"] :is(.supply-acc-gold-row, .supply-card-price, .supply-row-gold) {
+  color: var(--kx-hl) !important;
+}
+
+body[data-theme^="kuromi-xp"] :is(.supply-mini-btn, .supply-scope-tab) {
+  background: var(--kx-btn) !important;
+  box-shadow: var(--kx-bevel) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: var(--kx-on-btn) !important;
+}
+
+body[data-theme^="kuromi-xp"] :is(.supply-mini-btn:hover, .supply-scope-tab:hover) {
+  background: var(--kx-btn-hover) !important;
+}
+
+body[data-theme^="kuromi-xp"] .supply-scope-tab.is-active {
+  background: var(--kx-pbtn) !important;
+  box-shadow: var(--kx-bevel-pink) !important;
+  color: #fff !important;
+}
+
+body[data-theme^="kuromi-xp"] .supply-acc-count-badge {
+  background: var(--kx-pbtn) !important;
+  color: #fff !important;
+  border-radius: 0 !important;
+}

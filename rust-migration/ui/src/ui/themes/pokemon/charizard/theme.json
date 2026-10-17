@@ -1,0 +1,36 @@
+{
+  "id": "pokemon-charizard",
+  "name": "Charizard — Flame Dragon",
+  "category": "pokemon",
+  "tone": "dark",
+  "brandTitle": "CHARIZARD <span>LAUNCHER</span>",
+  "brandSub": "CALDERA DE FOGO E EMBERS",
+  "quote": "Cinzas ardentes sobem das profundezas vulcânicas quando as asas de fogo se abrem.",
+  "swatches": [
+    "#1a0c10",
+    "#33181f",
+    "#fb7185"
+  ],
+  "colors": {
+    "tone": "dark",
+    "bgBase": "#14070a",
+    "bgElevated": "#1e0b0f",
+    "surface1": "#2c1017",
+    "surface2": "#3d1620",
+    "surfaceHover": "#521e2c",
+    "surfaceSelected": "#421823",
+    "textPrimary": "#fff1f2",
+    "textSecondary": "#fecdd3",
+    "textMuted": "#fda4af",
+    "accent": "#fb7185",
+    "accentSoft": "rgba(251, 113, 133, 0.18)",
+    "actionPrimary": "#e11d48",
+    "actionPrimaryHover": "#be123c",
+    "borderSubtle": "#4a1c27",
+    "borderStrong": "#7d2f42"
+  },
+  "assets": {
+    "panorama": "src/ui/themes/pokemon/charizard/panorama.png",
+    "cutout": "src/ui/themes/pokemon/charizard/cutout.png"
+  }
+}
