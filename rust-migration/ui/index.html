@@ -3791,7 +3791,10 @@
                 else if (cr && cr.email && cr.senha && !(typeof isLoggingIn !== 'undefined' && isLoggingIn[i]) && ++deadT[i] >= ((wv.getURL() || '').includes('maintenance=1') ? 100 : 10)) { deadT[i] = 0; try { Promise.resolve(wv.loadURL(LOGIN_URL)).catch(() => { }); } catch { } }
               } else {
                 deadT[i] = 0;
-                if (wv.__pgSemScripts && d.live) injectScripts(wv);
+                if (wv.__pgSemScripts && d.live && !window.PioBattleHud?.isBlasterActive(i)) {
+                  if (window.__TAURI__) injectNativeScriptsWhenReady(wv, i);
+                  else injectScripts(wv);
+                }
                 checkStall(i, d);
                 if (lastFaint[i] === undefined || d.faintN < lastFaint[i]) lastFaint[i] = d.faintN;
                 else if (d.faintN > lastFaint[i]) { lastFaint[i] = d.faintN; alerta(i, 'msgFaint'); }
@@ -3914,7 +3917,14 @@
       wv.addEventListener('did-navigate', autoLogin);
       wv.addEventListener('did-navigate-in-page', (e) => { if (e.isMainFrame !== false) autoLogin(e); }); // Sair pelo dock: rota interna pra /login, sem did-navigate
       // saiu do /login por rota interna da SPA (sem novo dom-ready): agora sim os userscripts entram
-      wv.addEventListener('did-navigate-in-page', (e) => { try { if (e.isMainFrame && wv.__pgSemScripts && !usNoLoginUrl(e.url)) injectScripts(wv); } catch { } });
+      wv.addEventListener('did-navigate-in-page', (e) => {
+        try {
+          // Tauri emits this event at every native page load, including the login/CAPTCHA.
+          // Native userscripts must wait for the authenticated in-game state instead.
+          if (window.__TAURI__) return;
+          if (e.isMainFrame && wv.__pgSemScripts && !usNoLoginUrl(e.url)) injectScripts(wv);
+        } catch {}
+      });
 
       panel.querySelector('.reload').onclick = () => { if (!off[i]) { try { wv.reloadIgnoringCache(); } catch { wv.reload(); } } };
       panel.querySelector('.expand').onclick = () => toggleExpand(i);
@@ -12023,8 +12033,42 @@ return {portal:isPort,live,sk:!!(P.sock&&P.sock.readyState===1),hasBalls,hasInv,
     async function applyScriptToAll(sid) {
       const s = allScripts().find(x => x.id === sid); if (!s) return;
       const code = await getScriptCode(s); if (!code) return;
-      webviews.forEach((w, i) => { if (off[i] || !w) return; if (usNoLogin(w)) w.__pgSemScripts = true; else runUS(w, s, code); }); // painel no login: marca pra entrar quando sair de la
+      webviews.forEach((w, i) => {
+        if (off[i] || !w) return;
+        if (window.__TAURI__) {
+          // Allow enabling a script while Headless is active; run it on the next real game load.
+          if (window.PioBattleHud?.isBlasterActive(i)) { w.__pgSemScripts = true; return; }
+          injectNativeScriptsWhenReady(w, i).then(ready => {
+            if (ready) return; // injectScripts handles all currently enabled presets.
+            w.__pgSemScripts = true;
+          }).catch(() => { w.__pgSemScripts = true; });
+        } else if (usNoLogin(w)) {
+          w.__pgSemScripts = true;
+        } else {
+          runUS(w, s, code);
+        }
+      });
     }
+    // Check the fresh native game itself, not launcher cache (which may still contain
+    // live telemetry from the destroyed Headless session).
+    async function injectNativeScriptsWhenReady(wv, index) {
+      if (!wv || off[index] || !wv.__pgSemScripts ||
+          window.PioBattleHud?.isBlasterActive(index) || wv.__pgNativeChecking) return false;
+      wv.__pgNativeChecking = true;
+      try {
+        const state = await wv.executeJavaScript(READ_STATE);
+        if (!wv.__pgSemScripts || window.PioBattleHud?.isBlasterActive(index) ||
+            !state || state.live !== true || usNoLogin(wv)) return false;
+        await injectScripts(wv);
+        return true;
+      } catch (_) {
+        // The new WebView might not be ready yet. Telemetry/retry will try again.
+        return false;
+      } finally {
+        wv.__pgNativeChecking = false;
+      }
+    }
+
     // Headless Rust disconnects and destroys the page WebView, so browser userscripts cannot
     // run while Headless is active. Re-arm enabled scripts when a native game WebView returns.
     // Some PIW navigations stay on /play (the login uses the same route): check real game
@@ -12040,12 +12084,7 @@ return {portal:isPort,live,sk:!!(P.sock&&P.sock.readyState===1),hasBalls,hasInv,
         const retryAfterRestore = async () => {
           if (off[index] || window.PioBattleHud?.isBlasterActive(index) || !wv.__pgSemScripts) return;
           try {
-            const state = await wv.executeJavaScript(READ_STATE);
-            // A fresh, authenticated game state is required. Never inject into the login page.
-            if (state && state.live === true) {
-              await injectScripts(wv);
-              return;
-            }
+            if (await injectNativeScriptsWhenReady(wv, index)) return;
           } catch (_) {
             // The native view may still be recreating. The bounded retries cover that delay.
           }
