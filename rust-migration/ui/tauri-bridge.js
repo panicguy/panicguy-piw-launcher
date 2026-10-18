@@ -111,7 +111,11 @@
     blasterStop: async (index) => {
       await invoke('blaster_stop', { index });
       delete lastBounds[index];
+      // Headless closes the native WebView. Recreate it, including when Card view keeps it hidden.
       for (const el of registeredWebviews) if (el.__resolveIndex() === index) el.__syncBounds();
+      // The scripts manager uses this event to retry injection only after the game's own
+      // authenticated WebView session has loaded; it never runs userscripts on the login form.
+      window.dispatchEvent(new CustomEvent('piw:headless-restored', { detail: { index } }));
       return { ok: true };
     },
     blasterStatus: (index) => invoke('blaster_status', { index }).catch(() => ({ active: false })),
