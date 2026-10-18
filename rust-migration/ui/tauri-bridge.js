@@ -62,7 +62,56 @@
     saveBackup: (name, content, header) => invoke('backup_save', { name, content, header }).catch(() => false),
 
     // 4. Userscripts & Extensões
-    fetchUserScript: (url) => invoke('userscript_fetch', { url }).catch(() => null),
+    // The Tauri command returns raw source text, while the script manager expects
+    // {ok, url, code}. GitHub /blob/ links render an HTML page, so normalize them
+    // to raw.githubusercontent.com before fetching. Keep the normalized URL for updates.
+    fetchUserScript: async (url) => {
+      let target;
+      try {
+        const parsed = new URL(String(url || '').trim());
+        if (parsed.protocol !== 'https:') {
+          return { ok: false, error: 'Use um link HTTPS do GitHub.' };
+        }
+        const hostname = parsed.hostname.toLowerCase();
+        if (hostname === 'github.com' || hostname === 'www.github.com') {
+          const parts = parsed.pathname.split('/').filter(Boolean);
+          if (parts.length < 5 || !['blob', 'raw'].includes(parts[2])) {
+            return { ok: false, error: 'Use o link de um arquivo .js no GitHub (com /blob/ ou /raw/).' };
+          }
+          const [owner, repository, , branch, ...file] = parts;
+          if (!file.length || !file[file.length - 1].toLowerCase().endsWith('.js')) {
+            return { ok: false, error: 'Selecione um arquivo JavaScript (.js ou .user.js).' };
+          }
+          target = 'https://raw.githubusercontent.com/' +
+            [owner, repository, branch, ...file].join('/');
+        } else if (hostname === 'raw.githubusercontent.com') {
+          if (!parsed.pathname.toLowerCase().endsWith('.js')) {
+            return { ok: false, error: 'O link precisa apontar para um arquivo .js.' };
+          }
+          target = parsed.origin + parsed.pathname;
+        } else {
+          return { ok: false, error: 'Use um link do GitHub ou raw.githubusercontent.com.' };
+        }
+      } catch (_) {
+        return { ok: false, error: 'Link do GitHub inválido.' };
+      }
+
+      try {
+        const code = await invoke('userscript_fetch', { url: target });
+        if (typeof code !== 'string' || !code.trim()) {
+          return { ok: false, error: 'Não foi possível baixar o arquivo. Confira se o repositório é público e o caminho está correto.' };
+        }
+        if (code.length > 4 * 1024 * 1024) {
+          return { ok: false, error: 'O script excede o limite de 4 MB.' };
+        }
+        if (/^\s*(?:<!doctype\s+html|<html[\s>])/i.test(code)) {
+          return { ok: false, error: 'O GitHub retornou uma página HTML em vez do código JavaScript.' };
+        }
+        return { ok: true, url: target, code };
+      } catch (error) {
+        return { ok: false, error: 'Falha ao baixar o script: ' + String(error).slice(0, 180) };
+      }
+    },
     fetchExtension: (url) => invoke('userscript_request', { url }).catch(() => ({ status: 500, body: '' })),
 
     // 5. Autenticação & Janelas Auxiliares
