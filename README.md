@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/piw-launcher-logo.webp" width="400" alt="Poke Idle World — By KimJongDudu" />
+<img src="docs/piw-launcher-logo.webp" width="320" alt="Poke Idle World — By KimJongDudu" />
 
 <br />
 
