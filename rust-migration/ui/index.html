@@ -12009,6 +12009,22 @@ return {portal:isPort,live,sk:!!(P.sock&&P.sock.readyState===1),hasBalls,hasInv,
           .then(ja => {
             if (ja) return;
             wv.executeJavaScript('(async function(){' + shim + '\n' + code + '\n})()')
+              .then(() => {
+                if (!window.__TAURI__) return;
+                // Native gameplay bridge starts at document creation, before scripts are injected.
+                // Most PIW accounts have already opened their socket by now. Hand that existing
+                // socket to the shared PIW userscript bridge so its UI stops waiting for WS.
+                return wv.executeJavaScript(`(() => {
+                  try {
+                    const bridge = window.piwScripts && window.piwScripts.wsBridge;
+                    const nativeSocket = window.__piwLauncherGameSocket && window.__piwLauncherGameSocket();
+                    if (bridge && typeof bridge.attach === 'function' && nativeSocket) {
+                      return bridge.attach(nativeSocket);
+                    }
+                  } catch (_) {}
+                  return false;
+                })()`).catch(() => {});
+              })
               .catch(e => {
                 wv.executeJavaScript('(()=>{if(window.__pgUS)delete window.__pgUS[' + JSON.stringify(String(s.id)) + ']})()').catch(() => {});
                 try { window.pokeAPI.logError('userscript', String(s.name || s.id).slice(0, 60) + ': ' + String((e && e.message) || e).slice(0, 500)); } catch {}
