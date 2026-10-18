@@ -5,6 +5,11 @@
   const NativeWebSocket = window.WebSocket;
   let latestSocket, activeSession, pending = [], pendingBytes = 0, inFlight = false, timer;
   let awaitingSnapshot = false;
+  // PIW browser userscripts are injected only after login, when the game WS is
+  // frequently already open. Allow the script manager to adopt this existing socket,
+  // rather than waiting for a future WebSocket constructor or send().
+  window.__piwLauncherGameSocket = () =>
+    latestSocket && latestSocket.readyState !== NativeWebSocket.CLOSED ? latestSocket : null;
   // Invoked only by the native executor. Never changes inventory or gold locally.
   window.__idleioSupplySend = (session, command) => {
     if (session !== activeSession || awaitingSnapshot || latestSocket?.readyState !== NativeWebSocket.OPEN) return;
