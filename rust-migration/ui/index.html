@@ -12025,6 +12025,36 @@ return {portal:isPort,live,sk:!!(P.sock&&P.sock.readyState===1),hasBalls,hasInv,
       const code = await getScriptCode(s); if (!code) return;
       webviews.forEach((w, i) => { if (off[i] || !w) return; if (usNoLogin(w)) w.__pgSemScripts = true; else runUS(w, s, code); }); // painel no login: marca pra entrar quando sair de la
     }
+    // Headless Rust disconnects and destroys the page WebView, so browser userscripts cannot
+    // run while Headless is active. Re-arm enabled scripts when a native game WebView returns.
+    // Some PIW navigations stay on /play (the login uses the same route): check real game
+    // telemetry rather than relying on the URL or executing on a CAPTCHA screen.
+    if (window.__TAURI__) {
+      window.addEventListener('piw:headless-restored', (event) => {
+        const index = event.detail && event.detail.index;
+        if (!Number.isInteger(index) || index < 0 || index >= webviews.length || off[index]) return;
+        const wv = webviews[index];
+        if (!wv) return;
+        wv.__pgSemScripts = true;
+        let attempts = 0;
+        const retryAfterRestore = async () => {
+          if (off[index] || window.PioBattleHud?.isBlasterActive(index) || !wv.__pgSemScripts) return;
+          try {
+            const state = await wv.executeJavaScript(READ_STATE);
+            // A fresh, authenticated game state is required. Never inject into the login page.
+            if (state && state.live === true) {
+              await injectScripts(wv);
+              return;
+            }
+          } catch (_) {
+            // The native view may still be recreating. The bounded retries cover that delay.
+          }
+          if (++attempts < 24 && wv.__pgSemScripts) setTimeout(retryAfterRestore, 2500);
+        };
+        setTimeout(retryAfterRestore, 1200);
+      });
+    }
+
     function renderScriptsList() {
       const el = document.getElementById('scList');
       // grants vem do cabecalho do codigo; o preset so e lido do disco uma vez, entao preenche
