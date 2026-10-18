@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/Imagem do ChatGPT 17 de out. de 2026, 23_19_21.png" width="320" alt="Poke Idle World — By KimJongDudu" />
+<img src="docs/Logo 3D PIWLauncher by KimJongDudu.png" width="320" alt="Poke Idle World — By KimJongDudu" />
 
 <br />
 
