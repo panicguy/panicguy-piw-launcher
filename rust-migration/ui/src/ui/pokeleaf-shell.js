@@ -65,7 +65,7 @@
     <a class="leaf-skip" href="#leafMain">Pular para conteúdo</a>
     <header class="leaf-topbar">
       <div class="leaf-brand">
-        <div class="leaf-brand-copy"><div class="leaf-brand-title leaf-brand-logos" aria-label="PokeIdle by Reboste.io"><img class="leaf-pokeidle-logo" src="src/ui/assets/pokeidle-logo-smooth.png" alt="PokeIdle"><span class="leaf-brand-by">by</span><img class="leaf-rebosteio-logo" src="src/ui/assets/rebosteio-logo.png" alt="Reboste.io"></div></div>
+        <div class="leaf-brand-copy"><div class="leaf-brand-title leaf-brand-logos" aria-label="PIW Launcher by KimJongDudu"><img class="leaf-piw-logo" src="src/ui/assets/piw-launcher-header.webp" alt="PIW Launcher by KimJongDudu" width="156" height="47"></div></div>
       </div>
       <div class="leaf-top-center">
         <button type="button" class="leaf-icon-btn" id="leafSidebarToggle" aria-controls="leafSidebar" aria-expanded="true" title="Recolher menu lateral" aria-label="Recolher menu lateral"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/><path class="leaf-sidebar-arrow" d="m16 9-3 3 3 3"/></svg></button>
