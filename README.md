@@ -1,14 +1,14 @@
 <div align="center">
 
-<img src="docs/piw-nailo-banner.svg" width="100%" alt="PIW Nailo — Launcher Multi-Contas para Poke Idle World" />
+<img src="docs/piw-launcher-logo.webp" width="400" alt="Poke Idle World — By KimJongDudu" />
 
 <br />
 
-# PIW Nailo — Launcher Multi-Contas
+# PIW Launcher — Multi-Contas
 
 **Quatro treinadores, um só launcher.** ⚡
 
-Uma adaptação comunitária do Nailo para o [**Poke Idle World**](https://poke.idleworld.online/), com foco em **múltiplas contas, scripts e uso eficiente de recursos no Windows**.
+Projeto comunitário para o [**Poke Idle World**](https://poke.idleworld.online/), adaptado a partir de software de código aberto, com foco em **múltiplas contas, scripts e uso eficiente de recursos no Windows**.
 
 ![Windows](https://img.shields.io/badge/Windows-x64-087CD6?style=flat-square&logo=windows11&logoColor=white)
 ![Rust](https://img.shields.io/badge/backend-Rust-D97649?style=flat-square&logo=rust&logoColor=white)
@@ -18,7 +18,7 @@ Uma adaptação comunitária do Nailo para o [**Poke Idle World**](https://poke.
 ![Versão](https://img.shields.io/badge/vers%C3%A3o-2.0.30-F3B64D?style=flat-square)
 [![Licença MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-429C72?style=flat-square)](LICENSE)
 
-[**Começar**](#-como-instalar) · [**Recursos**](#-o-que-tem-no-piw-nailo) · [**Modos**](#-modos-de-execução) · [**Scripts**](#-scripts-e-extensões) · [**Créditos**](#-créditos-e-licença)
+[**Começar**](#-como-instalar) · [**Recursos**](#-o-que-tem-no-piw-launcher) · [**Modos**](#-modos-de-execução) · [**Scripts**](#-scripts-e-extensões) · [**Créditos**](#-créditos-e-licença)
 
 </div>
 
@@ -26,13 +26,13 @@ Uma adaptação comunitária do Nailo para o [**Poke Idle World**](https://poke.
 
 ## 👋 Bem-vindo, treinador!
 
-O **PIW Nailo** reúne até **4 contas do Poke Idle World** em uma única janela, com **backend Rust**, interface **Tauri 2** e páginas executadas pelo **Microsoft Edge WebView2**.
+O **PIW Launcher** reúne até **4 contas do Poke Idle World** em uma única janela, com **backend Rust**, interface **Tauri 2** e páginas executadas pelo **Microsoft Edge WebView2**.
 
 A proposta é manter o gerenciamento das contas em um programa nativo, sem precisar iniciar quatro interfaces Electron. O consumo final de RAM e CPU ainda depende do jogo, dos WebViews, dos scripts e do modo escolhido.
 
-> 🚧 **Projeto em desenvolvimento:** funcionalidades herdadas do PIO Nailo ainda estão sendo adaptadas para as regras e protocolos do **PIW**. Recursos experimentais podem exigir ajustes e testes.
+> 🚧 **Projeto em desenvolvimento:** funcionalidades herdadas do projeto original ainda estão sendo adaptadas para as regras e protocolos do **PIW**. Recursos experimentais podem exigir ajustes e testes.
 
-## ✨ O que tem no PIW Nailo?
+## ✨ O que tem no PIW Launcher?
 
 | Recurso | O que faz |
 |:---|:---|
@@ -57,7 +57,7 @@ A proposta é manter o gerenciamento das contas em um programa nativo, sem preci
    cd panicguy-piw-launcher
    ```
 
-3. Execute **`Abrir PIW Nailo.bat`** na raiz do projeto.
+3. Execute o arquivo **`.bat` de inicialização** na raiz do projeto (o nome do arquivo ainda é legado).
 4. Aguarde o preparo das dependências e a compilação inicial. Na primeira abertura, isso pode demorar e exigir permissões de instalação.
 5. Cadastre suas contas e faça login no PIW. Se aparecer a verificação do Cloudflare, conclua-a manualmente.
 
@@ -99,7 +99,7 @@ O launcher e o PIW têm configurações distintas. **Modo Carta e Modo Leve são
 
 Rust e Tauri ajudam a reduzir a sobrecarga do launcher, mas **cada WebView2 pode usar memória de renderização e GPU**. O modo Leve/Carta pode reduzir a carga visual; o Headless tende a liberar recursos da página, mas não executa os mesmos scripts de navegador.
 
-Ainda **não temos um benchmark padronizado** de RAM/CPU do PIW Nailo com quatro contas. Não seria correto usar aqui os números do launcher PIO original, pois são jogos e testes diferentes.
+Ainda **não temos um benchmark padronizado** de RAM/CPU do PIW Launcher com quatro contas. Não seria correto usar aqui os números do launcher PIO original, pois são jogos e testes diferentes.
 
 ## 🧩 Scripts e extensões
 
@@ -129,7 +129,7 @@ Os arquivos instalados podem ter acesso à página e à sessão do jogo. **Use s
 
 ```text
 panicguy-piw-launcher/
-├── Abrir PIW Nailo.bat        # Inicializador no Windows
+├── *.bat                     # Inicializador do Windows
 ├── tools/                     # Scripts de preparação e atualização
 ├── rust-migration/
 │   ├── src-tauri/             # Backend Rust/Tauri
@@ -142,12 +142,7 @@ panicguy-piw-launcher/
 
 ## 🔒 Seus dados e suas contas
 
-O PIW Nailo utiliza uma pasta de dados **separada** da usada pelo PIO Nailo:
-
-| Aplicativo | Pasta local |
-|:---|:---|
-| **PIW Nailo** | `%APPDATA%\piw-nailo` |
-| **PIO Nailo original** | `%APPDATA%\pionailo` |
+O **PIW Launcher** mantém seus dados e perfis **separados** dos dados do projeto original. Por compatibilidade, o diretório local de dados ainda utiliza um nome técnico legado; não o renomeie manualmente.
 
 Não publique arquivos de credenciais, cookies, tokens, sessões, perfis pessoais ou relatórios sem antes remover informações sensíveis. **Não apague essas pastas ao atualizar o código.**
 
@@ -172,7 +167,7 @@ Encontrou um problema ou tem uma sugestão? [**Abra uma issue**](https://github.
 
 ### 🎮 Boa caçada, treinador!
 
-**PIW Nailo · Quatro contas, uma equipe.**
+**PIW Launcher · By KimJongDudu**
 
 <sub>Feito para a comunidade do Poke Idle World.</sub>
 
